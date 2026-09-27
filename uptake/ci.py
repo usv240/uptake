@@ -131,8 +131,11 @@ def run(
         _register_globally(ws)
     # Import the MCP server once so its bytecode is compiled before Bob starts it: on a cold runner the first
     # start is slow enough for Bob to begin without its tools.
-    subprocess.run([sys.executable, "-c", "import uptake.mcp_server"], stdin=subprocess.DEVNULL,
-                   env={**os.environ, "UPTAKE_WS": str(ws)}, capture_output=True, timeout=300)
+    try:
+        subprocess.run([sys.executable, "-c", "import uptake.mcp_server"], stdin=subprocess.DEVNULL,
+                       env={**os.environ, "UPTAKE_WS": str(ws)}, capture_output=True, timeout=300)
+    except Exception:  # noqa: BLE001  (a warm-up must never fail the repair)
+        pass
     _log_mcp(ws)
 
     ndjson_path = ws / ".uptake" / "bob.ndjson"
