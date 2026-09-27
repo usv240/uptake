@@ -15,6 +15,11 @@ def main() -> None:
     prep.add_argument("case")
     prep.add_argument("dir", type=Path)
     prep.add_argument("--plain", action="store_true", help="baseline arm: MCP tools but no Uptake mode")
+    live = sub.add_parser("prepare-repo", help="set up an existing Maven checkout whose HEAD upgrades a dependency")
+    live.add_argument("dir", type=Path)
+    live.add_argument("--base", required=True, help="commit before the upgrade, e.g. the PR base")
+    live.add_argument("--jdk", default="17", help="JDK for the maven:3.9-eclipse-temurin-<jdk> image")
+    live.add_argument("--plain", action="store_true", help="MCP tools but no Uptake mode")
     for name in ("build", "audit", "finalize", "verify"):
         sub.add_parser(name).add_argument("dir", type=Path)
     pr_p = sub.add_parser("pr", help="render receipt as a PR comment (dry-run) or post it with gh")
@@ -29,6 +34,14 @@ def main() -> None:
         st = workspace.prepare(a.case, a.dir, with_mode=not a.plain)
         out = {"workspace": str(a.dir), "image": st["image"], "before": st["before"]["status"],
                "compileErrors": len(st["before"]["compileErrors"]), "testsRunBeforeUpgrade": st["baselineTests"]}
+    elif a.cmd == "prepare-repo":
+        from . import repo
+        st = repo.prepare(a.dir, a.base, a.jdk, with_mode=not a.plain)
+        d = st["case"]["updatedDependency"]
+        out = {"workspace": str(a.dir), "dependency": f"{d['dependencyGroupID']}:{d['dependencyArtifactID']}",
+               "from": d["previousVersion"], "to": d["newVersion"], "advisoriesRemoved": st["case"]["advisoriesRemoved"],
+               "before": st["before"]["status"], "compileErrors": len(st["before"]["compileErrors"]),
+               "testsRunBeforeUpgrade": st["baselineTests"]}
     elif a.cmd == "build":
         st = workspace.state(a.dir)
         out = container.build(st["image"], a.dir, st["workdir"])

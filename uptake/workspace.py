@@ -207,13 +207,22 @@ def verify(ws: Path) -> dict:
     patch = (ws / ".uptake" / "fix.patch").read_bytes().decode()
     checks = {"patchHashMatches": hashlib.sha256(patch.encode()).hexdigest() == receipt["patchSha256"]}
     st = state(ws)
-    # A judge's machine won't have our derived image: rebuild it from the public BUMP images.
-    image = container.ensure_image(st["case"]["breakingCommit"], cases.image(st["case"], "breaking"),
-                                   cases.image(st["case"], "pre"))
+    if st["case"].get("generic"):
+        image = st["image"]
+    else:
+        # A judge's machine won't have our derived image: rebuild it from the public BUMP images.
+        image = container.ensure_image(st["case"]["breakingCommit"], cases.image(st["case"], "breaking"),
+                                       cases.image(st["case"], "pre"))
     editable = re.compile(st.get("editRegex") or integrity.PRODUCTION.pattern)
     with tempfile.TemporaryDirectory() as tmp:
         fresh = Path(tmp) / "fresh"
-        container.extract(st.get("bumpImage", st["image"]), fresh)
+        if st["case"].get("generic"):
+            fresh.mkdir(parents=True)
+            tree = subprocess.run(["git", "-C", str(ws), "archive", "--format=tar", st["case"]["breakingCommit"]],
+                                  capture_output=True, check=True).stdout
+            subprocess.run(["tar", "xf", "-", "-C", str(fresh)], input=tree, check=True)
+        else:
+            container.extract(st.get("bumpImage", st["image"]), fresh)
         subprocess.run(["git", "init", "-q"], cwd=fresh, check=True)
         subprocess.run(["git", "config", "core.autocrlf", "false"], cwd=fresh, check=True)
         touched = [l[6:] for l in patch.splitlines() if l.startswith("+++ b/")]

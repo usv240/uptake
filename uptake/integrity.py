@@ -162,6 +162,12 @@ def audit(ws: Path, edit_regex: str | None = None) -> dict:
                                   for a in added.splitlines())]
     warnings += [{"kind": "public_method_removed_or_renamed", "line": r} for r in removed_public]
 
+    if st.get("configHash"):
+        # Live repos keep Uptake's config out of git, so compare it by hash instead of by diff.
+        from .repo import config_hash
+        if config_hash(ws) != st["configHash"]:
+            violations.append({"file": ".bob/", "status": "M", "kind": "agent_config_modified", "severity": "cheat"})
+
     stat = git(ws, "diff", "HEAD", "--shortstat", "--", *production) if production else ""
     return {"productionFilesChanged": production, "diffStat": stat.strip(),
             "violations": violations, "warnings": warnings}
