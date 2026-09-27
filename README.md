@@ -16,7 +16,7 @@ Uptake makes that exploit impossible instead of asking the agent not to do it. I
 - On the 7 cases the published Byam system also attempted, Byam solved 4 using the best of 40 configurations; Uptake repaired 4 in a single run each (only Uptake: geostore; only Byam: guice, where Uptake escalated a proven test-code patch instead).
 - **The real PRs behind these cases:** 0 of 10 were ever merged. The longest stayed open 1,663 days (liquibase-mssql, still open). HAP-Java's sat 1,603 days; Bob repaired it in 61 seconds.
 - **Against the maintainers' own fixes:** hap-java: different, same contract; pdb: identical (details on the results site).
-- **With release notes (document understanding), re-run as parallel Bob tasks on 1 cases Uptake had not unblocked:** 0/1 unblocked, 0 silent edits.
+- **With release notes (document understanding), re-run as parallel Bob tasks on 3 cases Uptake had not unblocked:** 1/3 unblocked, 0 silent edits.
 
 | Case | Upgrade | Advisories | Break | Uptake | Tests | Rules only | Byam (best of 40) | Bobcoins |
 |---|---|---:|---|---|---:|---|---|---:|

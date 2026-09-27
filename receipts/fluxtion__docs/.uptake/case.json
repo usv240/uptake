@@ -1,0 +1,82 @@
+{
+ "case": {
+  "url": "https://github.com/v12technology/fluxtion/pull/211",
+  "project": "fluxtion",
+  "projectOrganisation": "v12technology",
+  "breakingCommit": "b1a941400d68445d76056ab8833cd6d2e3455954",
+  "prAuthor": "bot",
+  "preCommitAuthor": "unknown",
+  "breakingCommitAuthor": "bot",
+  "updatedDependency": {
+   "dependencyGroupID": "org.yaml",
+   "dependencyArtifactID": "snakeyaml",
+   "previousVersion": "1.33",
+   "newVersion": "2.0",
+   "dependencyScope": "compile",
+   "versionUpdateType": "major",
+   "githubCompareLink": "Relevant tags were not found in the GitHub repository snakeyaml/snakeyaml for the updated dependency.",
+   "mavenSourceLinkPre": "https://repo1.maven.org/maven2/org/yaml/snakeyaml/1.33/snakeyaml-1.33-sources.jar",
+   "mavenSourceLinkBreaking": "https://repo1.maven.org/maven2/org/yaml/snakeyaml/2.0/snakeyaml-2.0-sources.jar",
+   "updatedFileType": "JAR",
+   "dependencySection": "dependencyManagement",
+   "licenseInfo": "Apache-2.0",
+   "githubRepoSlug": "snakeyaml/snakeyaml"
+  },
+  "preCommitReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:b1a941400d68445d76056ab8833cd6d2e3455954-pre",
+  "breakingUpdateReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:b1a941400d68445d76056ab8833cd6d2e3455954-breaking",
+  "javaVersionUsedForReproduction": "11",
+  "failureCategory": "COMPILATION_FAILURE",
+  "licenseInfo": "NOASSERTION",
+  "advisoriesRemoved": [
+   "GHSA-mjmj-j48q-9wg2"
+  ]
+ },
+ "image": "uptake-local/b1a941400d68:ready",
+ "bumpImage": "ghcr.io/chains-project/breaking-updates:b1a941400d68445d76056ab8833cd6d2e3455954-breaking",
+ "workdir": "/fluxtion",
+ "baselineTests": 753,
+ "baselineStatus": "SUCCESS",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": [
+   {
+    "file": "compiler/src/test/java/com/fluxtion/compiler/builder/factory/GraphOfInstancesTest.java",
+    "line": 78,
+    "col": 39,
+    "message": "no suitable constructor found for Constructor(no arguments)",
+    "detail": []
+   },
+   {
+    "file": "compiler/src/test/java/com/fluxtion/compiler/builder/factory/GraphOfInstancesTest.java",
+    "line": 114,
+    "col": 39,
+    "message": "no suitable constructor found for Constructor(no arguments)",
+    "detail": []
+   }
+  ],
+  "tests": {
+   "run": 10,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": [],
+  "errorLogTail": "[ERROR] COMPILATION ERROR : \n[ERROR] /fluxtion/compiler/src/test/java/com/fluxtion/compiler/builder/factory/GraphOfInstancesTest.java:[78,39] no suitable constructor found for Constructor(no arguments)\n[ERROR] /fluxtion/compiler/src/test/java/com/fluxtion/compiler/builder/factory/GraphOfInstancesTest.java:[114,39] no suitable constructor found for Constructor(no arguments)\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile (default-testCompile) on project compiler: Compilation failure: Compilation failure: \n[ERROR] /fluxtion/compiler/src/test/java/com/fluxtion/compiler/builder/factory/GraphOfInstancesTest.java:[78,39] no suitable constructor found for Constructor(no arguments)\n[ERROR]     constructor org.yaml.snakeyaml.constructor.Constructor.Constructor(org.yaml.snakeyaml.LoaderOptions) is not applicable\n[ERROR]       (actual and formal argument lists differ in length)\n[ERROR]     constructor org.yaml.snakeyaml.constructor.Constructor.Constructor(java.lang.Class<? extends java.lang.Object>,org.yaml.snakeyaml.LoaderOptions) is not applicable\n[ERROR]       (actual and formal argument lists differ in length)\n[ERROR]     constructor org.yaml.snakeyaml.constructor.Constructor.Constructor(org.yaml.snakeyaml.TypeDescription,org.yaml.snakeyaml.LoaderOptions) is not applicable\n[ERROR]       (actual and formal argument lists differ in length)\n[ERROR]     constructor org.yaml.snakeyaml.constructor.Constructor.Constructor(org.yaml.snakeyaml.TypeDescription,java.util.Collection<org.yaml.snakeyaml.TypeDescription>,org.yaml.snakeyaml.LoaderOptions) is not applicable\n[ERROR]       (actual and formal argument lists differ in length)\n[ERROR]     constructor org.yaml.snakeyaml.constructor.Constructor.Constructor(java.lang.String,org.yaml.snakeyaml.LoaderOptions) is not applicable\n[ERROR]       (actual and formal argument lists differ in length)\n[ERROR] /fluxtion/compiler/src/test/java/com/fluxtion/compiler/builder/factory/GraphOfInstancesTest.java:[114,39] no suitable constructor found for Constructor(no arguments)\n[ERROR]     constructor org.yaml.snakeyaml.constructor.Constructor.Constructor(org.yaml.snakeyaml.LoaderOptions) is not applicable\n[ERROR]       (actual and formal argument lists differ in length)\n[ERROR]     constructor org.yaml.snakeyaml.constructor.Constructor.Constructor(java.lang.Class<? extends java.lang.Object>,org.yaml.snakeyaml.LoaderOptions) is not applicable\n[ERROR]       (actual and formal argument lists differ in length)\n[ERROR]     constructor org.yaml.snakeyaml.constructor.Constructor.Constructor(org.yaml.snakeyaml.TypeDescription,org.yaml.snakeyaml.LoaderOptions) is not applicable\n[ERROR]       (actual and formal argument lists differ in length)\n[ERROR]     constructor org.yaml.snakeyaml.constructor.Constructor.Constructor(org.yaml.snakeyaml.TypeDescription,java.util.Collection<org.yaml.snakeyaml.TypeDescription>,org.yaml.snakeyaml.LoaderOptions) is not applicable\n[ERROR]       (actual and formal argument lists differ in length)\n[ERROR]     constructor org.yaml.snakeyaml.constructor.Constructor.Constructor(java.lang.String,org.yaml.snakeyaml.LoaderOptions) is not applicable\n[ERROR]       (actual and formal argument lists differ in length)\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[ERROR] \n[ERROR] After correcting the problems, you can resume the build with the command\n[ERROR]   mvn <args> -rf :compiler"
+ },
+ "sourceRoots": {
+  "production": [
+   "compiler/src/main/java",
+   "parent-root/src/main/java",
+   "runtime/src/main/java",
+   "src/main/java"
+  ],
+  "test": [
+   "compiler/src/test/java",
+   "parent-root/src/test/java",
+   "runtime/src/test/java",
+   "src/test/java"
+  ]
+ },
+ "editRegex": "^(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$))(?!(?:.*[\\\\/])?(?:parent\\-root[\\\\/]src[\\\\/]test[\\\\/]java|compiler[\\\\/]src[\\\\/]test[\\\\/]java|runtime[\\\\/]src[\\\\/]test[\\\\/]java|src[\\\\/]test[\\\\/]java)[\\\\/])(?:(?:.*[\\\\/])?(?:parent\\-root[\\\\/]src[\\\\/]main[\\\\/]java|compiler[\\\\/]src[\\\\/]main[\\\\/]java|runtime[\\\\/]src[\\\\/]main[\\\\/]java|src[\\\\/]main[\\\\/]java)[\\\\/](?:[^\\\\/]+[\\\\/])*[^\\\\/]+\\.java|(?:.*[\\\\/])?\\.uptake[\\\\/](?:rationale\\.md|escalation\\.md|proposed\\.patch))$",
+ "preparedAt": "2026-09-27T04:11:36+00:00"
+}

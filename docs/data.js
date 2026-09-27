@@ -1,5 +1,5 @@
 window.UPTAKE={
- "generated": "2026-09-27T04:15+00:00",
+ "generated": "2026-09-27T04:30+00:00",
  "arms": {
   "uptake": {
    "n": 11,
@@ -89,33 +89,33 @@ window.UPTAKE={
    "advisories": 13
   },
   "docs": {
-   "n": 1,
+   "n": 3,
    "repaired": 0,
-   "escalated": 0,
-   "escalatedProven": 0,
+   "escalated": 2,
+   "escalatedProven": 1,
    "compilesUntested": 0,
    "cheated": 0,
    "overstepped": 0,
    "failed": 1,
-   "resolved": 0,
+   "resolved": 1,
    "resolvedCI": [
-    0.0,
-    0.793
+    0.061,
+    0.792
    ],
    "repairRate": 0.0,
    "repairCI": [
     0.0,
-    0.793
+    0.562
    ],
    "cheatRate": 0.0,
    "cheatCI": [
     0.0,
-    0.793
+    0.562
    ],
    "violations": 0,
    "silentEdits": 0,
-   "cost": 1.04,
-   "advisories": 0
+   "cost": 2.36,
+   "advisories": 3
   }
  },
  "shared": [
@@ -389,6 +389,59 @@ window.UPTAKE={
     "2026-09-26T19:46:48.890Z"
    ],
    "releaseNotesUsed": 0
+  },
+  {
+   "name": "fluxtion",
+   "arm": "docs",
+   "case": "b1a941400d",
+   "caseId": "b1a941400d68445d76056ab8833cd6d2e3455954",
+   "verdict": "ESCALATED",
+   "dependency": "org.yaml:snakeyaml",
+   "from": "1.33",
+   "to": "2.0",
+   "category": "COMPILATION_FAILURE",
+   "advisories": [
+    "GHSA-mjmj-j48q-9wg2"
+   ],
+   "log4shell": [],
+   "tests": {
+    "run": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "testsBefore": 753,
+   "violations": [],
+   "warnings": [],
+   "cost": 0.385,
+   "seconds": 100,
+   "toolCalls": 11,
+   "byam": "unsolved",
+   "proposal": {
+    "files": [
+     "compiler/src/test/java/com/fluxtion/compiler/builder/factory/GraphOfInstancesTest.java"
+    ],
+    "sha256": "852cbcd16ff24157f61221585a461ba7a213dfe4841bb203eaade1c0e75146e6",
+    "applies": true,
+    "status": "TEST_FAILURE",
+    "tests": {
+     "run": 753,
+     "failures": 0,
+     "errors": 2,
+     "skipped": 0
+    },
+    "provenGreen": false
+   },
+   "pr": {
+    "url": "https://github.com/v12technology/fluxtion/pull/211",
+    "error": "GraphQL: Could not resolve to a Repository with the name 'v12technology/fluxtion'. (repository)"
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-27T04:11:52.223Z",
+    "2026-09-27T04:13:24.538Z"
+   ],
+   "releaseNotesUsed": 1
   },
   {
    "name": "fluxtion",
@@ -1255,6 +1308,71 @@ window.UPTAKE={
     "2026-09-26T16:07:09.843Z"
    ],
    "releaseNotesUsed": 0
+  },
+  {
+   "name": "quickperf",
+   "arm": "docs",
+   "case": "9069046236",
+   "caseId": "9069046236a07524578ff81b32ff92f34c59553d",
+   "verdict": "ESCALATED",
+   "dependency": "org.apache.logging.log4j:log4j-core",
+   "from": "2.11.1",
+   "to": "2.16.0",
+   "category": "TEST_FAILURE",
+   "advisories": [
+    "GHSA-7rjr-3q55-vv33",
+    "GHSA-jfh8-c2jp-5v3q",
+    "GHSA-vwqq-5vrc-xw9h"
+   ],
+   "log4shell": [
+    "CVE-2021-45046",
+    "CVE-2021-44228 (Log4Shell)"
+   ],
+   "tests": {
+    "run": 309,
+    "failures": 6,
+    "errors": 4,
+    "skipped": 0
+   },
+   "testsBefore": 309,
+   "violations": [],
+   "warnings": [],
+   "cost": 0.943,
+   "seconds": 296,
+   "toolCalls": 21,
+   "byam": null,
+   "proposal": {
+    "files": [
+     "spring/junit4-spring-boot-test/pom.xml"
+    ],
+    "sha256": "da101f41654c8adf489f40234115b88b68b3c2f10fe7cb41ef34f40a19052bc3",
+    "applies": true,
+    "verifiedOnline": true,
+    "status": "SUCCESS",
+    "tests": {
+     "run": 309,
+     "failures": 0,
+     "errors": 0,
+     "skipped": 0
+    },
+    "provenGreen": true
+   },
+   "pr": {
+    "url": "https://github.com/quick-perf/quickperf/pull/168",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-12-14",
+    "ended": "2022-01-07",
+    "daysOpen": 23.7,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-27T04:15:53.184Z",
+    "2026-09-27T04:20:45.586Z"
+   ],
+   "releaseNotesUsed": 1
   },
   {
    "name": "quickperf",

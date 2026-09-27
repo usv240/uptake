@@ -135,6 +135,9 @@ def render_comment(ws: Path) -> str:
     lines.append(f"Verify: `python -m uptake verify <path>`")
     lines.append(f"Patch sha256: `{patch_sha}`")
     lines.append("")
+    lines.append("Repaired by IBM Bob in [Uptake](https://usv240.github.io/uptake/)'s locked mode, audited and proven"
+                 " offline before this comment was written.")
+    lines.append("")
 
     return "\n".join(lines)
 

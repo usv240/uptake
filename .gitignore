@@ -5,3 +5,4 @@ demo/build/
 .pytest_cache/
 .vscode/
 Rules.md
+demo/video/build/

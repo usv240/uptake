@@ -1,0 +1,65 @@
+{
+ "tool": "uptake",
+ "verdict": "ESCALATED",
+ "dependency": "org.yaml:snakeyaml",
+ "from": "1.33",
+ "to": "2.0",
+ "advisoriesRemoved": [
+  "GHSA-mjmj-j48q-9wg2"
+ ],
+ "image": "uptake-local/b1a941400d68:ready",
+ "benchmarkCase": "b1a941400d68445d76056ab8833cd6d2e3455954",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": 2,
+  "failingTests": []
+ },
+ "after": {
+  "status": "COMPILATION_FAILURE",
+  "tests": {
+   "run": 10,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "baselineTestsBeforeUpgrade": 753,
+ "sourceRoots": {
+  "production": [
+   "compiler/src/main/java",
+   "parent-root/src/main/java",
+   "runtime/src/main/java",
+   "src/main/java"
+  ],
+  "test": [
+   "compiler/src/test/java",
+   "parent-root/src/test/java",
+   "runtime/src/test/java",
+   "src/test/java"
+  ]
+ },
+ "integrity": {
+  "productionFilesChanged": [],
+  "diffStat": "",
+  "violations": [],
+  "warnings": []
+ },
+ "proposal": {
+  "files": [
+   "compiler/src/test/java/com/fluxtion/compiler/builder/factory/GraphOfInstancesTest.java"
+  ],
+  "sha256": "852cbcd16ff24157f61221585a461ba7a213dfe4841bb203eaade1c0e75146e6",
+  "applies": true,
+  "status": "TEST_FAILURE",
+  "tests": {
+   "run": 753,
+   "failures": 0,
+   "errors": 2,
+   "skipped": 0
+  },
+  "provenGreen": false
+ },
+ "patchSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+ "finalizedAt": "2026-09-27T04:16:40+00:00"
+}
