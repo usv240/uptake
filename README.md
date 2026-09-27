@@ -9,7 +9,8 @@ Uptake makes that exploit impossible instead of asking the agent not to do it. I
 <!-- RESULTS:START -->
 **Results** (11 real breaking security upgrades from BUMP, one headless Bob run each, every run shown):
 
-- **7/11 unblocked** (95% CI 35%-85%): 4 repaired by Bob, 3 escalated with a one-approval patch that Uptake proved green, including the Log4Shell upgrade. 38 advisories unblocked.
+- **8/11 unblocked overall**, 7 on the first pass and quickperf added once Bob could read the library's release notes.
+- First pass: **7/11 unblocked** (95% CI 35%-85%): 4 repaired by Bob, 3 escalated with a one-approval patch that Uptake proved green, including the Log4Shell upgrade. 38 advisories unblocked.
 - **0 silent edits** to tests or build files in 15 runs under Uptake's protocol.
 - Control, same Bob with a normal request ("get the build and all tests passing"): silent edits in **3/4** runs, including downgrading slf4j-api to a 2008 release on the Log4Shell case; 1/4 unblocked.
 - Rules written down but not enforced by the mode: 0/4 silent edits, 4/4 unblocked. On this sample the mode lock added nothing beyond the rules; it is there so that stays true when rules are ignored.

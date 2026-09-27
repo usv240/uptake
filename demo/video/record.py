@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from beats import BUILD, SITE  # noqa: E402
 from common import sentence_starts  # noqa: E402
 
-W, H, BAR = 1920, 1080, 44
+W, H, BAR, ZOOM = 1920, 1080, 44, 1.35
 LIVE = json.loads((Path(__file__).resolve().parent / "live_pr.json").read_text(encoding="utf-8")) \
     if (Path(__file__).resolve().parent / "live_pr.json").exists() else {}
 
@@ -33,12 +33,15 @@ OVERLAY = f"""
     const url = bar.querySelector('#__url');
     const tick = () => {{ url.textContent = location.href; }};
     tick(); setInterval(tick, 200);
+    // our site is laid out for reading at 1160px wide; zoom its body so it reads at video size (not GitHub's)
+    const Z = location.host.endsWith('github.io') ? {ZOOM} : 1;
+    if (Z !== 1) document.body.style.zoom = String(Z);
     document.documentElement.style.setProperty('scroll-padding-top', '{BAR + 80}px', 'important');
-    document.body.style.setProperty('margin-top', '{BAR}px', 'important');
+    document.body.style.setProperty('margin-top', ({BAR} / Z) + 'px', 'important');
     for (const el of document.querySelectorAll('body *')) {{
       const cs = getComputedStyle(el);
       if ((cs.position === 'sticky' || cs.position === 'fixed') && parseInt(cs.top || '0') === 0 && el.id !== '__bar') {{
-        el.style.setProperty('top', '{BAR}px', 'important');
+        el.style.setProperty('top', ({BAR} / Z) + 'px', 'important');
       }}
     }}
     const ring = document.createElement('div');
@@ -76,7 +79,16 @@ class Camera:
         self.page, self.narration = page, narration
         self.mouse = [W / 2, H / 2]
 
+    def still(self, quiet_ms: int = 300, limit_ms: int = 4000):
+        """Wait until the page has stopped scrolling (CSS smooth scroll from an anchor click, or ours)."""
+        self.page.evaluate("""([quiet, limit]) => new Promise(done => {
+            let last = window.scrollY, same = 0; const t0 = performance.now();
+            const tick = () => { const y = window.scrollY; same = (y === last) ? same + 50 : 0; last = y;
+              if (same >= quiet || performance.now() - t0 > limit) done(); else setTimeout(tick, 50); };
+            setTimeout(tick, 50); })""", [quiet_ms, limit_ms])
+
     def move_to(self, selector: str, dx: float = 0.5, dy: float = 0.5, steps: int = 28):
+        self.still()
         box = self.page.locator(selector).first.bounding_box()
         if not box:
             return
@@ -91,12 +103,16 @@ class Camera:
         self.page.wait_for_timeout(90)
         self.page.mouse.up()
         self.page.locator(selector).first.click(no_wait_after=True, timeout=5000, force=True)
+        self.page.wait_for_timeout(150)
+        self.still()
 
     def scroll_to(self, selector: str, offset: int = BAR + 76, frames: int = 26):
         top = self.page.evaluate("s => { const el = document.querySelector(s); return el ? el.getBoundingClientRect().top + window.scrollY : null; }", selector)
         if top is not None:
+            self.still()
+            top = self.page.evaluate("s => document.querySelector(s).getBoundingClientRect().top + window.scrollY", selector)
             self.page.evaluate(EASE_SCROLL, [max(0, top - offset), frames])
-            self.page.wait_for_timeout(120)
+            self.still()
 
     def settle(self, selector: str = "body", timeout: int = 15000):
         self.page.wait_for_load_state("load", timeout=timeout)

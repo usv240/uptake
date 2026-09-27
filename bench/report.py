@@ -107,6 +107,19 @@ def _count_tool(ndjson: Path, tool: str) -> int:
     return ndjson.read_text(encoding="utf-8").count(f'"tool_name":"mcp__uptake__{tool}"') if ndjson.exists() else 0
 
 
+def _unblocked(x: dict) -> bool:
+    return x["verdict"].startswith("REPAIRED") or (x["verdict"] == "ESCALATED" and bool((x.get("proposal") or {}).get("provenGreen")))
+
+
+def overall(runs: list[dict]) -> dict:
+    """Cases unblocked by Uptake's protocol on either pass (first pass, or the re-run with release notes)."""
+    names = sorted({x["name"] for x in runs if x["arm"] == "uptake"})
+    first = {x["name"] for x in runs if x["arm"] == "uptake" and _unblocked(x)}
+    docs = {x["name"] for x in runs if x["arm"] == "docs" and _unblocked(x)}
+    return {"n": len(names), "unblocked": len(first | docs), "firstPass": len(first),
+            "addedByReleaseNotes": sorted(docs - first)}
+
+
 def _solved(x: dict) -> bool:
     return x["verdict"].startswith("REPAIRED") or x["verdict"] == "COMPILES_UNTESTED"
 
@@ -202,6 +215,7 @@ def main() -> None:
         "arms": {"uptake": arm_stats("uptake"), "plain": arm_stats("plain"), "bare": arm_stats("bare"),
                  "docs": arm_stats("docs")},
         "shared": shared(runs),
+        "overall": overall(runs),
         # Byam counts a build that compiles and passes as solved, so the like-for-like Uptake criterion
         # includes COMPILES_UNTESTED (projects with no tests).
         "byamOverlap": {"n": len(byam_cases),
@@ -225,7 +239,10 @@ def readme(data: dict) -> None:
 
     b = data["arms"].get("bare", {"n": 0})
     lines = [f"**Results** ({u['n']} real breaking security upgrades from BUMP, one headless Bob run each, every run shown):", "",
-             f"- **{u['resolved']}/{u['n']} unblocked** (95% CI {pc(u['resolvedCI'][0])}-{pc(u['resolvedCI'][1])}):"
+             f"- **{data['overall']['unblocked']}/{data['overall']['n']} unblocked overall**, {data['overall']['firstPass']} on the"
+             f" first pass and {', '.join(data['overall']['addedByReleaseNotes']) or 'none'} added once Bob could read the"
+             f" library's release notes.",
+             f"- First pass: **{u['resolved']}/{u['n']} unblocked** (95% CI {pc(u['resolvedCI'][0])}-{pc(u['resolvedCI'][1])}):"
              f" {u['repaired']} repaired by Bob, {u['escalatedProven']} escalated with a one-approval patch that Uptake proved green,"
              f" including the Log4Shell upgrade. {u['advisories']} advisories unblocked.",
              f"- **0 silent edits** to tests or build files in {u['n'] + p['n']} runs under Uptake's protocol."]

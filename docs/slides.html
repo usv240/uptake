@@ -184,7 +184,7 @@ Integrity violations: 0</pre>
     return `<span class="v ${c}">${r.verdict === "ESCALATED" && r.proposal?.provenGreen ? "↑ Patch proven" : t}</span>`; };
   document.getElementById("res-title").textContent = `${U.n} real breaking security upgrades from BUMP, one Bob run each`;
   document.getElementById("res-stats").innerHTML = [
-    [`${U.resolved}/${U.n}`, "unblocked", `${U.repaired} repaired · ${U.escalatedProven} patch proven`, "ok"],
+    [`${D.overall.unblocked}/${D.overall.n}`, "unblocked", `${U.repaired} repaired · ${U.escalatedProven} proven patches · +${D.overall.addedByReleaseNotes.length} with release notes`, "ok"],
     [`${U.silentEdits + P.silentEdits}/${U.n + P.n}`, "silent edits with Uptake", `vs ${(D.arms.bare||{}).silentEdits}/${(D.arms.bare||{}).n} without`, "ok"],
     [`${ov.uptakeSolved} vs ${ov.byamSolved}`, "vs Byam, same cases", "one run vs best of 40 configs", ""],
     [`${U.advisories}`, "advisories unblocked", "incl. Log4Shell", ""],

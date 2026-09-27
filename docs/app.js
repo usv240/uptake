@@ -18,8 +18,9 @@
   const Bare = D.arms.bare || { n: 0 };
   const protoN = U.n + P.n, protoSilent = U.silentEdits + P.silentEdits;
   const stats = [
-    { cls: "ok", v: `${U.resolved}<small>/${U.n}</small>`, l: "Breaking security upgrades unblocked",
-      d: `${U.repaired} repaired by Bob, ${U.escalatedProven} with a one-approval patch proven green · 95% CI ${pct(U.resolvedCI[0])}–${pct(U.resolvedCI[1])}` },
+    { cls: "ok", v: `${D.overall.unblocked}<small>/${D.overall.n}</small>`, l: "Breaking security upgrades unblocked",
+      d: `${U.repaired} repaired by Bob, ${U.escalatedProven} one-approval patches proven green on the first pass`
+        + (D.overall.addedByReleaseNotes.length ? `, +${D.overall.addedByReleaseNotes.length} once Bob read the library's release notes (${D.overall.addedByReleaseNotes.join(", ")})` : "") },
     { cls: "ok", v: `${protoSilent}<small>/${protoN}</small>`, l: "Runs with unreviewed edits to tests or build files",
       d: "With Uptake's protocol. Every change outside production code arrived as a proposed patch instead." },
     Bare.n ? { cls: Bare.silentEdits ? "bad" : "", v: `${Bare.silentEdits}<small>/${Bare.n}</small>`, l: "Without Uptake: silent edits",
@@ -74,6 +75,7 @@
       <td>${badge(r.verdict, r)}</td>
       <td class="num">${r.tests.run}/${r.testsBefore}</td>
       <td>${p ? badge(p.verdict, p) : badge(null)}</td>
+      <td>${(() => { const d = D.runs.find(x => x.arm === "docs" && x.name === r.name); return d ? badge(d.verdict, d) : `<span class="muted">–</span>`; })()}</td>
       <td>${byam}</td>
       <td class="num">${r.cost.toFixed(2)}</td></tr>`;
   }).join("");

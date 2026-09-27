@@ -1,5 +1,5 @@
 window.UPTAKE={
- "generated": "2026-09-27T04:30+00:00",
+ "generated": "2026-09-27T04:44+00:00",
  "arms": {
   "uptake": {
    "n": 11,
@@ -259,6 +259,14 @@ window.UPTAKE={
    }
   }
  ],
+ "overall": {
+  "n": 11,
+  "unblocked": 8,
+  "firstPass": 7,
+  "addedByReleaseNotes": [
+   "quickperf"
+  ]
+ },
  "byamOverlap": {
   "n": 7,
   "byamSolved": 4,
