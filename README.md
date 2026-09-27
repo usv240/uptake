@@ -84,6 +84,22 @@ python bench/run.py 9069046236 quickperf --arm bare     # control: Agent mode, n
 python bench/report.py                                   # regenerate docs/data.js
 ```
 
+## Post the result on the Dependabot PR
+
+After `finalize`, post the receipt as a comment directly on the Dependabot PR:
+
+```bash
+# Dry run: print the Markdown comment to stdout
+python -m uptake pr receipts/oripa__uptake
+
+# Post it (requires `gh` CLI authenticated with repo write access)
+python -m uptake pr receipts/oripa__uptake --repo owner/repo-name --number 42
+```
+
+The comment includes the verdict, advisories removed with osv.dev links, test counts, the fix patch, and
+(for escalated cases) the proposed patch with its proven-green status.
+A hidden `<!-- uptake-receipt:<sha256> -->` marker lets automation detect and update the comment later.
+
 ## Method
 
 - **Cases.** From [BUMP](https://github.com/chains-project/bump) (SANER 2024, MIT): 571 real Dependabot/Renovate upgrades that broke real builds, each with Docker images. We queried [OSV](https://osv.dev) for every case: 146 remove at least one known advisory (759 IDs). Our cases come from those 146, including two that are the Log4Shell patch (`quickperf`, `oripa`). See [`data/bump_osv.json`](data/bump_osv.json).
