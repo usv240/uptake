@@ -14,6 +14,9 @@ Uptake makes that exploit impossible instead of asking the agent not to do it. I
 - Control, same Bob with a normal request ("get the build and all tests passing"): silent edits in **3/4** runs, including downgrading slf4j-api to a 2008 release on the Log4Shell case; 1/4 unblocked.
 - Rules written down but not enforced by the mode: 0/4 silent edits, 4/4 unblocked. On this sample the mode lock added nothing beyond the rules; it is there so that stays true when rules are ignored.
 - On the 7 cases the published Byam system also attempted, Byam solved 4 using the best of 40 configurations; Uptake repaired 4 in a single run each (only Uptake: geostore; only Byam: guice, where Uptake escalated a proven test-code patch instead).
+- **The real PRs behind these cases:** 0 of 10 were ever merged. The longest stayed open 1,663 days (liquibase-mssql, still open). HAP-Java's sat 1,603 days; Bob repaired it in 61 seconds.
+- **Against the maintainers' own fixes:** hap-java: different, same contract; pdb: identical (details on the results site).
+- **With release notes (document understanding), re-run as parallel Bob tasks on 1 cases Uptake had not unblocked:** 0/1 unblocked, 0 silent edits.
 
 | Case | Upgrade | Advisories | Break | Uptake | Tests | Rules only | Byam (best of 40) | Bobcoins |
 |---|---|---:|---|---|---:|---|---|---:|
@@ -52,6 +55,36 @@ Results site with every run, diff and agent trace: [`docs/index.html`](docs/inde
 | Auditor | [`uptake/integrity.py`](uptake/integrity.py) | Diffs against the baseline commit. Classifies protected-file edits as violations and flags stubs, empty catches, reflection and removed public methods for review. |
 | Receipt | [`uptake/workspace.py`](uptake/workspace.py) | Writes `UPGRADE_RECEIPT.md`, `receipt.json`, `fix.patch`. `verify` re-applies the patch to a fresh copy and rebuilds. |
 | Benchmark | [`bench/`](bench/) | `run.py` (one case through headless Bob), `queue.py` (budgeted batch), `report.py` (site data). |
+
+## Use it on your repository: one GitHub Action
+
+```yaml
+# .github/workflows/uptake.yml
+on:
+  pull_request:
+    paths: ["**/pom.xml"]
+permissions: { contents: write, pull-requests: write, actions: write }
+jobs:
+  repair:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.event.pull_request.head.ref }}", fetch-depth: 0 }
+      - uses: usv240/uptake@main
+        with:
+          bob-api-key: ${{ secrets.BOB_API_KEY }}   # add it as an Actions and a Dependabot secret
+          rerun-workflow: ci.yml                    # optional: your CI, re-run on the fix commit
+```
+
+When a Dependabot PR breaks the build, the Action:
+1. builds the base and the upgrade once in a stock Maven image;
+2. runs **IBM Bob Shell in the Uptake mode**;
+3. proves the result offline;
+4. **commits a proven repair to the PR**, or posts the proven one-line patch for approval;
+5. comments the receipt, and uploads Bob's full trace as an artifact.
+
+Live example: [usv240/uptake-demo](https://github.com/usv240/uptake-demo) (HAP-Java, MIT).
 
 ## Verify our results yourself (Docker + Python only, no Bob needed)
 

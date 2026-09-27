@@ -1,0 +1,2 @@
+liquibase-mssql    docs   FAILED                 tests=4/4 cost=1.03618 viol=0 144s
+total spent 13.60

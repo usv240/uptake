@@ -1,0 +1,12 @@
+{
+ "pdb": {
+  "match": "identical",
+  "summary": "Bob's patch is identical to the maintainers' fix recorded in BUMP: the same one-line import change to com.mysql.cj.jdbc.exceptions.MySQLTimeoutException.",
+  "source": "https://github.com/chains-project/bump/blob/main/fixes/0305beafdecb0b28f7c94264ed20cdc4e41ff067.patch"
+ },
+ "hap-java": {
+  "match": "different, same contract",
+  "summary": "The maintainers upgraded 1,603 days after this PR opened (Jan 2026, 'Update to bouncy castle 1.8.3 (#193)'). They added the separate bctls library to keep throwing TlsFatalAlert and rewrote the decoder on ChaCha20Poly1305. Uptake may not add dependencies, so Bob throws IOException, the type the method already declares and that TlsFatalAlert extends: callers catch the same exception type.",
+  "source": "https://github.com/hap-java/HAP-Java/blob/master/src/main/java/io/github/hapjava/server/impl/crypto/ChachaDecoder.java"
+ }
+}

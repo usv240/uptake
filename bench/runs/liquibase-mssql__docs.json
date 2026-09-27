@@ -1,0 +1,58 @@
+{
+ "case": "feb582661e",
+ "name": "liquibase-mssql",
+ "arm": "docs",
+ "verdict": "FAILED",
+ "dependency": "org.liquibase:liquibase-core",
+ "from": "3.4.2",
+ "to": "4.8.0",
+ "advisoriesRemoved": 1,
+ "failureCategory": "COMPILATION_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "outsideWorkspace": [],
+ "after": {
+  "status": "TEST_FAILURE",
+  "tests": {
+   "run": 4,
+   "failures": 4,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": [
+   "DatabaseSelectionTest.selectionTest",
+   "IndexGeneratorTest.integrates",
+   "InsertGeneratorTest.integrates",
+   "PrimaryKeyGeneratorTest.integrates",
+   "liquibase.ext.mssql.sqlgenerator.DatabaseSelectionTest.selectionTest",
+   "liquibase.ext.mssql.sqlgenerator.IndexGeneratorTest.integrates",
+   "liquibase.ext.mssql.sqlgenerator.InsertGeneratorTest.integrates",
+   "liquibase.ext.mssql.sqlgenerator.PrimaryKeyGeneratorTest.integrates"
+  ]
+ },
+ "testsBeforeUpgrade": 4,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "e46e3e1c499f564e16ba8b8d651c0888",
+  "duration_ms": 125921,
+  "session_costs": 1.03618,
+  "max_cost": 1,
+  "tool_calls": 29
+ },
+ "toolCalls": 29,
+ "toolsUsed": [
+  "apply_diff",
+  "glob",
+  "list_files",
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_build",
+  "mcp__uptake__uptake_release_notes",
+  "mcp__uptake__uptake_status",
+  "read_file",
+  "update_todo_list"
+ ],
+ "wallSeconds": 144,
+ "exitCode": 0,
+ "stderrTail": "(node:117732) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+}

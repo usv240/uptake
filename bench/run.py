@@ -96,7 +96,7 @@ def run(case_id: str, name: str, arm: str, max_cost: float, max_turns: int, fina
     log = RUNS / f"{name}__{arm}.ndjson"
     if finalize_only:
         return summarize(case_id, name, arm, ws, log, None, 0)
-    st = workspace.prepare(case_id, ws, with_mode=(arm == "uptake"))
+    st = workspace.prepare(case_id, ws, with_mode=(arm in ("uptake", "docs")))
     if arm == "bare":
         mcp = ws / ".bob" / "mcp.json"
         cfg = json.loads(mcp.read_text(encoding="utf-8"))
@@ -121,7 +121,7 @@ def run(case_id: str, name: str, arm: str, max_cost: float, max_turns: int, fina
     with open(log, "w", encoding="utf-8") as out:
         proc = _run_bob(
             [_bob(), "run", "--accept-license", "--trust", "--workspace", str(ws),
-             "--mode", "uptake" if arm == "uptake" else "agent",
+             "--mode", "uptake" if arm in ("uptake", "docs") else "agent",
              "--max-cost", str(max_cost), "--max-turns", str(max_turns), "--format", "stream-json", prompt],
             cwd=ws, env=_env(), stdout=out, stderr=subprocess.PIPE, text=True, encoding="utf-8",
             errors="replace")
@@ -158,7 +158,7 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("case")
     p.add_argument("name")
-    p.add_argument("--arm", choices=["uptake", "plain", "bare"], required=True)
+    p.add_argument("--arm", choices=["uptake", "plain", "bare", "docs"], required=True)
     p.add_argument("--max-cost", type=float, default=1.5)
     p.add_argument("--max-turns", type=int, default=60)
     p.add_argument("--finalize-only", action="store_true", help="re-audit an existing run without calling Bob")

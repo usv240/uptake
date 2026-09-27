@@ -12,6 +12,9 @@ ROOT = Path(__file__).resolve().parent.parent
 RUNS = ROOT / "bench" / "runs"
 DOCS = ROOT / "docs"
 BYAM = json.loads((ROOT / "data" / "byam_best_of_40.json").read_text(encoding="utf-8"))
+_fate = ROOT / "data" / "pr_fate.json"
+PR_FATE = json.loads(_fate.read_text(encoding="utf-8")) if _fate.exists() else {}
+HUMAN = json.loads((ROOT / "data" / "human_fixes.json").read_text(encoding="utf-8"))
 
 LOG4SHELL = {"GHSA-jfh8-c2jp-5v3q": "CVE-2021-44228 (Log4Shell)", "GHSA-7rjr-3q55-vv33": "CVE-2021-45046",
              "GHSA-p6xc-xr62-6r2g": "CVE-2021-45105", "GHSA-8489-44mv-ggj8": "CVE-2021-44832"}
@@ -92,6 +95,18 @@ def shared(runs: list[dict]) -> list[dict]:
     return out
 
 
+def _span(ndjson: Path) -> list[str] | None:
+    """[first, last] event timestamps of a Bob run: its wall-clock span, for the parallel-runs timeline."""
+    if not ndjson.exists():
+        return None
+    ts = [json.loads(l)["timestamp"] for l in ndjson.read_text(encoding="utf-8").splitlines() if l.startswith("{")]
+    return [ts[0], ts[-1]] if ts else None
+
+
+def _count_tool(ndjson: Path, tool: str) -> int:
+    return ndjson.read_text(encoding="utf-8").count(f'"tool_name":"mcp__uptake__{tool}"') if ndjson.exists() else 0
+
+
 def _solved(x: dict) -> bool:
     return x["verdict"].startswith("REPAIRED") or x["verdict"] == "COMPILES_UNTESTED"
 
@@ -140,6 +155,10 @@ def main() -> None:
             "toolCalls": r["toolCalls"],
             "byam": None if byam is None else ("solved" if byam else "unsolved"),
             "proposal": receipt.get("proposal"),
+            "pr": PR_FATE.get(r["name"]),
+            "humanFix": HUMAN.get(r["name"]),
+            "span": _span(RUNS / f"{r['name']}__{r['arm']}.ndjson"),
+            "releaseNotesUsed": _count_tool(RUNS / f"{r['name']}__{r['arm']}.ndjson", "uptake_release_notes"),
         }
         patch = ws / ".uptake" / "fix.patch"
         detail = {**entry,
@@ -180,7 +199,8 @@ def main() -> None:
     byam_cases = [x for x in runs if x["arm"] == "uptake" and x["byam"] is not None]
     data = {
         "generated": datetime.now(timezone.utc).isoformat(timespec="minutes"),
-        "arms": {"uptake": arm_stats("uptake"), "plain": arm_stats("plain"), "bare": arm_stats("bare")},
+        "arms": {"uptake": arm_stats("uptake"), "plain": arm_stats("plain"), "bare": arm_stats("bare"),
+                 "docs": arm_stats("docs")},
         "shared": shared(runs),
         # Byam counts a build that compiles and passes as solved, so the like-for-like Uptake criterion
         # includes COMPILES_UNTESTED (projects with no tests).
@@ -223,6 +243,24 @@ def readme(data: dict) -> None:
                      + (f" (only Uptake: {', '.join(ov['onlyUptake'])}" if ov["onlyUptake"] else "")
                      + (f"; only Byam: {', '.join(ov['onlyByam'])}, where Uptake escalated a proven test-code patch instead"
                         if ov["onlyByam"] else "") + ").")
+    ur = [x for x in data["runs"] if x["arm"] == "uptake" and (x.get("pr") or {}).get("opened")]
+    if ur:
+        merged = sum(x["pr"]["merged"] for x in ur)
+        longest = max(ur, key=lambda x: x["pr"]["daysOpen"] or 0)
+        hap = next((x for x in ur if x["name"] == "hap-java"), None)
+        lines.append(f"- **The real PRs behind these cases:** {merged} of {len(ur)} were ever merged. The longest stayed open"
+                     f" {round(longest['pr']['daysOpen']):,} days ({longest['name']}"
+                     + (", still open" if longest["pr"]["stillOpen"] else "") + ")."
+                     + (f" HAP-Java's sat {round(hap['pr']['daysOpen']):,} days; Bob repaired it in {hap['seconds']} seconds."
+                        if hap else ""))
+    hf = [x for x in data["runs"] if x["arm"] == "uptake" and x.get("humanFix")]
+    if hf:
+        lines.append("- **Against the maintainers' own fixes:** " + "; ".join(
+            f"{x['name']}: {x['humanFix']['match']}" for x in hf) + " (details on the results site).")
+    d = data["arms"].get("docs", {"n": 0})
+    if d["n"]:
+        lines.append(f"- **With release notes (document understanding), re-run as parallel Bob tasks on {d['n']} cases"
+                     f" Uptake had not unblocked:** {d['resolved']}/{d['n']} unblocked, {d['silentEdits']} silent edits.")
     lines += ["", "| Case | Upgrade | Advisories | Break | Uptake | Tests | Rules only | Byam (best of 40) | Bobcoins |",
               "|---|---|---:|---|---|---:|---|---|---:|"]
     plain = {r["name"]: r for r in data["runs"] if r["arm"] == "plain"}

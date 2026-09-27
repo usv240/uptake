@@ -44,7 +44,7 @@ def install_bob_config(ws: Path, edit_regex: str, with_mode: bool = True) -> Non
         "command": "python", "args": ["-m", "uptake.mcp_server"],
         "cwd": str(ROOT), "env": {"PYTHONPATH": str(ROOT), "UPTAKE_WS": str(ws.resolve())},
         "timeout": 1200000,
-        "alwaysAllow": ["uptake_status", "uptake_build", "uptake_api_lookup", "uptake_audit"]}}}
+        "alwaysAllow": ["uptake_status", "uptake_build", "uptake_api_lookup", "uptake_release_notes", "uptake_audit"]}}}
     (bob / "mcp.json").write_text(json.dumps(mcp, indent=2), encoding="utf-8")
 
 

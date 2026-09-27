@@ -20,7 +20,7 @@ def spent() -> float:
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("cases", nargs="+", help="case-id:name")
-    p.add_argument("--arm", choices=["uptake", "plain", "bare"], required=True)
+    p.add_argument("--arm", choices=["uptake", "plain", "bare", "docs"], required=True)
     p.add_argument("--budget", type=float, required=True, help="stop when total spend across all runs reaches this")
     p.add_argument("--max-cost", type=float, default=1.5)
     a = p.parse_args()

@@ -80,6 +80,33 @@
   tbody.addEventListener("click", e => { const tr = e.target.closest("tr"); if (tr) open(tr.dataset.name, true); });
   tbody.addEventListener("keydown", e => { if (e.key === "Enter") { const tr = e.target.closest("tr"); if (tr) open(tr.dataset.name, true); } });
 
+  // The real PRs behind the benchmark cases
+  const withPr = uRuns.filter(r => r.pr && r.pr.opened);
+  if (withPr.length) {
+    const merged = withPr.filter(r => r.pr.merged).length;
+    const longest = withPr.reduce((a, b) => (b.pr.daysOpen || 0) > (a.pr.daysOpen || 0) ? b : a);
+    const hap = withPr.find(r => r.name === "hap-java");
+    const stillOpen = withPr.filter(r => r.pr.stillOpen);
+    $("#realprs-lede").textContent = `Every case started life as a real Dependabot pull request that broke a real build. We looked up what happened to each one.`;
+    $("#realprs-stats").innerHTML = [
+      { cls: "bad", v: `${merged}<small>/${withPr.length}</small>`, l: "of those security PRs were ever merged", d: "The rest were closed unmerged or are still open" },
+      { cls: "bad", v: `${Math.round(longest.pr.daysOpen).toLocaleString()}`, l: `days: the longest (${esc(longest.name)})`, d: longest.pr.stillOpen ? "and still open today" : "before it was closed unmerged" },
+      ...(hap ? [{ cls: "ok", v: `${hap.seconds}<small>s</small>`, l: "for Bob to repair HAP-Java's", d: `whose real PR sat ${Math.round(hap.pr.daysOpen).toLocaleString()} days` }] : []),
+      ...(stillOpen.length ? [{ v: `${stillOpen.length}`, l: "still open today", d: stillOpen.map(r => esc(r.name)).join(", ") }] : []),
+    ].map(s => `<div class="stat ${s.cls || ""}"><div class="v">${s.v}</div><div class="l">${s.l}</div><div class="d">${s.d}</div></div>`).join("");
+    $("#realprs-table tbody").innerHTML = withPr.sort((a, b) => (b.pr.daysOpen || 0) - (a.pr.daysOpen || 0)).map(r => {
+      const what = r.pr.merged ? "merged" : r.pr.stillOpen ? "still open" : "closed unmerged";
+      const pr = r.pr.url.replace("https://github.com/", "");
+      return `<tr><td><b>${esc(r.name)}</b>${r.log4shell.length ? '<span class="tag">LOG4SHELL</span>' : ""}</td>
+        <td class="dep"><a href="${esc(r.pr.url)}">${esc(pr)}</a></td><td class="nowrap">${esc(r.pr.opened)}</td>
+        <td>${what}</td><td class="num">${Math.round(r.pr.daysOpen).toLocaleString()}</td>
+        <td>${badge(r.verdict, r)}</td><td class="num">${r.seconds > 600 ? `${r.seconds}s<sup title="Our offline build tool hung on this project's tests and Bob waited on it. Builds now stop at 10 minutes.">*</sup>` : `${r.seconds}s`}</td></tr>`;
+    }).join("");
+    const hf = uRuns.filter(r => r.humanFix);
+    $("#humanfix").innerHTML = hf.map(r => `<article class="fact"><p class="big" style="font-size:22px">${esc(r.name)}: ${esc(r.humanFix.match)}</p><p>${esc(r.humanFix.summary)}</p><a class="src" href="${esc(r.humanFix.source)}">maintainers' fix</a></article>`).join("");
+    if (withPr.some(r => r.seconds > 600)) $("#realprs-table caption").insertAdjacentHTML("beforeend", " * Our offline build tool hung on that project's tests and Bob waited on it; builds now stop at 10 minutes.");
+  } else { $("#realprs").remove(); }
+
   // Controlled comparison: the same cases through three setups
   if (D.shared?.length) {
     const cell = a => {

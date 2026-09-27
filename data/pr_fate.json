@@ -1,0 +1,106 @@
+{
+ "allure-maven": {
+  "url": "https://github.com/allure-framework/allure-maven/pull/230",
+  "state": "CLOSED",
+  "merged": false,
+  "author": "app/dependabot",
+  "opened": "2022-03-29",
+  "ended": "2022-06-21",
+  "daysOpen": 84.0,
+  "stillOpen": false
+ },
+ "chainsaw": {
+  "url": "https://github.com/apache/logging-chainsaw/pull/14",
+  "state": "CLOSED",
+  "merged": false,
+  "author": "app/dependabot",
+  "opened": "2022-05-23",
+  "ended": "2022-05-31",
+  "daysOpen": 8.0,
+  "stillOpen": false
+ },
+ "fluxtion": {
+  "url": "https://github.com/v12technology/fluxtion/pull/211",
+  "error": "GraphQL: Could not resolve to a Repository with the name 'v12technology/fluxtion'. (repository)"
+ },
+ "geostore": {
+  "url": "https://github.com/geosolutions-it/geostore/pull/296",
+  "state": "CLOSED",
+  "merged": false,
+  "author": "app/dependabot",
+  "opened": "2022-07-06",
+  "ended": "2022-07-25",
+  "daysOpen": 18.7,
+  "stillOpen": false
+ },
+ "guice": {
+  "url": "https://github.com/google/guice/pull/1551",
+  "state": "CLOSED",
+  "merged": false,
+  "author": "app/dependabot",
+  "opened": "2021-12-02",
+  "ended": "2022-02-09",
+  "daysOpen": 69.3,
+  "stillOpen": false
+ },
+ "hap-java": {
+  "url": "https://github.com/hap-java/HAP-Java/pull/146",
+  "state": "CLOSED",
+  "merged": false,
+  "author": "app/dependabot",
+  "opened": "2021-08-13",
+  "ended": "2026-01-02",
+  "daysOpen": 1603.1,
+  "stillOpen": false
+ },
+ "liquibase-mssql": {
+  "url": "https://github.com/sabomichal/liquibase-mssql/pull/29",
+  "state": "OPEN",
+  "merged": false,
+  "author": "app/dependabot",
+  "opened": "2022-03-08",
+  "ended": "",
+  "daysOpen": 1663.3,
+  "stillOpen": true
+ },
+ "oripa": {
+  "url": "https://github.com/oripa/oripa/pull/164",
+  "state": "CLOSED",
+  "merged": false,
+  "author": "app/dependabot",
+  "opened": "2021-12-10",
+  "ended": "2021-12-14",
+  "daysOpen": 4.8,
+  "stillOpen": false
+ },
+ "pdb": {
+  "url": "https://github.com/feedzai/pdb/pull/342",
+  "state": "CLOSED",
+  "merged": false,
+  "author": "app/dependabot",
+  "opened": "2022-06-21",
+  "ended": "2022-06-28",
+  "daysOpen": 7.7,
+  "stillOpen": false
+ },
+ "quickperf": {
+  "url": "https://github.com/quick-perf/quickperf/pull/168",
+  "state": "CLOSED",
+  "merged": false,
+  "author": "app/dependabot",
+  "opened": "2021-12-14",
+  "ended": "2022-01-07",
+  "daysOpen": 23.7,
+  "stillOpen": false
+ },
+ "sardine": {
+  "url": "https://github.com/lookfirst/sardine/pull/334",
+  "state": "CLOSED",
+  "merged": false,
+  "author": "app/dependabot",
+  "opened": "2021-06-04",
+  "ended": "2023-04-18",
+  "daysOpen": 683.7,
+  "stillOpen": false
+ }
+}

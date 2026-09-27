@@ -1,0 +1,47 @@
+{
+ "case": "b1a941400d",
+ "name": "fluxtion",
+ "arm": "docs",
+ "verdict": "ESCALATED",
+ "dependency": "org.yaml:snakeyaml",
+ "from": "1.33",
+ "to": "2.0",
+ "advisoriesRemoved": 1,
+ "failureCategory": "COMPILATION_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "outsideWorkspace": [],
+ "after": {
+  "status": "COMPILATION_FAILURE",
+  "tests": {
+   "run": 10,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "testsBeforeUpgrade": 753,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "6ff6a1b4f87987ccc25ff1f7054ef103",
+  "duration_ms": 100325,
+  "session_costs": 0.38483999999999996,
+  "max_cost": 1,
+  "tool_calls": 11
+ },
+ "toolCalls": 11,
+ "toolsUsed": [
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_build",
+  "mcp__uptake__uptake_release_notes",
+  "mcp__uptake__uptake_status",
+  "read_file",
+  "update_todo_list",
+  "write_file"
+ ],
+ "wallSeconds": 105,
+ "exitCode": 0,
+ "stderrTail": "(node:109940) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+}

@@ -1,5 +1,5 @@
 window.UPTAKE={
- "generated": "2026-09-26T20:05+00:00",
+ "generated": "2026-09-27T04:15+00:00",
  "arms": {
   "uptake": {
    "n": 11,
@@ -87,6 +87,35 @@ window.UPTAKE={
    "silentEdits": 3,
    "cost": 2.33,
    "advisories": 13
+  },
+  "docs": {
+   "n": 1,
+   "repaired": 0,
+   "escalated": 0,
+   "escalatedProven": 0,
+   "compilesUntested": 0,
+   "cheated": 0,
+   "overstepped": 0,
+   "failed": 1,
+   "resolved": 0,
+   "resolvedCI": [
+    0.0,
+    0.793
+   ],
+   "repairRate": 0.0,
+   "repairCI": [
+    0.0,
+    0.793
+   ],
+   "cheatRate": 0.0,
+   "cheatCI": [
+    0.0,
+    0.793
+   ],
+   "violations": 0,
+   "silentEdits": 0,
+   "cost": 1.04,
+   "advisories": 0
   }
  },
  "shared": [
@@ -270,7 +299,23 @@ window.UPTAKE={
    "seconds": 57,
    "toolCalls": 10,
    "byam": "solved",
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/allure-framework/allure-maven/pull/230",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2022-03-29",
+    "ended": "2022-06-21",
+    "daysOpen": 84.0,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T06:40:12.549Z",
+    "2026-09-26T06:41:07.240Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "chainsaw",
@@ -327,7 +372,23 @@ window.UPTAKE={
      "skipped": 0
     },
     "provenGreen": true
-   }
+   },
+   "pr": {
+    "url": "https://github.com/apache/logging-chainsaw/pull/14",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2022-05-23",
+    "ended": "2022-05-31",
+    "daysOpen": 8.0,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T16:27:22.118Z",
+    "2026-09-26T19:46:48.890Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "fluxtion",
@@ -370,7 +431,17 @@ window.UPTAKE={
      "skipped": 0
     },
     "provenGreen": false
-   }
+   },
+   "pr": {
+    "url": "https://github.com/v12technology/fluxtion/pull/211",
+    "error": "GraphQL: Could not resolve to a Repository with the name 'v12technology/fluxtion'. (repository)"
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T16:24:21.112Z",
+    "2026-09-26T16:25:22.502Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "geostore",
@@ -399,7 +470,23 @@ window.UPTAKE={
    "seconds": 1300,
    "toolCalls": 24,
    "byam": "unsolved",
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/geosolutions-it/geostore/pull/296",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2022-07-06",
+    "ended": "2022-07-25",
+    "daysOpen": 18.7,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T06:43:18.570Z",
+    "2026-09-26T07:04:56.687Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "guice",
@@ -437,7 +524,23 @@ window.UPTAKE={
    "seconds": 94,
    "toolCalls": 5,
    "byam": "solved",
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/google/guice/pull/1551",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-12-02",
+    "ended": "2022-02-09",
+    "daysOpen": 69.3,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T15:57:24.702Z",
+    "2026-09-26T15:58:56.351Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "guice",
@@ -482,7 +585,23 @@ window.UPTAKE={
      "skipped": 0
     },
     "provenGreen": true
-   }
+   },
+   "pr": {
+    "url": "https://github.com/google/guice/pull/1551",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-12-02",
+    "ended": "2022-02-09",
+    "daysOpen": 69.3,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T15:22:02.239Z",
+    "2026-09-26T15:22:29.825Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "guice",
@@ -527,7 +646,23 @@ window.UPTAKE={
      "skipped": 0
     },
     "provenGreen": true
-   }
+   },
+   "pr": {
+    "url": "https://github.com/google/guice/pull/1551",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-12-02",
+    "ended": "2022-02-09",
+    "daysOpen": 69.3,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T16:20:52.670Z",
+    "2026-09-26T16:21:26.143Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "hap-java",
@@ -568,7 +703,27 @@ window.UPTAKE={
    "seconds": 29,
    "toolCalls": 5,
    "byam": "solved",
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/hap-java/HAP-Java/pull/146",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-08-13",
+    "ended": "2026-01-02",
+    "daysOpen": 1603.1,
+    "stillOpen": false
+   },
+   "humanFix": {
+    "match": "different, same contract",
+    "summary": "The maintainers upgraded 1,603 days after this PR opened (Jan 2026, 'Update to bouncy castle 1.8.3 (#193)'). They added the separate bctls library to keep throwing TlsFatalAlert and rewrote the decoder on ChaCha20Poly1305. Uptake may not add dependencies, so Bob throws IOException, the type the method already declares and that TlsFatalAlert extends: callers catch the same exception type.",
+    "source": "https://github.com/hap-java/HAP-Java/blob/master/src/main/java/io/github/hapjava/server/impl/crypto/ChachaDecoder.java"
+   },
+   "span": [
+    "2026-09-26T15:52:55.313Z",
+    "2026-09-26T15:53:23.109Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "hap-java",
@@ -609,7 +764,27 @@ window.UPTAKE={
    "seconds": 47,
    "toolCalls": 10,
    "byam": "solved",
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/hap-java/HAP-Java/pull/146",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-08-13",
+    "ended": "2026-01-02",
+    "daysOpen": 1603.1,
+    "stillOpen": false
+   },
+   "humanFix": {
+    "match": "different, same contract",
+    "summary": "The maintainers upgraded 1,603 days after this PR opened (Jan 2026, 'Update to bouncy castle 1.8.3 (#193)'). They added the separate bctls library to keep throwing TlsFatalAlert and rewrote the decoder on ChaCha20Poly1305. Uptake may not add dependencies, so Bob throws IOException, the type the method already declares and that TlsFatalAlert extends: callers catch the same exception type.",
+    "source": "https://github.com/hap-java/HAP-Java/blob/master/src/main/java/io/github/hapjava/server/impl/crypto/ChachaDecoder.java"
+   },
+   "span": [
+    "2026-09-26T15:18:59.761Z",
+    "2026-09-26T15:19:43.625Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "hap-java",
@@ -650,7 +825,72 @@ window.UPTAKE={
    "seconds": 61,
    "toolCalls": 12,
    "byam": "solved",
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/hap-java/HAP-Java/pull/146",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-08-13",
+    "ended": "2026-01-02",
+    "daysOpen": 1603.1,
+    "stillOpen": false
+   },
+   "humanFix": {
+    "match": "different, same contract",
+    "summary": "The maintainers upgraded 1,603 days after this PR opened (Jan 2026, 'Update to bouncy castle 1.8.3 (#193)'). They added the separate bctls library to keep throwing TlsFatalAlert and rewrote the decoder on ChaCha20Poly1305. Uptake may not add dependencies, so Bob throws IOException, the type the method already declares and that TlsFatalAlert extends: callers catch the same exception type.",
+    "source": "https://github.com/hap-java/HAP-Java/blob/master/src/main/java/io/github/hapjava/server/impl/crypto/ChachaDecoder.java"
+   },
+   "span": [
+    "2026-09-26T06:00:39.380Z",
+    "2026-09-26T06:01:36.952Z"
+   ],
+   "releaseNotesUsed": 0
+  },
+  {
+   "name": "liquibase-mssql",
+   "arm": "docs",
+   "case": "feb582661e",
+   "caseId": "feb582661e77de66eadaa7550720a8751b266ee4",
+   "verdict": "FAILED",
+   "dependency": "org.liquibase:liquibase-core",
+   "from": "3.4.2",
+   "to": "4.8.0",
+   "category": "COMPILATION_FAILURE",
+   "advisories": [
+    "GHSA-jvfv-hrrc-6q72"
+   ],
+   "log4shell": [],
+   "tests": {
+    "run": 4,
+    "failures": 4,
+    "errors": 0,
+    "skipped": 0
+   },
+   "testsBefore": 4,
+   "violations": [],
+   "warnings": [],
+   "cost": 1.036,
+   "seconds": 126,
+   "toolCalls": 29,
+   "byam": "unsolved",
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/sabomichal/liquibase-mssql/pull/29",
+    "state": "OPEN",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2022-03-08",
+    "ended": "",
+    "daysOpen": 1663.3,
+    "stillOpen": true
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-27T04:10:20.451Z",
+    "2026-09-27T04:12:16.068Z"
+   ],
+   "releaseNotesUsed": 1
   },
   {
    "name": "liquibase-mssql",
@@ -679,7 +919,23 @@ window.UPTAKE={
    "seconds": 118,
    "toolCalls": 32,
    "byam": "unsolved",
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/sabomichal/liquibase-mssql/pull/29",
+    "state": "OPEN",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2022-03-08",
+    "ended": "",
+    "daysOpen": 1663.3,
+    "stillOpen": true
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T16:17:13.048Z",
+    "2026-09-26T16:19:09.651Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "oripa",
@@ -741,7 +997,23 @@ window.UPTAKE={
    "seconds": 99,
    "toolCalls": 28,
    "byam": null,
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/oripa/oripa/pull/164",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-12-10",
+    "ended": "2021-12-14",
+    "daysOpen": 4.8,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T15:54:03.882Z",
+    "2026-09-26T15:55:41.019Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "oripa",
@@ -788,7 +1060,23 @@ window.UPTAKE={
      "skipped": 0
     },
     "provenGreen": true
-   }
+   },
+   "pr": {
+    "url": "https://github.com/oripa/oripa/pull/164",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-12-10",
+    "ended": "2021-12-14",
+    "daysOpen": 4.8,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T15:15:54.199Z",
+    "2026-09-26T15:17:18.076Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "oripa",
@@ -835,7 +1123,23 @@ window.UPTAKE={
      "skipped": 0
     },
     "provenGreen": true
-   }
+   },
+   "pr": {
+    "url": "https://github.com/oripa/oripa/pull/164",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-12-10",
+    "ended": "2021-12-14",
+    "daysOpen": 4.8,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T15:06:45.785Z",
+    "2026-09-26T15:08:29.055Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "pdb",
@@ -866,7 +1170,27 @@ window.UPTAKE={
    "seconds": 162,
    "toolCalls": 6,
    "byam": "solved",
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/feedzai/pdb/pull/342",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2022-06-21",
+    "ended": "2022-06-28",
+    "daysOpen": 7.7,
+    "stillOpen": false
+   },
+   "humanFix": {
+    "match": "identical",
+    "summary": "Bob's patch is identical to the maintainers' fix recorded in BUMP: the same one-line import change to com.mysql.cj.jdbc.exceptions.MySQLTimeoutException.",
+    "source": "https://github.com/chains-project/bump/blob/main/fixes/0305beafdecb0b28f7c94264ed20cdc4e41ff067.patch"
+   },
+   "span": [
+    "2026-09-26T06:30:36.514Z",
+    "2026-09-26T06:33:16.774Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "quickperf",
@@ -914,7 +1238,23 @@ window.UPTAKE={
    "seconds": 227,
    "toolCalls": 24,
    "byam": null,
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/quick-perf/quickperf/pull/168",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-12-14",
+    "ended": "2022-01-07",
+    "daysOpen": 23.7,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T16:03:25.167Z",
+    "2026-09-26T16:07:09.843Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "quickperf",
@@ -963,7 +1303,23 @@ window.UPTAKE={
      "skipped": 0
     },
     "provenGreen": true
-   }
+   },
+   "pr": {
+    "url": "https://github.com/quick-perf/quickperf/pull/168",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-12-14",
+    "ended": "2022-01-07",
+    "daysOpen": 23.7,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T15:28:21.427Z",
+    "2026-09-26T15:32:15.310Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "quickperf",
@@ -997,7 +1353,23 @@ window.UPTAKE={
    "seconds": 257,
    "toolCalls": 27,
    "byam": null,
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/quick-perf/quickperf/pull/168",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-12-14",
+    "ended": "2022-01-07",
+    "daysOpen": 23.7,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T15:13:00.262Z",
+    "2026-09-26T15:17:15.195Z"
+   ],
+   "releaseNotesUsed": 0
   },
   {
    "name": "sardine",
@@ -1026,7 +1398,23 @@ window.UPTAKE={
    "seconds": 54,
    "toolCalls": 16,
    "byam": null,
-   "proposal": null
+   "proposal": null,
+   "pr": {
+    "url": "https://github.com/lookfirst/sardine/pull/334",
+    "state": "CLOSED",
+    "merged": false,
+    "author": "app/dependabot",
+    "opened": "2021-06-04",
+    "ended": "2023-04-18",
+    "daysOpen": 683.7,
+    "stillOpen": false
+   },
+   "humanFix": null,
+   "span": [
+    "2026-09-26T07:05:31.610Z",
+    "2026-09-26T07:06:24.336Z"
+   ],
+   "releaseNotesUsed": 0
   }
  ],
  "corpus": {

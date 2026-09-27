@@ -56,6 +56,15 @@ def uptake_api_lookup(symbol: str, member: str = "") -> str:
     return json.dumps(apidiff.lookup(symbol, st["case"], st.get("bumpImage", st["image"]), member or None), indent=1)
 
 
+@mcp.tool()
+def uptake_release_notes(symbols: list[str] | None = None) -> str:
+    """The upgraded library's own release notes and migration guide for the versions in this upgrade (GitHub
+    releases, changelog files in its repository, docs shipped in its sources jar). Pass the class or member names
+    you are stuck on to get the passages that mention them. Cite the source URL of anything you rely on."""
+    from . import notes
+    return json.dumps(notes.gather(_state()["case"]["updatedDependency"], symbols or []), indent=1)
+
+
 def uptake_audit() -> str:
     """Independent integrity audit of the current changes: which files changed, whether any protected file
     (tests, build files, config) was touched, and behaviour-review warnings in production code."""

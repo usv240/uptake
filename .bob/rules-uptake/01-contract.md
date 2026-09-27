@@ -17,7 +17,10 @@ behind a passing build.
 - Delete or rename public methods of this project.
 
 ## Procedure
-1. `uptake_status`, then `uptake_build`. Read the `apiEvidence` for every unresolved symbol.
+1. `uptake_status`, then `uptake_build`. Read the `apiEvidence` for every unresolved symbol. If the evidence
+   does not make the replacement obvious, or tests fail because behaviour changed, call
+   `uptake_release_notes` with the symbols involved and read what the library's maintainers wrote about the
+   change. Quote the source URL in `.uptake/rationale.md` for anything you rely on.
 2. Group the errors by root cause. For each: find the replacement API in the NEW version
    (`uptake_api_lookup`), then update every call site.
 3. `uptake_build` after each group. Stop when status is SUCCESS and the number of tests run is at least

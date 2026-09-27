@@ -57,6 +57,35 @@
 </section>
 
 <section>
+  <div class="kicker">What actually happened to these PRs</div>
+  <h2 id="rp-title">Real security PRs, never merged</h2>
+  <div class="grid g4" id="rp-stats"></div>
+  <p style="margin-top:36px" id="rp-note"></p>
+</section>
+
+<section>
+  <div class="kicker">Where it runs</div>
+  <h2>One line in CI. Bob fixes the Dependabot PR where the team already works.</h2>
+  <div class="grid g2" style="align-items:start">
+    <pre style="font-size:20px"><span class="c"># .github/workflows/uptake.yml</span>
+on: pull_request            <span class="c"># Dependabot's upgrade PRs</span>
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: <span class="s">usv240/uptake@main</span>
+        with:
+          bob-api-key: ${{ secrets.BOB_API_KEY }}</pre>
+    <ol class="steps" style="grid-template-columns:1fr;gap:12px">
+      <li style="padding:18px 22px"><h3 style="margin:0 0 6px">Build breaks on the upgrade</h3><p>Base and upgrade built once, then frozen offline.</p></li>
+      <li style="padding:18px 22px"><h3 style="margin:0 0 6px">Bob repairs in Uptake mode</h3><p>IBM Bob Shell, headless, same lock, tools and rules.</p></li>
+      <li style="padding:18px 22px"><h3 style="margin:0 0 6px">Fix committed, receipt commented</h3><p>Or a one-line patch, proven green, waiting for one approval.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section>
   <div class="kicker">The idea</div>
   <h2>Rules tell Bob what's off-limits.<br>A <span class="accent">permission</span> makes sure of it. An auditor proves it.</h2>
   <div class="grid g2" style="align-items:center">
@@ -174,6 +203,21 @@ Integrity violations: 0</pre>
     document.getElementById("vs-note").innerHTML = `Silent edits to tests or build files: <b class="ok">${U.silentEdits + P.silentEdits} of ${U.n + P.n}</b> runs with Uptake's protocol, <b class="bad">${Bare.silentEdits} of ${Bare.n}</b> without. Bob with rules never gamed a test; without them it fixed the build however it could.`;
   } else {
     document.getElementById("vs-slide").remove();
+  }
+  const withPr = D.runs.filter(r => r.arm === "uptake" && r.pr && r.pr.opened);
+  if (withPr.length) {
+    const merged = withPr.filter(r => r.pr.merged).length;
+    const longest = withPr.reduce((a, b) => (b.pr.daysOpen || 0) > (a.pr.daysOpen || 0) ? b : a);
+    const hap = withPr.find(r => r.name === "hap-java");
+    const pdb = withPr.find(r => r.name === "pdb");
+    document.getElementById("rp-title").textContent = `${withPr.length} real security PRs. ${merged === 0 ? "None" : merged} merged.`;
+    document.getElementById("rp-stats").innerHTML = [
+      [`${merged}/${withPr.length}`, "ever merged", "closed unmerged or still open", "bad"],
+      [`${Math.round(longest.pr.daysOpen).toLocaleString()}`, "days, the longest", `${longest.name}${longest.pr.stillOpen ? ", still open" : ""}`, "bad"],
+      hap ? [`${hap.seconds}s`, "Bob on HAP-Java", `its real PR sat ${Math.round(hap.pr.daysOpen).toLocaleString()} days`, "ok"] : null,
+      pdb ? ["identical", "to the maintainers' fix", "pdb: same one-line change", "ok"] : null,
+    ].filter(Boolean).map(([b, l, d, c]) => `<div class="card"><div class="big ${c}" style="font-size:52px">${b}</div><p><b>${l}</b><br>${d}</p></div>`).join("");
+    document.getElementById("rp-note").innerHTML = `"Closed unmerged" is a fact about the PR. HAP-Java's maintainers did upgrade, <b>1,603 days later</b>, by adding a new library; Bob, which may not add dependencies, kept the same exception contract.`;
   }
   const esc = rows.filter(r => r.verdict === "ESCALATED");
   document.getElementById("limits").innerHTML = [
