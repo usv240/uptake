@@ -25,31 +25,29 @@ def beats() -> list[dict]:
         {"id": "hello", "pause": 0.0, "shot": "hero",
          "say": f"Hi everyone, I am {name}." if name else "Hi everyone."},
         {"id": "problem", "pause": 0.4, "shot": "realprs",
-         "say": "In 2021, Dependabot opened a pull request on an open source HomeKit library to upgrade BouncyCastle "
-                "and remove thirteen known vulnerabilities. It broke the build. It sat open for 1,603 days and was "
-                "closed without being merged. Behind our benchmark are ten real security pull requests like it. "
-                "None of them were merged."},
+         "say": "In 2021, Dependabot opened a pull request to upgrade BouncyCastle in an open source HomeKit "
+                "library, removing thirteen known vulnerabilities. It broke the build, sat open for 1,603 days, and "
+                "was never merged. Behind our benchmark are ten real security pull requests like it. None were merged."},
         {"id": "product", "pause": 0.4, "shot": "hero_stats",
          "say": "Uptake fixes that. It hands the broken upgrade to IBM Bob, locked so it can only change production "
                 "code, and proves the result before anyone has to trust it."},
     ]
     if LIVE.get("url"):
         b.append({"id": "live", "pause": 0.4, "shot": "live_pr",
-                  "say": "Here it is on a live repository. Dependabot opened the upgrade and the build broke. The "
-                         "Uptake action ran Bob in the pipeline, committed the fix to the pull request, and left a "
-                         f"receipt: {LIVE.get('tests', 'all')} tests green, {LIVE.get('advisories', 'the')} advisories gone."})
+                  "say": "Here it is live. Dependabot opened the upgrade and the build broke. The Uptake action ran "
+                         "Bob in the pipeline, committed the fix to the pull request, and left a receipt: "
+                         f"{LIVE.get('tests', 'all')} tests green."})
     b += [
         {"id": "ide", "pause": 0.4, "shot": "ide" if IDE_CLIP.exists() else "how",
-         "say": "In the Bob IDE it is one sentence in the Uptake mode. Bob reads the real failure through Uptake's "
-                "MCP server, including the library's own release notes, and edits only what it is allowed to."},
+         "say": "In the Bob IDE it is one sentence in the Uptake mode. Bob reads the real failure and the library's "
+                "release notes through Uptake's MCP server, and edits only what it is allowed to."},
         {"id": "log4shell", "pause": 0.4, "shot": "oripa",
          "say": "Some fixes are not Bob's to make. On the Log4Shell upgrade, forty-three tests died because a "
                 "companion logging library was left behind. Bob may not touch the build file, so it proposed one "
                 "line, and Uptake proved it: sixty-seven of sixty-seven tests green."},
         {"id": "honest", "pause": 0.4, "shot": "results",
-         "say": "Not every case works. Across eleven real upgrades, Bob unblocked seven on the first pass, and "
-                "one more, the second Log4Shell upgrade, once it could read the library's release notes. The three "
-                "it did not are on the page with their traces."},
+         "say": "Not every case works. Bob unblocked seven of eleven upgrades on the first pass, and the second "
+                "Log4Shell upgrade once it could read the library's release notes. The three it missed are on the page."},
         {"id": "control", "pause": 0.4, "shot": "compare",
          "say": "Without Uptake, the same Bob edited tests and build files in three of four runs. Once it "
                 "downgraded a logging library to a 2008 release, and the build still failed."},

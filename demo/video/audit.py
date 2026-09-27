@@ -64,7 +64,10 @@ def main() -> int:
     check("records against the live deployment", SITE.startswith("https://") and "localhost" not in SITE)
     check("Bob IDE footage in the video", IDE_CLIP.exists() and any(b["shot"] == "ide" for b in beats),
           "demo/ide_clip.mp4 missing" if not IDE_CLIP.exists() else "")
-    check("live Dependabot PR shown", any(b["shot"] == "live_pr" for b in beats), "demo/video/live_pr.json missing")
+    live = any(b["shot"] == "live_pr" for b in beats)
+    check("live Dependabot PR shown", live, "" if live else "demo/video/live_pr.json missing")
+    missing = json.loads((BUILD / "missing_targets.json").read_text(encoding="utf-8")) if (BUILD / "missing_targets.json").exists() else ["not recorded"]
+    check("every pointer target was found on camera", not missing, ", ".join(missing[:3]))
     check("ends on the product, not a logo or black", beats[-1]["shot"] == "hold" and beats[-2]["shot"] == "close")
 
     cues = [c for c in srt.strip().split("\n\n") if c]

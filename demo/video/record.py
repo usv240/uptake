@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from beats import BUILD, SITE  # noqa: E402
 from common import sentence_starts  # noqa: E402
 
-W, H, BAR, ZOOM = 1920, 1080, 44, 1.35
+W, H, BAR, ZOOM, GH_ZOOM = 1920, 1080, 44, 1.35, 1.3
 LIVE = json.loads((Path(__file__).resolve().parent / "live_pr.json").read_text(encoding="utf-8")) \
     if (Path(__file__).resolve().parent / "live_pr.json").exists() else {}
 
@@ -34,7 +34,7 @@ OVERLAY = f"""
     const tick = () => {{ url.textContent = location.href; }};
     tick(); setInterval(tick, 200);
     // our site is laid out for reading at 1160px wide; zoom its body so it reads at video size (not GitHub's)
-    const Z = location.host.endsWith('github.io') ? {ZOOM} : 1;
+    const Z = location.host.endsWith('github.io') ? {ZOOM} : (location.host === 'github.com' ? {GH_ZOOM} : 1);
     if (Z !== 1) document.body.style.zoom = String(Z);
     document.documentElement.style.setProperty('scroll-padding-top', '{BAR + 80}px', 'important');
     document.body.style.setProperty('margin-top', ({BAR} / Z) + 'px', 'important');
@@ -80,16 +80,38 @@ class Camera:
         self.mouse = [W / 2, H / 2]
 
     def still(self, quiet_ms: int = 300, limit_ms: int = 4000):
-        """Wait until the page has stopped scrolling (CSS smooth scroll from an anchor click, or ours)."""
+        """Wait until the page has stopped scrolling (CSS smooth scroll from an anchor click, or ours).
+        If a click just started a navigation, wait for the new page instead."""
+        for _ in range(3):
+            try:
+                self.page.wait_for_load_state("load", timeout=30000)
+                self._still(quiet_ms, limit_ms)
+                return
+            except Exception as e:  # noqa: BLE001  execution context destroyed by a navigation: try again
+                if "Execution context was destroyed" not in str(e) and "navigat" not in str(e):
+                    raise
+                self.page.wait_for_timeout(500)
+
+    def _still(self, quiet_ms: int, limit_ms: int):
         self.page.evaluate("""([quiet, limit]) => new Promise(done => {
             let last = window.scrollY, same = 0; const t0 = performance.now();
             const tick = () => { const y = window.scrollY; same = (y === last) ? same + 50 : 0; last = y;
               if (same >= quiet || performance.now() - t0 > limit) done(); else setTimeout(tick, 50); };
             setTimeout(tick, 50); })""", [quiet_ms, limit_ms])
 
+    missing: list = []
+
     def move_to(self, selector: str, dx: float = 0.5, dy: float = 0.5, steps: int = 28):
         self.still()
+        if self.page.locator(selector).count() == 0:
+            Camera.missing.append(selector)  # the audit fails on any missed shot
+            print(f"   missing shot target: {selector}", flush=True)
+            return
         box = self.page.locator(selector).first.bounding_box()
+        if box and (box["y"] < BAR or box["y"] + box["height"] > H):  # off screen: ease it into view first
+            self.page.evaluate(EASE_SCROLL, [max(0, self.page.evaluate("() => window.scrollY") + box["y"] - H / 2), 26])
+            self.still()
+            box = self.page.locator(selector).first.bounding_box()
         if not box:
             return
         x, y = box["x"] + box["width"] * dx, box["y"] + box["height"] * dy
@@ -99,20 +121,27 @@ class Camera:
     def click(self, selector: str, read: float = 0.6):
         self.move_to(selector)
         self.page.wait_for_timeout(int(read * 1000))
+        # one real press where the cursor is: the click the viewer sees is the click that happens
         self.page.mouse.down()
         self.page.wait_for_timeout(90)
         self.page.mouse.up()
-        self.page.locator(selector).first.click(no_wait_after=True, timeout=5000, force=True)
         self.page.wait_for_timeout(150)
         self.still()
 
     def scroll_to(self, selector: str, offset: int = BAR + 76, frames: int = 26):
-        top = self.page.evaluate("s => { const el = document.querySelector(s); return el ? el.getBoundingClientRect().top + window.scrollY : null; }", selector)
-        if top is not None:
-            self.still()
-            top = self.page.evaluate("s => document.querySelector(s).getBoundingClientRect().top + window.scrollY", selector)
-            self.page.evaluate(EASE_SCROLL, [max(0, top - offset), frames])
-            self.still()
+        # resolved through Playwright's locator API: document.querySelector does not understand :has-text()
+        self.still()
+        loc = self.page.locator(selector)
+        if loc.count() == 0:
+            Camera.missing.append(selector)
+            print(f"   missing scroll target: {selector}", flush=True)
+            return
+        box = loc.first.bounding_box()
+        if box is None:
+            return
+        top = box["y"] + self.page.evaluate("() => window.scrollY")
+        self.page.evaluate(EASE_SCROLL, [max(0, top - offset), frames])
+        self.still()
 
     def settle(self, selector: str = "body", timeout: int = 15000):
         self.page.wait_for_load_state("load", timeout=timeout)
@@ -151,7 +180,7 @@ def shot(name: str):
         cam.click('a#live-pr')
         cam.settle(".js-discussion, .timeline-comment", 30000)
         cam.page.wait_for_timeout(800)
-        cam.move_to("span.State, .gh-header-meta .State", 0.5, 0.5)  # the red CI cross on Dependabot's commit comes next
+        cam.move_to("[data-component='StateLabel']", 0.5, 0.5)  # the red CI cross on Dependabot's commit comes next
         on(1)
         cam.scroll_to(".js-timeline-item:has-text('Bump org.bouncycastle')", offset=BAR + 220, frames=40)
         cam.move_to(".js-timeline-item:has-text('Bump org.bouncycastle') a:has-text('Bump org')", 0.9, 0.5)
@@ -294,6 +323,7 @@ def main() -> int:
         browser.close()
     shutil.move(video, BUILD / "raw.webm")
     (BUILD / "beatlog.json").write_text(json.dumps(log, indent=1), encoding="utf-8")
+    (BUILD / "missing_targets.json").write_text(json.dumps(Camera.missing), encoding="utf-8")
     worst = max(log, key=lambda x: (x["end"] - x["start"]) - x["clip"])
     print(f"largest stall: {worst['id']} ran {worst['end'] - worst['start'] - worst['clip']:.1f}s past its line")
     return 0
