@@ -1,0 +1,50 @@
+{
+ "case": "19e20b0d69",
+ "name": "chainsaw",
+ "arm": "uptake",
+ "verdict": "FAILED",
+ "dependency": "com.thoughtworks.xstream:xstream",
+ "from": "1.4.17",
+ "to": "1.4.19",
+ "advisoriesRemoved": 15,
+ "failureCategory": "TEST_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "after": {
+  "status": "TEST_FAILURE",
+  "tests": {
+   "run": 5,
+   "failures": 0,
+   "errors": 1,
+   "skipped": 0
+  },
+  "failingTests": [
+   "org.apache.log4j.chainsaw.LogPanelPreferenceModelTest#testLogPanelPreferenceModelSerialization"
+  ]
+ },
+ "testsBeforeUpgrade": 5,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "6e1bc6db91a624cf02fd0ad309f35318",
+  "duration_ms": 129963,
+  "session_costs": 1.0034209999999997,
+  "max_cost": 1,
+  "tool_calls": 24
+ },
+ "toolCalls": 24,
+ "toolsUsed": [
+  "glob",
+  "grep",
+  "list_files",
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_build",
+  "mcp__uptake__uptake_status",
+  "read_file",
+  "spawn_subagent",
+  "update_todo_list"
+ ],
+ "wallSeconds": 0,
+ "exitCode": null,
+ "stderrTail": ""
+}

@@ -1,0 +1,119 @@
+{
+ "case": {
+  "url": "https://github.com/google/guice/pull/1551",
+  "project": "guice",
+  "projectOrganisation": "google",
+  "breakingCommit": "acc50dabec6796c091b84c1ada2ae4cbcab8b562",
+  "prAuthor": "bot",
+  "preCommitAuthor": "human",
+  "breakingCommitAuthor": "bot",
+  "updatedDependency": {
+   "dependencyGroupID": "org.apache.struts",
+   "dependencyArtifactID": "struts2-core",
+   "previousVersion": "2.3.37",
+   "newVersion": "2.5.22",
+   "dependencyScope": "provided",
+   "versionUpdateType": "minor",
+   "githubCompareLink": "Relevant tags were not found in the GitHub repository apache/struts for the updated dependency.",
+   "mavenSourceLinkPre": "https://repo1.maven.org/maven2/org/apache/struts/struts2-core/2.3.37/struts2-core-2.3.37-sources.jar",
+   "mavenSourceLinkBreaking": "https://repo1.maven.org/maven2/org/apache/struts/struts2-core/2.5.22/struts2-core-2.5.22-sources.jar",
+   "updatedFileType": "JAR",
+   "dependencySection": "dependencies",
+   "licenseInfo": "Apache-2.0",
+   "githubRepoSlug": "apache/struts"
+  },
+  "preCommitReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:acc50dabec6796c091b84c1ada2ae4cbcab8b562-pre",
+  "breakingUpdateReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:acc50dabec6796c091b84c1ada2ae4cbcab8b562-breaking",
+  "javaVersionUsedForReproduction": "11",
+  "failureCategory": "COMPILATION_FAILURE",
+  "licenseInfo": "Apache-2.0",
+  "advisoriesRemoved": [
+   "GHSA-8m5q-crqq-6pmf",
+   "GHSA-ccp5-gg58-pxfm",
+   "GHSA-wp4h-pvgw-5727"
+  ]
+ },
+ "image": "uptake-local/acc50dabec67:ready",
+ "bumpImage": "ghcr.io/chains-project/breaking-updates:acc50dabec6796c091b84c1ada2ae4cbcab8b562-breaking",
+ "workdir": "/guice",
+ "baselineTests": 5787,
+ "baselineStatus": "SUCCESS",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": [
+   {
+    "file": "extensions/struts2/test/com/google/inject/struts2/Struts2FactoryTest.java",
+    "line": 19,
+    "col": 46,
+    "message": "error: package org.apache.struts2.dispatcher.ng.filter does not exist",
+    "detail": []
+   },
+   {
+    "file": "extensions/struts2/test/com/google/inject/struts2/Struts2FactoryTest.java",
+    "line": 55,
+    "col": 19,
+    "message": "error: cannot find symbol",
+    "detail": []
+   },
+   {
+    "file": "extensions/struts2/test/com/google/inject/struts2/Struts2FactoryTest.java",
+    "line": 57,
+    "col": 35,
+    "message": "error: cannot find symbol",
+    "detail": []
+   }
+  ],
+  "tests": {
+   "run": 5405,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": [],
+  "errorLogTail": "[ERROR] COMPILATION ERROR : \n[ERROR] /guice/extensions/struts2/test/com/google/inject/struts2/Struts2FactoryTest.java:[19,46] error: package org.apache.struts2.dispatcher.ng.filter does not exist\n[ERROR] /guice/extensions/struts2/test/com/google/inject/struts2/Struts2FactoryTest.java:[55,19] error: cannot find symbol\n[ERROR]  class StrutsPrepareAndExecuteFilter\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile (default-testCompile) on project guice-struts2: Compilation failure: Compilation failure: \n[ERROR] /guice/extensions/struts2/test/com/google/inject/struts2/Struts2FactoryTest.java:[19,46] error: package org.apache.struts2.dispatcher.ng.filter does not exist\n[ERROR] /guice/extensions/struts2/test/com/google/inject/struts2/Struts2FactoryTest.java:[55,19] error: cannot find symbol\n[ERROR]  class StrutsPrepareAndExecuteFilter\n[ERROR] /guice/extensions/struts2/test/com/google/inject/struts2/Struts2FactoryTest.java:[57,35] error: cannot find symbol\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[ERROR] \n[ERROR] After correcting the problems, you can resume the build with the command\n[ERROR]   mvn <args> -rf :guice-struts2"
+ },
+ "sourceRoots": {
+  "production": [
+   "bom/src",
+   "core/src",
+   "extensions/assistedinject/src",
+   "extensions/dagger-adapter/src",
+   "extensions/grapher/src",
+   "extensions/jmx/src",
+   "extensions/jndi/src",
+   "extensions/mini/src",
+   "extensions/persist/src",
+   "extensions/service/src",
+   "extensions/servlet/src",
+   "extensions/spring/src",
+   "extensions/src",
+   "extensions/struts2/src",
+   "extensions/testlib/src",
+   "extensions/throwingproviders/src",
+   "jdk8-tests/src",
+   "src"
+  ],
+  "test": [
+   "bom/test",
+   "core/test",
+   "extensions/assistedinject/test",
+   "extensions/dagger-adapter/test",
+   "extensions/grapher/test",
+   "extensions/jmx/test",
+   "extensions/jndi/test",
+   "extensions/mini/test",
+   "extensions/persist/test",
+   "extensions/service/test",
+   "extensions/servlet/test",
+   "extensions/spring/test",
+   "extensions/struts2/test",
+   "extensions/test",
+   "extensions/testlib/test",
+   "extensions/throwingproviders/test",
+   "jdk8-tests/test",
+   "test"
+  ]
+ },
+ "editRegex": "^(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$))(?!(?:.*[\\\\/])?(?:extensions[\\\\/]throwingproviders[\\\\/]test|extensions[\\\\/]assistedinject[\\\\/]test|extensions[\\\\/]dagger\\-adapter[\\\\/]test|extensions[\\\\/]grapher[\\\\/]test|extensions[\\\\/]persist[\\\\/]test|extensions[\\\\/]service[\\\\/]test|extensions[\\\\/]servlet[\\\\/]test|extensions[\\\\/]struts2[\\\\/]test|extensions[\\\\/]testlib[\\\\/]test|extensions[\\\\/]spring[\\\\/]test|extensions[\\\\/]jndi[\\\\/]test|extensions[\\\\/]mini[\\\\/]test|extensions[\\\\/]jmx[\\\\/]test|extensions[\\\\/]test|jdk8\\-tests[\\\\/]test|core[\\\\/]test|bom[\\\\/]test|test)[\\\\/])(?:(?:.*[\\\\/])?(?:extensions[\\\\/]throwingproviders[\\\\/]src|extensions[\\\\/]assistedinject[\\\\/]src|extensions[\\\\/]dagger\\-adapter[\\\\/]src|extensions[\\\\/]grapher[\\\\/]src|extensions[\\\\/]persist[\\\\/]src|extensions[\\\\/]service[\\\\/]src|extensions[\\\\/]servlet[\\\\/]src|extensions[\\\\/]struts2[\\\\/]src|extensions[\\\\/]testlib[\\\\/]src|extensions[\\\\/]spring[\\\\/]src|extensions[\\\\/]jndi[\\\\/]src|extensions[\\\\/]mini[\\\\/]src|extensions[\\\\/]jmx[\\\\/]src|extensions[\\\\/]src|jdk8\\-tests[\\\\/]src|core[\\\\/]src|bom[\\\\/]src|src)[\\\\/](?:[^\\\\/]+[\\\\/])*[^\\\\/]+\\.java|(?:.*[\\\\/])?\\.uptake[\\\\/](?:rationale\\.md|escalation\\.md|proposed\\.patch))$",
+ "preparedAt": "2026-09-26T16:20:47+00:00"
+}

@@ -1,0 +1,36 @@
+[
+ {"id": "hook", "say": "Log4Shell was fixed in 2021. Four years later, thirteen percent of Log4j downloads are still vulnerable. The fix exists. The upgrade breaks the build. So it waits.",
+  "actions": [{"do": "goto", "url": "docs/cover.html", "settle": 1200}]},
+
+ {"id": "cheat", "lead": 0.6, "say": "Hand that upgrade to an AI agent and it will get the build green however it can. Watch. This is a real breaking security upgrade. Put the old, vulnerable version back in the pom, and all twelve tests pass. CI would ship it. Uptake's auditor reads the diff, not the build log, and calls it what it is. Here is Bob's real repair of the same upgrade instead, re-verified from its receipt on a fresh copy.",
+  "actions": [{"do": "goto", "url": "demo/terminal.html", "settle": 200}]},
+
+ {"id": "ide", "ide": true, "say": "This is Uptake inside IBM Bob. Pick the Uptake mode and say one sentence. Bob calls Uptake's MCP server for the real failure and for evidence of what changed in the library, edits only production code, and checks its work with an offline build in the original container.",
+  "actions": [{"do": "goto", "url": "docs/slides.html", "settle": 1000},
+              {"do": "js", "code": "document.body.style.zoom=1.2; window.scrollTo(0, document.querySelectorAll('section')[2].offsetTop*1.2)"}]},
+
+ {"id": "how", "say": "The Uptake mode is Bob's own permission system. The edit rule is computed from the project's poms. Tests, versions and Bob's config are outside it, and there's no shell. When a fix needs a file Bob may not touch, it writes a proposed patch and stops, and Uptake proves that patch green in a scratch copy.",
+  "actions": [{"do": "goto", "url": "docs/index.html", "hash": "#how", "settle": 1200},
+              {"do": "scroll", "to": "#how", "offset": 60, "hold": 8},
+              {"do": "scroll", "to": ".lock", "offset": 120}]},
+
+ {"id": "log4shell", "say": "Here's the Log4Shell upgrade. Forty-three tests died at class load. Bob traced it to a companion logging library left on the old version. It didn't touch the pom. It proposed one line. Uptake applied it, and all sixty-seven tests went green. One approval, and Log4Shell is gone.",
+  "actions": [{"do": "goto", "url": "docs/index.html", "settle": 1200},
+              {"do": "click", "sel": "#picker button[data-name='oripa']"},
+              {"do": "scroll", "to": "#explore", "offset": 60, "hold": 4},
+              {"do": "js", "code": "document.querySelector('#all')?.click()"},
+              {"do": "scroll", "to": "#case .pane:nth-child(2) h4:nth-of-type(2)", "offset": 200, "hold": 6},
+              {"do": "scroll", "to": "#case .receipt", "offset": 200}]},
+
+ {"id": "results", "say": "Every case is a real Dependabot or Renovate upgrade that broke a real open-source build, from the BUMP benchmark. We ran Bob once per case. Seven of eleven were repaired outright or unblocked with a one-approval patch Uptake proved green, including Log4Shell, with zero unreviewed edits. The failures are on the page too. On the cases the best published system also attempted, it needed its best of forty configurations to match a single Bob run.",
+  "actions": [{"do": "goto", "url": "docs/index.html", "settle": 1200},
+              {"do": "scroll", "to": "#stats", "offset": 160, "hold": 7},
+              {"do": "scroll", "to": "#results-table", "offset": 120}]},
+
+ {"id": "compare", "say": "And the control. Same Bob, same upgrades. With Uptake's rules, not one silent edit. With a normal request, Bob edited tests and poms in three of four cases, and on Log4Shell it downgraded a logging library to a 2008 release and still broke the build. Uptake turns that into something you can review, approve, and verify.",
+  "actions": [{"do": "goto", "url": "docs/index.html", "settle": 1200},
+              {"do": "scroll", "to": "#compare", "offset": 60}]},
+
+ {"id": "close", "say": "Uptake. Security upgrades, unblocked, with every change proven. Built on IBM Bob. Everything, including every Bob run, is in the repo.",
+  "actions": [{"do": "goto", "url": "docs/cover.html", "settle": 1000}]}
+]

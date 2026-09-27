@@ -1,0 +1,58 @@
+{
+ "tool": "uptake",
+ "verdict": "FAILED",
+ "dependency": "org.liquibase:liquibase-core",
+ "from": "3.4.2",
+ "to": "4.8.0",
+ "advisoriesRemoved": [
+  "GHSA-jvfv-hrrc-6q72"
+ ],
+ "image": "uptake-local/feb582661e77:ready",
+ "benchmarkCase": "feb582661e77de66eadaa7550720a8751b266ee4",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": 5,
+  "failingTests": []
+ },
+ "after": {
+  "status": "TEST_FAILURE",
+  "tests": {
+   "run": 4,
+   "failures": 4,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": [
+   "DatabaseSelectionTest.selectionTest",
+   "IndexGeneratorTest.integrates",
+   "InsertGeneratorTest.integrates",
+   "PrimaryKeyGeneratorTest.integrates",
+   "liquibase.ext.mssql.sqlgenerator.DatabaseSelectionTest.selectionTest",
+   "liquibase.ext.mssql.sqlgenerator.IndexGeneratorTest.integrates",
+   "liquibase.ext.mssql.sqlgenerator.InsertGeneratorTest.integrates",
+   "liquibase.ext.mssql.sqlgenerator.PrimaryKeyGeneratorTest.integrates"
+  ]
+ },
+ "baselineTestsBeforeUpgrade": 4,
+ "sourceRoots": {
+  "production": [
+   "src/java"
+  ],
+  "test": [
+   "src/java-test"
+  ]
+ },
+ "integrity": {
+  "productionFilesChanged": [
+   "src/java/liquibase/ext/mssql/database/MSSQLDatabase.java",
+   "src/java/liquibase/ext/mssql/sqlgenerator/AddPrimaryKeyGeneratorMSSQL.java",
+   "src/java/liquibase/ext/mssql/sqlgenerator/CreateIndexGeneratorMSSQL.java"
+  ],
+  "diffStat": "3 files changed, 6 insertions(+), 5 deletions(-)",
+  "violations": [],
+  "warnings": []
+ },
+ "proposal": null,
+ "patchSha256": "cec4ccdbbc6a06b4baf973c4f9f8239a27ca03df2dc220c35a8cd2ad4711b4d7",
+ "finalizedAt": "2026-09-26T19:47:54+00:00"
+}

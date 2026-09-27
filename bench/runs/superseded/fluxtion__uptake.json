@@ -1,0 +1,44 @@
+{
+ "case": "b1a941400d",
+ "name": "fluxtion",
+ "arm": "uptake",
+ "verdict": "ESCALATED",
+ "dependency": "org.yaml:snakeyaml",
+ "from": "1.33",
+ "to": "2.0",
+ "advisoriesRemoved": 1,
+ "failureCategory": "COMPILATION_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "after": {
+  "status": "COMPILATION_FAILURE",
+  "tests": {
+   "run": 10,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "testsBeforeUpgrade": 753,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "c8da8effaf0c7817c7d76bed5a046c1c",
+  "duration_ms": 41651,
+  "session_costs": 0.19608199999999998,
+  "max_cost": 1,
+  "tool_calls": 7
+ },
+ "toolCalls": 7,
+ "toolsUsed": [
+  "grep",
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_status",
+  "read_file",
+  "write_file"
+ ],
+ "wallSeconds": 0,
+ "exitCode": null,
+ "stderrTail": ""
+}

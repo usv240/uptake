@@ -1,0 +1,78 @@
+{
+ "case": {
+  "url": "https://github.com/apache/logging-chainsaw/pull/14",
+  "project": "logging-chainsaw",
+  "projectOrganisation": "apache",
+  "breakingCommit": "19e20b0d69cb6dadbc54313cb6c6e5f70670ac93",
+  "prAuthor": "bot",
+  "preCommitAuthor": "human",
+  "breakingCommitAuthor": "bot",
+  "updatedDependency": {
+   "dependencyGroupID": "com.thoughtworks.xstream",
+   "dependencyArtifactID": "xstream",
+   "previousVersion": "1.4.17",
+   "newVersion": "1.4.19",
+   "dependencyScope": "compile",
+   "versionUpdateType": "patch",
+   "githubCompareLink": "A GitHub repository could not be found for the updated dependency.",
+   "mavenSourceLinkPre": "https://repo1.maven.org/maven2/com/thoughtworks/xstream/xstream/1.4.17/xstream-1.4.17-sources.jar",
+   "mavenSourceLinkBreaking": "https://repo1.maven.org/maven2/com/thoughtworks/xstream/xstream/1.4.19/xstream-1.4.19-sources.jar",
+   "updatedFileType": "JAR",
+   "dependencySection": "dependencies",
+   "licenseInfo": "No license found",
+   "githubRepoSlug": "Repository not found"
+  },
+  "preCommitReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:19e20b0d69cb6dadbc54313cb6c6e5f70670ac93-pre",
+  "breakingUpdateReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:19e20b0d69cb6dadbc54313cb6c6e5f70670ac93-breaking",
+  "javaVersionUsedForReproduction": "11",
+  "failureCategory": "TEST_FAILURE",
+  "licenseInfo": "Apache-2.0",
+  "advisoriesRemoved": [
+   "GHSA-2q8x-2p7f-574v",
+   "GHSA-3ccq-5vw3-2p6x",
+   "GHSA-64xx-cq4q-mf44",
+   "GHSA-6w62-hx7r-mw68",
+   "GHSA-6wf9-jmg9-vxcc",
+   "GHSA-8jrj-525p-826v",
+   "GHSA-cxfm-5m4g-x7xp",
+   "GHSA-g5w6-mrj7-75h2",
+   "GHSA-h7v4-7xg3-hxcc",
+   "GHSA-hph2-m3g5-xxv4",
+   "GHSA-j9h8-phrw-h4fh",
+   "GHSA-p8pq-r894-fm8f",
+   "GHSA-qrx8-8545-4wg2",
+   "GHSA-rmr5-cpv2-vgjf",
+   "GHSA-xw4p-crpj-vjx2"
+  ]
+ },
+ "image": "uptake-local/19e20b0d69cb:ready",
+ "bumpImage": "ghcr.io/chains-project/breaking-updates:19e20b0d69cb6dadbc54313cb6c6e5f70670ac93-breaking",
+ "workdir": "/logging-chainsaw",
+ "baselineTests": 5,
+ "baselineStatus": "SUCCESS",
+ "before": {
+  "status": "TEST_FAILURE",
+  "compileErrors": [],
+  "tests": {
+   "run": 5,
+   "failures": 0,
+   "errors": 1,
+   "skipped": 0
+  },
+  "failingTests": [
+   "org.apache.log4j.chainsaw.LogPanelPreferenceModelTest#testLogPanelPreferenceModelSerialization"
+  ],
+  "errorLogTail": "[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.35 s <<< FAILURE! - in org.apache.log4j.chainsaw.LogPanelPreferenceModelTest\n[ERROR] testLogPanelPreferenceModelSerialization(org.apache.log4j.chainsaw.LogPanelPreferenceModelTest)  Time elapsed: 0.345 s  <<< ERROR!\n[ERROR] Errors: \n[ERROR]   org.apache.log4j.chainsaw.LogPanelPreferenceModelTest#testLogPanelPreferenceModelSerialization ForbiddenClassException\n[ERROR] Tests run: 5, Failures: 0, Errors: 1, Skipped: 0\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test (default-test) on project apache-chainsaw: There are test failures.\n[ERROR] \n[ERROR] Please refer to /logging-chainsaw/target/surefire-reports for the individual test results.\n[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException",
+  "testFailureDetails": "Test set: org.apache.log4j.chainsaw.LogPanelPreferenceModelTest\nTests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.35 s <<< FAILURE! - in org.apache.log4j.chainsaw.LogPanelPreferenceModelTest\ntestLogPanelPreferenceModelSerialization(org.apache.log4j.chainsaw.LogPanelPreferenceModelTest)  Time elapsed: 0.345 s  <<< ERROR!\ncom.thoughtworks.xstream.security.ForbiddenClassException: org.apache.log4j.chainsaw.LogPanelPreferenceModel\n\tat com.thoughtworks.xstream.security.NoTypePermission.allows(NoTypePermission.java:26)\n\tat com.thoughtworks.xstream.mapper.SecurityMapper.realClass(SecurityMapper.java:74)\n\tat com.thoughtworks.xstream.mapper.MapperWrapper.realClass(MapperWrapper.java:125)\n\tat com.thoughtworks.xstream.mapper.CachingMapper.realClass(CachingMapper.java:47)\n\tat com.thoughtworks.xstream.core.util.HierarchicalStreams.readClassType(HierarchicalStreams.java:29)\n\tat com.thoughtworks.xstream.core.TreeUnmarshaller.start(TreeUnmarshaller.java:135)\n\tat com.thoughtworks.xstream.core.AbstractTreeMarshallingStrategy.unmarshal(AbstractTreeMarshallingStrategy.java:32)\n\tat com.thoughtworks.xstream.XStream.unmarshal(XStream.java:1421)\n\tat com.thoughtworks.xstream.XStream.unmarshal(XStream.java:1399)\n\tat com.thoughtworks.xstream.XStream.fromXML(XStream.java:1284)\n\tat com.thoughtworks.xstream.XStream.fromXML(XStream.java:1275)\n\tat org.apache.log4j.chainsaw.LogPanelPreferenceModelTest.testLogPanelPreferenceModelSerialization(LogPanelPreferenceModelTest.java:47)"
+ },
+ "sourceRoots": {
+  "production": [
+   "src/main/java"
+  ],
+  "test": [
+   "src/test/java"
+  ]
+ },
+ "editRegex": "^(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$))(?!(?:.*[\\\\/])?(?:src[\\\\/]test[\\\\/]java)[\\\\/])(?:(?:.*[\\\\/])?(?:src[\\\\/]main[\\\\/]java)[\\\\/](?:[^\\\\/]+[\\\\/])*[^\\\\/]+\\.java|(?:.*[\\\\/])?\\.uptake[\\\\/](?:rationale\\.md|escalation\\.md|proposed\\.patch))$",
+ "preparedAt": "2026-09-26T16:27:17+00:00"
+}

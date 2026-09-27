@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Uptake · terminal replay of real output</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;width:1920px;height:1080px;background:#0B0D10;color:#E6E8EB;overflow:hidden;font-family:Geist,system-ui,sans-serif}
+  .win{position:absolute;inset:72px 120px 96px;background:#111418;border:2px solid #2A2F37;border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+  .bar{height:52px;display:flex;align-items:center;gap:10px;padding:0 20px;border-bottom:2px solid #2A2F37;color:#9BA3AF;font:500 18px Geist}
+  .dot{width:14px;height:14px;border-radius:50%;background:#2A2F37}
+  .bar b{margin-left:14px;color:#E6E8EB;font-weight:600}
+  #t{flex:1;padding:28px 36px;font:500 27px/1.55 "Geist Mono",monospace;white-space:pre-wrap;overflow:hidden}
+  .p{color:#56B4E9}.o{color:#C9CED6}.g{color:#009E73;font-weight:600}.r{color:#D55E00;font-weight:600}
+  .n{display:block;color:#E69F00;font:600 25px Geist;margin:14px 0 6px}
+  .add{color:#D55E00}.del{color:#009E73}
+  .cur{display:inline-block;width:14px;height:30px;background:#56B4E9;vertical-align:-5px;animation:b 1s steps(1) infinite}
+  @keyframes b{50%{opacity:0}}
+  .cap{position:absolute;left:120px;bottom:30px;color:#9BA3AF;font:500 20px Geist}
+</style></head><body>
+<div class="win"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><b>uptake</b> · real BUMP case, real output</div><div id="t"></div></div>
+<div class="cap">Replay of output captured from the actual run · outputs abridged, not edited</div>
+<script src="terminal_data.js"></script>
+<script>
+(async () => {
+  const t = document.getElementById("t"), sleep = ms => new Promise(r => setTimeout(r, ms));
+  const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+  const cur = document.createElement("span"); cur.className = "cur";
+  const scroll = () => { while (t.scrollHeight > t.clientHeight && t.firstChild) t.removeChild(t.firstChild); };
+  await sleep(600);
+  for (const step of window.TERM) {
+    if (step.note) {
+      const n = document.createElement("span"); n.className = "n"; n.textContent = "# " + step.note;
+      t.appendChild(n); scroll(); await sleep(1400); continue;
+    }
+    const line = document.createElement("div"); line.innerHTML = '<span class="p">$ </span>'; t.appendChild(line); line.appendChild(cur);
+    for (const ch of step.cmd) { cur.insertAdjacentText("beforebegin", ch); await sleep(16); }
+    await sleep(350); cur.remove();
+    const out = document.createElement("div");
+    out.className = step.good ? "g" : step.bad ? "r" : "o";
+    out.innerHTML = step.diff ? step.out.split("\n").map(l => l.startsWith("-") ? `<span class="del">${esc(l)}</span>` : l.startsWith("+") ? `<span class="add">${esc(l)}</span>` : `<span class="o">${esc(l)}</span>`).join("\n") : esc(step.out);
+    t.appendChild(out); scroll(); await sleep(1700);
+  }
+  document.title = "done";
+})();
+</script>
+</body></html>

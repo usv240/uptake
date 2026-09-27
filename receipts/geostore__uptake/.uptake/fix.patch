@@ -1,0 +1,68 @@
+diff --git a/src/core/security/src/main/java/it/geosolutions/geostore/core/security/password/GeoStoreDigestPasswordEncoder.java b/src/core/security/src/main/java/it/geosolutions/geostore/core/security/password/GeoStoreDigestPasswordEncoder.java
+index 1157916..9d0937d 100644
+--- a/src/core/security/src/main/java/it/geosolutions/geostore/core/security/password/GeoStoreDigestPasswordEncoder.java
++++ b/src/core/security/src/main/java/it/geosolutions/geostore/core/security/password/GeoStoreDigestPasswordEncoder.java
+@@ -20,8 +20,8 @@
+ package it.geosolutions.geostore.core.security.password;
+ 
+ import org.apache.commons.codec.binary.Base64;
++import org.acegisecurity.providers.encoding.PasswordEncoder;
+ import org.jasypt.digest.StandardByteDigester;
+-import org.jasypt.spring.security.PasswordEncoder;
+ import org.jasypt.util.password.StrongPasswordEncryptor;
+ import static it.geosolutions.geostore.core.security.password.SecurityUtils.toBytes;
+ 
+@@ -42,9 +42,17 @@ public class GeoStoreDigestPasswordEncoder extends AbstractGeoStorePasswordEncod
+ 
+ 	    @Override
+ 	    protected PasswordEncoder createStringEncoder() {
+-	        PasswordEncoder encoder = new PasswordEncoder();
+-	        encoder.setPasswordEncryptor(new StrongPasswordEncryptor());
+-	        return encoder;
++	        final StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
++	        return new PasswordEncoder() {
++	            @Override
++	            public String encodePassword(String rawPass, Object salt) {
++	                return encryptor.encryptPassword(rawPass);
++	            }
++	            @Override
++	            public boolean isPasswordValid(String encPass, String rawPass, Object salt) {
++	                return encryptor.checkPassword(rawPass, encPass);
++	            }
++	        };
+ 	    }
+ 
+ 	    @Override
+diff --git a/src/core/security/src/main/java/it/geosolutions/geostore/core/security/password/GeoStorePBEPasswordEncoder.java b/src/core/security/src/main/java/it/geosolutions/geostore/core/security/password/GeoStorePBEPasswordEncoder.java
+index cba1b70..a23c9c0 100644
+--- a/src/core/security/src/main/java/it/geosolutions/geostore/core/security/password/GeoStorePBEPasswordEncoder.java
++++ b/src/core/security/src/main/java/it/geosolutions/geostore/core/security/password/GeoStorePBEPasswordEncoder.java
+@@ -30,7 +30,6 @@ import java.util.Base64;
+ import org.acegisecurity.providers.encoding.PasswordEncoder;
+ import org.jasypt.encryption.pbe.StandardPBEByteEncryptor;
+ import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+-import org.jasypt.spring.security.PBEPasswordEncoder;
+ /**
+  * Password Encoder using symmetric encryption
+  * 
+@@ -99,10 +98,16 @@ public class GeoStorePBEPasswordEncoder extends AbstractGeoStorePasswordEncoder
+ 			}
+ 			stringEncrypter.setAlgorithm(getAlgorithm());
+ 
+-			PBEPasswordEncoder encoder = new PBEPasswordEncoder();
+-			encoder.setPbeStringEncryptor(stringEncrypter);
+-
+-			return encoder;
++			return new org.acegisecurity.providers.encoding.PasswordEncoder() {
++					@Override
++					public String encodePassword(String rawPass, Object salt) {
++						return stringEncrypter.encrypt(rawPass);
++					}
++					@Override
++					public boolean isPasswordValid(String encPass, String rawPass, Object salt) {
++						return stringEncrypter.decrypt(encPass).equals(rawPass);
++					}
++				};
+ 		} finally {
+ 			scramble(password);
+ 			scramble(chars);

@@ -1,0 +1,11 @@
+--- a/src/test/java/org/apache/log4j/chainsaw/LogPanelPreferenceModelTest.java
++++ b/src/test/java/org/apache/log4j/chainsaw/LogPanelPreferenceModelTest.java
+@@ -40,6 +40,8 @@ public class LogPanelPreferenceModelTest extends TestCase {
+         model.setToolTips(!model.isToolTips());
+         
+         XStream stream = new XStream(new DomDriver());
++        // XStream 1.4.18+ uses deny-all by default; allow the classes under test
++        stream.allowTypesByWildcard(new String[]{"org.apache.log4j.chainsaw.**"});
+         String xml = stream.toXML(model);
+ //        System.out.println(xml);
+         

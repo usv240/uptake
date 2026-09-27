@@ -1,0 +1,29 @@
+diff --git a/src/main/java/com/github/sardine/impl/SardineException.java b/src/main/java/com/github/sardine/impl/SardineException.java
+index 7d14f90..823194b 100644
+--- a/src/main/java/com/github/sardine/impl/SardineException.java
++++ b/src/main/java/com/github/sardine/impl/SardineException.java
+@@ -28,6 +28,7 @@ public class SardineException extends HttpResponseException
+ {
+ 	private static final long serialVersionUID = -3900043433469104564L;
+ 
++	private final String message;
+ 	private String responsePhrase;
+ 
+ 	/**
+@@ -38,6 +39,7 @@ public class SardineException extends HttpResponseException
+ 	public SardineException(String msg, int statusCode, String responsePhrase)
+ 	{
+ 		super(statusCode, msg);
++		this.message = msg;
+ 		this.responsePhrase = responsePhrase;
+ 	}
+ 
+@@ -54,6 +56,6 @@ public class SardineException extends HttpResponseException
+ 	@Override
+ 	public String getMessage()
+ 	{
+-		return String.format("%s (%d %s)", super.getMessage(), this.getStatusCode(), this.getResponsePhrase());
++		return String.format("%s (%d %s)", this.message, this.getStatusCode(), this.getResponsePhrase());
+ 	}
+ }
+\ No newline at end of file

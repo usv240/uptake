@@ -1,0 +1,41 @@
+{
+ "tool": "uptake",
+ "verdict": "COMPILES_UNTESTED",
+ "dependency": "net.lingala.zip4j:zip4j",
+ "from": "1.3.2",
+ "to": "2.10.0",
+ "advisoriesRemoved": [
+  "GHSA-2rpm-4x8c-pvqg",
+  "GHSA-q62h-jw38-24vh"
+ ],
+ "image": "uptake-local/54857351e0b0:ready",
+ "benchmarkCase": "54857351e0b0a655970d7e2ccdb67f175cc5d688",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": 1,
+  "failingTests": []
+ },
+ "after": {
+  "status": "SUCCESS",
+  "tests": {
+   "run": 0,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "baselineTestsBeforeUpgrade": 0,
+ "sourceRoots": null,
+ "integrity": {
+  "productionFilesChanged": [
+   "src/main/java/io/qameta/allure/maven/AllureCommandline.java"
+  ],
+  "diffStat": "1 file changed, 1 insertion(+), 1 deletion(-)",
+  "violations": [],
+  "warnings": []
+ },
+ "proposal": null,
+ "patchSha256": "c7951952123cc0c6d505f49bda9a948e7edd58e14b4ed09b6e95f02ca6b29469",
+ "finalizedAt": "2026-09-26T15:05:10+00:00"
+}

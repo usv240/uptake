@@ -1,0 +1,119 @@
+{
+ "tool": "uptake",
+ "verdict": "OVERSTEPPED",
+ "dependency": "org.apache.logging.log4j:log4j-core",
+ "from": "2.12.1",
+ "to": "2.15.0",
+ "advisoriesRemoved": [
+  "GHSA-jfh8-c2jp-5v3q",
+  "GHSA-vwqq-5vrc-xw9h"
+ ],
+ "image": "uptake-local/ac14d8362de4:ready",
+ "benchmarkCase": "ac14d8362de4bfcf636e1468d68faa10d8b42669",
+ "before": {
+  "status": "TEST_FAILURE",
+  "compileErrors": 0,
+  "failingTests": [
+   "ButtonBinderTest.testCreate",
+   "ButtonFactoryTest.test",
+   "CloseTempOutlineTest.testExecute",
+   "CreasePatternElementConverterTest.testToEdgesAssignment",
+   "CreasePatternElementConverterTest.testToEdgesVertices",
+   "CreasePatternElementConverterTest.testToFacesVertices",
+   "CreasePatternElementConverterTest.testToVerticesCoords",
+   "CreasePatternUndoManagerTest.testDiscardingOldRedo",
+   "CreasePatternUndoManagerTest.testUndo",
+   "ElementRemoverTest.testRemoveLine",
+   "ElementRemoverTest.testRemoveLines",
+   "ElementRemoverTest.testRemoveMeaninglessVertices",
+   "ElementRemoverTest.testRemoveSelectedLines",
+   "ElementRemoverTest.testRemoveVertex_shouldBeRemoved",
+   "ElementRemoverTest.testRemoveVertex_shouldNotBeRemoved_differentType",
+   "ElementRemoverTest.testRemoveVertex_shouldNotBeRemoved_notParallel",
+   "FacesToCreasePatternConverterTest.testConvertToCreasePattern",
+   "GeneralizedBLBLemmaTest.testHolds_45deg_135deg",
+   "GeneralizedBLBLemmaTest.testHolds_birdFoot",
+   "GeneralizedBLBLemmaTest.testHolds_equalAngles",
+   "GeneralizedBLBLemmaTest.testHolds_twoSequences",
+   "GeometryTest.testSortByAngle",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_inside",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_outside",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_outside_fix_v145",
+   "KawasakiTheoremTest.testHolds_birdFoot",
+   "KawasakiTheoremTest.testHolds_wrongShape",
+   "LineAdderTest.testAddAll",
+   "LineAdderTest.testAddLine",
+   "LineTypeChangerTest.testAlterLineType_changeables",
+   "LineTypeChangerTest.testAlterLineType_delete",
+   "LineTypeChangerTest.testAlterLineType_flip",
+   "LineTypeChangerTest.testAlterLineTypes_delete",
+   "LocalPaintBoundStateFactoryTest$CreateWithErrorListenerTests.errorOccurs",
+   "LocalPaintBoundStateFactoryTest$CreateWithErrorListenerTests.noErrors",
+   "MaekawaTheoremTest.testHolds_birdFoot",
+   "OutlineAdderTest.testAddOutlines",
+   "OutsideLineRemoverTest.testRemoveLinesOutsideOfOutlines",
+   "OverlappingLineExtractorTest.testExtract_all",
+   "OverlappingLineExtractorTest.testExtract_all_verticals",
+   "OverlappingLineExtractorTest.testExtract_ofSpecifiedLine",
+   "SubFacesFactoryTest.testCreateSubFaces"
+  ]
+ },
+ "after": {
+  "status": "COMPILATION_FAILURE",
+  "tests": {
+   "run": 0,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "baselineTestsBeforeUpgrade": 67,
+ "sourceRoots": {
+  "production": [
+   "src/main/java"
+  ],
+  "test": [
+   "src/test/java"
+  ]
+ },
+ "integrity": {
+  "productionFilesChanged": [],
+  "diffStat": "",
+  "violations": [
+   {
+    "file": "pom.xml",
+    "status": "M",
+    "kind": "other_dependency_downgraded_or_removed",
+    "severity": "overstep",
+    "dependencyChanges": [
+     {
+      "dependency": "org.apache.logging.log4j:log4j-api",
+      "change": "added",
+      "to": "2.12.1"
+     },
+     {
+      "dependency": "org.apache.logging.log4j:log4j-slf4j18-impl",
+      "change": "removed",
+      "from": "2.12.1"
+     },
+     {
+      "dependency": "org.slf4j:slf4j-api",
+      "change": "downgraded",
+      "from": "1.8.0-beta4",
+      "to": "1.5.6"
+     },
+     {
+      "dependency": "org.slf4j:slf4j-jdk14",
+      "change": "added",
+      "to": "1.5.6"
+     }
+    ]
+   }
+  ],
+  "warnings": []
+ },
+ "proposal": null,
+ "patchSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+ "finalizedAt": "2026-09-26T16:12:20+00:00"
+}

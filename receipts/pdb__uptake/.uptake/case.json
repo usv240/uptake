@@ -1,0 +1,74 @@
+{
+ "case": {
+  "url": "https://github.com/feedzai/pdb/pull/342",
+  "project": "pdb",
+  "projectOrganisation": "feedzai",
+  "breakingCommit": "0305beafdecb0b28f7c94264ed20cdc4e41ff067",
+  "prAuthor": "bot",
+  "preCommitAuthor": "bot",
+  "breakingCommitAuthor": "bot",
+  "updatedDependency": {
+   "dependencyGroupID": "mysql",
+   "dependencyArtifactID": "mysql-connector-java",
+   "previousVersion": "5.1.49",
+   "newVersion": "8.0.28",
+   "dependencyScope": "compile",
+   "versionUpdateType": "major",
+   "githubCompareLink": "A GitHub repository could not be found for the updated dependency.",
+   "mavenSourceLinkPre": "https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.49/mysql-connector-java-5.1.49-sources.jar",
+   "mavenSourceLinkBreaking": "https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.28/mysql-connector-java-8.0.28-sources.jar",
+   "updatedFileType": "JAR",
+   "dependencySection": "dependencies",
+   "licenseInfo": "No license found",
+   "githubRepoSlug": "Repository not found"
+  },
+  "preCommitReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:0305beafdecb0b28f7c94264ed20cdc4e41ff067-pre",
+  "breakingUpdateReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:0305beafdecb0b28f7c94264ed20cdc4e41ff067-breaking",
+  "javaVersionUsedForReproduction": "11",
+  "failureCategory": "COMPILATION_FAILURE",
+  "licenseInfo": "Apache-2.0",
+  "advisoriesRemoved": [
+   "GHSA-4vrv-ch96-6h42",
+   "GHSA-g76j-4cxx-23h9",
+   "GHSA-jcq3-cprp-m333"
+  ]
+ },
+ "image": "uptake-local/0305beafdecb:ready",
+ "bumpImage": "ghcr.io/chains-project/breaking-updates:0305beafdecb0b28f7c94264ed20cdc4e41ff067-breaking",
+ "workdir": "/pdb",
+ "baselineTests": 291,
+ "baselineStatus": "SUCCESS",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": [
+   {
+    "file": "src/main/java/com/feedzai/commons/sql/abstraction/engine/impl/mysql/MySqlQueryExceptionHandler.java",
+    "line": 21,
+    "col": 33,
+    "message": "package com.mysql.jdbc.exceptions does not exist",
+    "detail": [
+     "symbol: class MySQLTimeoutException"
+    ]
+   },
+   {
+    "file": "src/main/java/com/feedzai/commons/sql/abstraction/engine/impl/mysql/MySqlQueryExceptionHandler.java",
+    "line": 40,
+    "col": 37,
+    "message": "cannot find symbol",
+    "detail": [
+     "symbol: class MySQLTimeoutException",
+     "location: class com.feedzai.commons.sql.abstraction.engine.impl.mysql.MySqlQueryExceptionHandler"
+    ]
+   }
+  ],
+  "tests": {
+   "run": 0,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": [],
+  "errorLogTail": "[ERROR] COMPILATION ERROR : \n[ERROR] /pdb/src/main/java/com/feedzai/commons/sql/abstraction/engine/impl/mysql/MySqlQueryExceptionHandler.java:[21,33] package com.mysql.jdbc.exceptions does not exist\n[ERROR] /pdb/src/main/java/com/feedzai/commons/sql/abstraction/engine/impl/mysql/MySqlQueryExceptionHandler.java:[40,37] cannot find symbol\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project pdb: Compilation failure: Compilation failure: \n[ERROR] /pdb/src/main/java/com/feedzai/commons/sql/abstraction/engine/impl/mysql/MySqlQueryExceptionHandler.java:[21,33] package com.mysql.jdbc.exceptions does not exist\n[ERROR] /pdb/src/main/java/com/feedzai/commons/sql/abstraction/engine/impl/mysql/MySqlQueryExceptionHandler.java:[40,37] cannot find symbol\n[ERROR]   symbol:   class MySQLTimeoutException\n[ERROR]   location: class com.feedzai.commons.sql.abstraction.engine.impl.mysql.MySqlQueryExceptionHandler\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException"
+ },
+ "preparedAt": "2026-09-26T06:30:32+00:00"
+}

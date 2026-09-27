@@ -1,0 +1,44 @@
+{
+ "case": "6ad104c4fb",
+ "name": "hap-java",
+ "arm": "bare",
+ "verdict": "REPAIRED",
+ "dependency": "org.bouncycastle:bcprov-jdk15on",
+ "from": "1.51",
+ "to": "1.67",
+ "advisoriesRemoved": 13,
+ "failureCategory": "COMPILATION_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "after": {
+  "status": "SUCCESS",
+  "tests": {
+   "run": 12,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "testsBeforeUpgrade": 12,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "080fe8e2ba41a89c8fd9d672bb3083a6",
+  "duration_ms": 29492,
+  "session_costs": 0.13653800000000002,
+  "max_cost": 1,
+  "tool_calls": 5
+ },
+ "toolCalls": 5,
+ "toolsUsed": [
+  "apply_diff",
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_build",
+  "mcp__uptake__uptake_status",
+  "read_file"
+ ],
+ "wallSeconds": 0,
+ "exitCode": null,
+ "stderrTail": ""
+}

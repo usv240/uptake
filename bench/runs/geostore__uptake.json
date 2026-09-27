@@ -1,0 +1,48 @@
+{
+ "case": "9a8b6fc784",
+ "name": "geostore",
+ "arm": "uptake",
+ "verdict": "REPAIRED",
+ "dependency": "org.jasypt:jasypt",
+ "from": "1.8",
+ "to": "1.9.2",
+ "advisoriesRemoved": 1,
+ "failureCategory": "COMPILATION_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "after": {
+  "status": "SUCCESS",
+  "tests": {
+   "run": 208,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 36
+  },
+  "failingTests": []
+ },
+ "testsBeforeUpgrade": 208,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "adb83db68a361dc0d9620f7f31377640",
+  "duration_ms": 1299639,
+  "session_costs": 0.880202,
+  "max_cost": 1,
+  "tool_calls": 24
+ },
+ "toolCalls": 24,
+ "toolsUsed": [
+  "apply_diff",
+  "grep",
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_audit",
+  "mcp__uptake__uptake_build",
+  "mcp__uptake__uptake_status",
+  "read_file",
+  "update_todo_list",
+  "write_file"
+ ],
+ "wallSeconds": 0,
+ "exitCode": null,
+ "stderrTail": ""
+}

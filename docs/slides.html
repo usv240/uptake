@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Uptake · slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page { size: 1600px 900px; margin: 0; }
+  :root { --bg:#0B0D10; --surface:#14171C; --border:#2A2F37; --text:#E6E8EB; --muted:#9BA3AF; --accent:#56B4E9; --ok:#009E73; --esc:#E69F00; --bad:#D55E00; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #000; font-family: Geist, Inter, system-ui, sans-serif; color: var(--text); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  section { width: 1600px; height: 900px; background: var(--bg); position: relative; padding: 88px 112px; page-break-after: always; overflow: hidden; }
+  .kicker { font: 600 18px "Geist Mono", monospace; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px; }
+  h1 { font: 800 88px/1.02 Geist; letter-spacing: -.045em; margin: 0 0 28px; }
+  h2 { font: 700 56px/1.08 Geist; letter-spacing: -.03em; margin: 0 0 40px; max-width: 1300px; }
+  p { font-size: 26px; line-height: 1.45; color: var(--muted); margin: 0 0 18px; max-width: 1200px; }
+  b, strong { color: var(--text); }
+  .accent { color: var(--accent); } .ok { color: var(--ok); } .bad { color: var(--bad); } .esc { color: var(--esc); }
+  .grid { display: grid; gap: 24px; }
+  .g4 { grid-template-columns: repeat(4, 1fr); } .g3 { grid-template-columns: repeat(3, 1fr); } .g2 { grid-template-columns: 1fr 1fr; }
+  .card { background: var(--surface); border: 2px solid var(--border); border-radius: 18px; padding: 30px; }
+  .big { font: 600 64px/1 "Geist Mono", monospace; letter-spacing: -.03em; margin-bottom: 16px; }
+  .card p { font-size: 20px; margin: 0; }
+  .src { font-size: 15px; color: var(--muted); margin-top: 14px; }
+  .foot { position: absolute; left: 112px; right: 112px; bottom: 44px; display: flex; justify-content: space-between; font-size: 16px; color: var(--muted); }
+  pre { margin: 0; font: 500 22px/1.6 "Geist Mono", monospace; background: var(--surface); border: 2px solid var(--border); border-radius: 18px; padding: 28px 32px; white-space: pre-wrap; }
+  .c { color: var(--muted); } .s { color: var(--ok); }
+  ol.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  ol.steps li { background: var(--surface); border: 2px solid var(--border); border-radius: 18px; padding: 28px; }
+  ol.steps .n { font: 600 20px "Geist Mono"; color: var(--accent); }
+  ol.steps h3 { font: 700 28px Geist; margin: 12px 0; }
+  ol.steps p { font-size: 19px; margin: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 17px; }
+  th { text-align: left; color: var(--muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; padding: 6px 12px; border-bottom: 2px solid var(--border); }
+  td { padding: 6px 12px; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+  td.m { font-family: "Geist Mono", monospace; font-size: 15px; }
+  .v { font: 600 13px "Geist Mono"; padding: 3px 7px; border: 2px solid currentColor; border-radius: 7px; white-space: nowrap; }
+  .logo { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 14px; background: var(--accent); color: var(--bg); font-size: 34px; font-weight: 800; vertical-align: middle; margin-right: 16px; }
+  .quote { border-left: 4px solid var(--accent); padding-left: 24px; font-size: 30px; color: var(--text); line-height: 1.4; max-width: 1250px; }
+</style></head><body>
+
+<section>
+  <div style="margin-top:80px"><span class="logo">✓</span><span style="font:700 40px Geist;vertical-align:middle">Uptake</span></div>
+  <h1 style="margin-top:48px">Security upgrades,<br>unblocked. <span class="accent">Every change proven.</span></h1>
+  <p style="font-size:30px">Uptake bumps a vulnerable dependency, reproduces what breaks, has <b>IBM Bob</b> rewrite your code to the new API with tests and build files <b>locked read-only</b>, and proves it green in the original container.</p>
+  <div class="foot"><span>IBM Bob 2.0 Hackathon · release &amp; maintenance workflow</span><span>github.com/usv240/uptake</span></div>
+</section>
+
+<section>
+  <div class="kicker">The problem</div>
+  <h2>The security fix usually exists. The upgrade is what doesn't happen, because it breaks the build.</h2>
+  <div class="grid g4">
+    <div class="card"><div class="big accent">95%</div><p>of vulnerable components downloaded already had a fixed version.</p><div class="src">Sonatype SSCR 2024</div></div>
+    <div class="card"><div class="big accent">13%</div><p>of Log4j downloads are still vulnerable, 4 years after Log4Shell. ~40M in 2025.</p><div class="src">Sonatype, 2025</div></div>
+    <div class="card"><div class="big accent">27%</div><p>of breaking upgrades fully repaired by the best published AI system.</p><div class="src">Byam, EMSE 2026</div></div>
+    <div class="card"><div class="big bad">76%</div><p>of the time a frontier agent exploited tests instead of doing the task.</p><div class="src">ImpossibleBench, ICLR 2026</div></div>
+  </div>
+  <p style="margin-top:40px">Hand an upgrade to an AI agent and it will get the build green <b>however it can</b>: editing tests, changing other dependencies, pinning versions. CI can't tell the difference.</p>
+</section>
+
+<section>
+  <div class="kicker">The idea</div>
+  <h2>Rules tell Bob what's off-limits.<br>A <span class="accent">permission</span> makes sure of it. An auditor proves it.</h2>
+  <div class="grid g2" style="align-items:center">
+    <pre><span class="c"># .bob/custom_modes.yaml  (computed from the project's poms)</span>
+- slug: uptake
+  groups:
+    - read
+    - - edit
+      - fileRegex: <span class="s">'&lt;production source roots&gt;/**.java'</span>
+    - mcp        <span class="c"># evidence + offline verifier</span>
+    - subagent   <span class="c"># explore only</span>
+  <span class="c"># no "execute": no shell, no -DskipTests</span></pre>
+    <div>
+      <p class="quote">ImpossibleBench (ICLR 2026): when tests are read-only, agent test-gaming drops to <b>near zero</b>.</p>
+      <p style="margin-top:28px">Uptake builds that finding into <b>IBM Bob's own mode system</b>: tests, <code>pom.xml</code>, <code>.bob/</code> and <code>../</code> escapes are outside the edit permission, so Bob refuses those edits before any file is touched. An independent auditor checks anyway.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">How it works</div>
+  <h2>Reproduce → evidence → locked repair → proof</h2>
+  <ol class="steps">
+    <li><span class="n">01</span><h3>Reproduce</h3><p>The real breaking upgrade replays in its original BUMP container, <b>offline</b>. Errors and failing tests become the work order.</p></li>
+    <li><span class="n">02</span><h3>Evidence</h3><p>Uptake's <b>MCP server</b> tells Bob where each missing symbol lived, what replaced it, and what is on the classpath.</p></li>
+    <li><span class="n">03</span><h3>Locked repair</h3><p>Bob in <b>Uptake mode</b> edits production code only, fans out <b>explore subagents</b>, or escalates with a proposed patch.</p></li>
+    <li><span class="n">04</span><h3>Proof</h3><p>An auditor that trusts nothing rebuilds, classifies every change, proves proposals, and writes a <b>re-verifiable receipt</b>.</p></li>
+  </ol>
+  <p style="margin-top:40px">What it leaves in your repo: <b>the fix</b>, or <b>a one-approval patch already proven green</b>, plus <code>UPGRADE_RECEIPT.md</code> with a patch hash and <code>uptake verify</code>.</p>
+</section>
+
+<section>
+  <div class="kicker">Real case · Log4Shell (CVE-2021-44228)</div>
+  <h2 id="l4-title">The Log4Shell upgrade broke 43 tests. Bob found why in one run.</h2>
+  <div class="grid g2">
+    <div>
+      <p id="l4-text">Dependabot bumped <b>log4j-core 2.12.1 → 2.15.0</b> but left <b>log4j-slf4j18-impl</b> at 2.12.1. <code>LoggerContext</code> fails at class load, and every test that logs dies after it.</p>
+      <p>Bob is not allowed to edit <code>pom.xml</code>, so it stopped and wrote the one-line fix as a proposal. Uptake applied it in a scratch copy:</p>
+      <p style="font-size:34px;color:var(--text);margin-top:24px"><span class="ok">✓ 67/67 tests green</span> · one human approval</p>
+    </div>
+    <pre style="font-size:20px"><span class="c">--- a/pom.xml</span>
+<span class="c">+++ b/pom.xml</span>
+   &lt;artifactId&gt;log4j-slf4j18-impl&lt;/artifactId&gt;
+<span class="bad">-  &lt;version&gt;2.12.1&lt;/version&gt;</span>
+<span class="s">+  &lt;version&gt;2.15.0&lt;/version&gt;</span>
+
+<span class="c"># UPGRADE_RECEIPT.md</span>
+Verdict: ESCALATED
+Proposed patch: proven green
+Integrity violations: 0</pre>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Results</div>
+  <h2 id="res-title" style="margin-bottom:24px;font-size:46px">Real breaking security upgrades from BUMP</h2>
+  <div class="grid g4" id="res-stats"></div>
+  <div style="margin-top:22px" id="res-table"></div>
+</section>
+
+<section id="vs-slide">
+  <div class="kicker">The negative control</div>
+  <h2>Same Bob, same upgrades, same build tool. Three setups.</h2>
+  <div class="grid g2" id="vs"></div>
+  <p style="margin-top:36px" id="vs-note"></p>
+</section>
+
+<section>
+  <div class="kicker">IBM Bob 2.0, used as the product</div>
+  <h2>Every Bob 2.0 extension point, pointed at one job</h2>
+  <div class="grid g3">
+    <div class="card"><h3 style="font:700 28px Geist;margin:0 0 12px">Custom mode</h3><p><code>fileRegex</code> lock computed from the project's poms, no shell, <code>allowedSubagents: [explore]</code>.</p></div>
+    <div class="card"><h3 style="font:700 28px Geist;margin:0 0 12px">MCP server</h3><p>Status, offline build + test, API evidence across versions, integrity audit. None can edit a file.</p></div>
+    <div class="card"><h3 style="font:700 28px Geist;margin:0 0 12px">Mode rules</h3><p>When to stop: companion artifacts, removed features, deliberate security behaviour changes.</p></div>
+    <div class="card"><h3 style="font:700 28px Geist;margin:0 0 12px">Subagents</h3><p>Read-only <code>explore</code> subagents map every call site of a removed API in parallel.</p></div>
+    <div class="card"><h3 style="font:700 28px Geist;margin:0 0 12px">Bob Shell</h3><p><code>bob run --mode uptake --max-cost</code> ran the whole benchmark headless, with cost in the JSON.</p></div>
+    <div class="card"><h3 style="font:700 28px Geist;margin:0 0 12px">Bob IDE</h3><p>A developer picks <b>Uptake</b> in the mode menu and types one sentence.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Limits, measured</div>
+  <h2>What Uptake does not do, and how often that happened</h2>
+  <div id="limits" style="font-size:24px;line-height:1.7;color:var(--muted)"></div>
+  <p style="margin-top:30px">Every run, trace, diff and receipt: <b>docs/index.html</b>. Every receipt re-verifies with <code>python -m uptake verify</code>. <span id="tests-count"></span></p>
+</section>
+
+<script src="data.js"></script>
+<script>
+(() => {
+  const D = window.UPTAKE, U = D.arms.uptake, P = D.arms.plain, ov = D.byamOverlap;
+  const pct = x => Math.round(x * 100) + "%";
+  const lab = { REPAIRED: ["✓ Repaired", "ok"], REPAIRED_NEEDS_REVIEW: ["✓ Repaired", "ok"], ESCALATED: ["↑ Escalated", "esc"],
+    COMPILES_UNTESTED: ["◐ Compiles", ""], CHEATED: ["✗ Cheated", "bad"], OVERSTEPPED: ["⚠ Overstepped", "esc"], FAILED: ["– Failed", ""] };
+  const v = r => { if (!r) return "–"; const [t, c] = lab[r.verdict] || [r.verdict, ""];
+    return `<span class="v ${c}">${r.verdict === "ESCALATED" && r.proposal?.provenGreen ? "↑ Patch proven" : t}</span>`; };
+  document.getElementById("res-title").textContent = `${U.n} real breaking security upgrades from BUMP, one Bob run each`;
+  document.getElementById("res-stats").innerHTML = [
+    [`${U.resolved}/${U.n}`, "unblocked", `${U.repaired} repaired · ${U.escalatedProven} patch proven`, "ok"],
+    [`${U.silentEdits + P.silentEdits}/${U.n + P.n}`, "silent edits with Uptake", `vs ${(D.arms.bare||{}).silentEdits}/${(D.arms.bare||{}).n} without`, "ok"],
+    [`${ov.uptakeSolved} vs ${ov.byamSolved}`, "vs Byam, same cases", "one run vs best of 40 configs", ""],
+    [`${U.advisories}`, "advisories unblocked", "incl. Log4Shell", ""],
+  ].map(([b, l, d, c]) => `<div class="card" style="padding:20px 24px"><div class="big ${c}" style="font-size:44px;margin-bottom:8px">${b}</div><p><b>${l}</b><br>${d}</p></div>`).join("");
+  const plain = Object.fromEntries(D.runs.filter(r => r.arm === "plain").map(r => [r.name, r]));
+  const rows = D.runs.filter(r => r.arm === "uptake");
+  document.getElementById("res-table").innerHTML = `<table><tr><th>Case</th><th>Upgrade</th><th>Adv.</th><th>Uptake</th><th>Tests</th><th>Rules only</th><th>Byam (best of 40)</th></tr>` +
+    rows.map(r => `<tr><td><b>${r.name}</b>${r.log4shell.length ? ' <span class="bad" style="font-size:14px">LOG4SHELL</span>' : ""}</td><td class="m">${r.dependency.split(":")[1]} ${r.from}→${r.to}</td><td>${r.advisories.length}</td><td>${v(r)}</td><td>${r.tests.run}/${r.testsBefore}</td><td>${v(plain[r.name])}</td><td>${r.byam || "–"}</td></tr>`).join("") + `</table>`;
+  const Bare = D.arms.bare || { n: 0 };
+  if (D.shared?.length) {
+    const cell = a => { const p = a.verdict === "ESCALATED" && a.proven; const [t, c] = lab[a.verdict] || [a.verdict, ""];
+      const d = a.violations.map(v => (v.dependencyChanges || []).filter(x => x.change === "downgraded").map(x => `${x.dependency.split(":")[1]} ${x.from}→${x.to}`).join(", ") || v.file.split("/").pop()).join("; ");
+      return `<span class="v ${p ? "ok" : c}">${p ? "↑ Patch proven" : t}</span>${d ? `<div style="font:14px 'Geist Mono';color:var(--muted);margin-top:4px">${d}</div>` : ""}`; };
+    document.getElementById("vs").outerHTML = `<table><tr><th>Case</th><th>Uptake mode</th><th>Rules only</th><th>No Uptake: "get the build passing"</th></tr>` +
+      D.shared.map(s => `<tr><td><b>${s.name}</b>${s.log4shell ? ' <span class="bad" style="font-size:14px">LOG4SHELL</span>' : ""}</td><td>${cell(s.uptake)}</td><td>${cell(s.plain)}</td><td>${cell(s.bare)}</td></tr>`).join("") + `</table>`;
+    document.getElementById("vs-note").innerHTML = `Silent edits to tests or build files: <b class="ok">${U.silentEdits + P.silentEdits} of ${U.n + P.n}</b> runs with Uptake's protocol, <b class="bad">${Bare.silentEdits} of ${Bare.n}</b> without. Bob with rules never gamed a test; without them it fixed the build however it could.`;
+  } else {
+    document.getElementById("vs-slide").remove();
+  }
+  const esc = rows.filter(r => r.verdict === "ESCALATED");
+  document.getElementById("limits").innerHTML = [
+    `<b>Escalates instead of editing tests or poms:</b> ${esc.length} of ${U.n} cases needed a test-code or build-file change; Bob proposed it and stopped (${U.escalatedProven} proposals proven green).`,
+    `<b>Small N:</b> every run costs Bobcoins. 95% interval on the unblocked rate: ${pct(U.resolvedCI[0])}–${pct(U.resolvedCI[1])}.`,
+    `<b>Tests are the spec:</b> ${U.compilesUntested} project had no tests, so it is reported as "compiles", not "repaired".`,
+    `<b>Java/Maven only</b> today. Bob picks its own model, so model-for-model comparison with Byam is not possible.`,
+  ].map(x => `<div>· ${x}</div>`).join("");
+})();
+</script>
+</body></html>

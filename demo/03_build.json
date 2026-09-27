@@ -1,0 +1,12 @@
+{
+ "status": "SUCCESS",
+ "compileErrors": [],
+ "tests": {
+  "run": 12,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+ },
+ "failingTests": [],
+ "errorLogTail": ""
+}

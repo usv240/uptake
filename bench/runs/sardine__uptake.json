@@ -1,0 +1,47 @@
+{
+ "case": "d4aade950f",
+ "name": "sardine",
+ "arm": "uptake",
+ "verdict": "REPAIRED",
+ "dependency": "org.apache.httpcomponents:httpclient",
+ "from": "4.5.1",
+ "to": "4.5.13",
+ "advisoriesRemoved": 1,
+ "failureCategory": "TEST_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "after": {
+  "status": "SUCCESS",
+  "tests": {
+   "run": 26,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "testsBeforeUpgrade": 26,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "49c5b66d299a26ce4fb991f3543d6d7b",
+  "duration_ms": 54443,
+  "session_costs": 1.008132,
+  "max_cost": 1,
+  "tool_calls": 16
+ },
+ "toolCalls": 16,
+ "toolsUsed": [
+  "apply_diff",
+  "glob",
+  "list_files",
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_build",
+  "mcp__uptake__uptake_status",
+  "read_file",
+  "update_todo_list"
+ ],
+ "wallSeconds": 0,
+ "exitCode": null,
+ "stderrTail": ""
+}

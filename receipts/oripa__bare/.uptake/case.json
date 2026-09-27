@@ -1,0 +1,106 @@
+{
+ "case": {
+  "url": "https://github.com/oripa/oripa/pull/164",
+  "project": "oripa",
+  "projectOrganisation": "oripa",
+  "breakingCommit": "ac14d8362de4bfcf636e1468d68faa10d8b42669",
+  "prAuthor": "bot",
+  "preCommitAuthor": "human",
+  "breakingCommitAuthor": "bot",
+  "updatedDependency": {
+   "dependencyGroupID": "org.apache.logging.log4j",
+   "dependencyArtifactID": "log4j-core",
+   "previousVersion": "2.12.1",
+   "newVersion": "2.15.0",
+   "dependencyScope": "compile",
+   "versionUpdateType": "minor",
+   "githubCompareLink": "Relevant tags were not found in the GitHub repository apache/logging-log4j1 for the updated dependency.",
+   "mavenSourceLinkPre": "https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.12.1/log4j-core-2.12.1-sources.jar",
+   "mavenSourceLinkBreaking": "https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.15.0/log4j-core-2.15.0-sources.jar",
+   "updatedFileType": "JAR",
+   "dependencySection": "dependencies",
+   "licenseInfo": "Apache-2.0",
+   "githubRepoSlug": "apache/logging-log4j1"
+  },
+  "preCommitReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:ac14d8362de4bfcf636e1468d68faa10d8b42669-pre",
+  "breakingUpdateReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:ac14d8362de4bfcf636e1468d68faa10d8b42669-breaking",
+  "javaVersionUsedForReproduction": "11",
+  "failureCategory": "TEST_FAILURE",
+  "licenseInfo": "GPL-3.0",
+  "advisoriesRemoved": [
+   "GHSA-jfh8-c2jp-5v3q",
+   "GHSA-vwqq-5vrc-xw9h"
+  ]
+ },
+ "image": "uptake-local/ac14d8362de4:ready",
+ "bumpImage": "ghcr.io/chains-project/breaking-updates:ac14d8362de4bfcf636e1468d68faa10d8b42669-breaking",
+ "workdir": "/oripa",
+ "baselineTests": 67,
+ "baselineStatus": "SUCCESS",
+ "before": {
+  "status": "TEST_FAILURE",
+  "compileErrors": [],
+  "tests": {
+   "run": 67,
+   "failures": 0,
+   "errors": 43,
+   "skipped": 0
+  },
+  "failingTests": [
+   "ButtonBinderTest.testCreate",
+   "ButtonFactoryTest.test",
+   "CloseTempOutlineTest.testExecute",
+   "CreasePatternElementConverterTest.testToEdgesAssignment",
+   "CreasePatternElementConverterTest.testToEdgesVertices",
+   "CreasePatternElementConverterTest.testToFacesVertices",
+   "CreasePatternElementConverterTest.testToVerticesCoords",
+   "CreasePatternUndoManagerTest.testDiscardingOldRedo",
+   "CreasePatternUndoManagerTest.testUndo",
+   "ElementRemoverTest.testRemoveLine",
+   "ElementRemoverTest.testRemoveLines",
+   "ElementRemoverTest.testRemoveMeaninglessVertices",
+   "ElementRemoverTest.testRemoveSelectedLines",
+   "ElementRemoverTest.testRemoveVertex_shouldBeRemoved",
+   "ElementRemoverTest.testRemoveVertex_shouldNotBeRemoved_differentType",
+   "ElementRemoverTest.testRemoveVertex_shouldNotBeRemoved_notParallel",
+   "FacesToCreasePatternConverterTest.testConvertToCreasePattern",
+   "GeneralizedBLBLemmaTest.testHolds_45deg_135deg",
+   "GeneralizedBLBLemmaTest.testHolds_birdFoot",
+   "GeneralizedBLBLemmaTest.testHolds_equalAngles",
+   "GeneralizedBLBLemmaTest.testHolds_twoSequences",
+   "GeometryTest.testSortByAngle",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_inside",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_outside",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_outside_fix_v145",
+   "KawasakiTheoremTest.testHolds_birdFoot",
+   "KawasakiTheoremTest.testHolds_wrongShape",
+   "LineAdderTest.testAddAll",
+   "LineAdderTest.testAddLine",
+   "LineTypeChangerTest.testAlterLineType_changeables",
+   "LineTypeChangerTest.testAlterLineType_delete",
+   "LineTypeChangerTest.testAlterLineType_flip",
+   "LineTypeChangerTest.testAlterLineTypes_delete",
+   "LocalPaintBoundStateFactoryTest$CreateWithErrorListenerTests.errorOccurs",
+   "LocalPaintBoundStateFactoryTest$CreateWithErrorListenerTests.noErrors",
+   "MaekawaTheoremTest.testHolds_birdFoot",
+   "OutlineAdderTest.testAddOutlines",
+   "OutsideLineRemoverTest.testRemoveLinesOutsideOfOutlines",
+   "OverlappingLineExtractorTest.testExtract_all",
+   "OverlappingLineExtractorTest.testExtract_all_verticals",
+   "OverlappingLineExtractorTest.testExtract_ofSpecifiedLine",
+   "SubFacesFactoryTest.testCreateSubFaces"
+  ],
+  "errorLogTail": "oClassDefFound Could not initialize class oripa.d...\n[ERROR]   LineAdderTest.testAddLine:49 \u00bb NoClassDefFound Could not initialize class org....\n[ERROR]   LineTypeChangerTest.testAlterLineType_changeables:43 \u00bb NoClassDefFound Could n...\n[ERROR]   LineTypeChangerTest.testAlterLineType_delete:96 \u00bb NoClassDefFound Could not in...\n[ERROR]   LineTypeChangerTest.testAlterLineType_flip:110 \u00bb NoClassDefFound Could not ini...\n[ERROR]   LineTypeChangerTest.testAlterLineTypes_delete:145 \u00bb NoClassDefFound Could not ...\n[ERROR]   OverlappingLineExtractorTest.testExtract_all:46 NoClassDefFound Could not init...\n[ERROR]   OverlappingLineExtractorTest.testExtract_all_verticals:62 NoClassDefFound Coul...\n[ERROR]   OverlappingLineExtractorTest.testExtract_ofSpecifiedLine:82 \u00bb NoSuchField EMPT...\n[ERROR]   GeneralizedBLBLemmaTest.testHolds_45deg_135deg \u00bb UnfinishedMockingSession \n[ERROR]   GeneralizedBLBLemmaTest.testHolds_birdFoot \u00bb UnfinishedMockingSession \n[ERROR]   GeneralizedBLBLemmaTest.testHolds_equalAngles \u00bb UnfinishedMockingSession \n[ERROR]   GeneralizedBLBLemmaTest.testHolds_twoSequences \u00bb UnfinishedMockingSession \n[ERROR]   KawasakiTheoremTest.testHolds_birdFoot:38 NoClassDefFound Could not initialize...\n[ERROR]   KawasakiTheoremTest.testHolds_wrongShape:46 \u00bb NoClassDefFound Could not initia...\n[ERROR]   MaekawaTheoremTest.testHolds_birdFoot:39 \u00bb NoClassDefFound Could not initializ...\n[ERROR]   FacesToCreasePatternConverterTest.testConvertToCreasePattern \u00bb NoClassDefFound\n[ERROR]   SubFacesFactoryTest.testCreateSubFaces \u00bb UnfinishedMockingSession \n[ERROR]   CreasePatternUndoManagerTest.testDiscardingOldRedo \u00bb NoClassDefFound Could not...\n[ERROR]   CreasePatternUndoManagerTest.<clinit>:39 \u00bb NoClassDefFound Could not initializ...\n[ERROR]   CreasePatternUndoManagerTest.testUndo \u00bb NoClassDefFound Could not initialize c...\n[ERROR]   CloseTempOutlineTest.testExecute \u00bb UnfinishedMockingSession \n[ERROR]   IsOutsideOfTempOutlineLoopTest.testExecute_inside \u00bb UnfinishedMockingSession \n[ERROR]   IsOutsideOfTempOutlineLoopTest.testExecute_outside \u00bb UnfinishedMockingSession ...\n[ERROR]   IsOutsideOfTempOutlineLoopTest.testExecute_outside_fix_v145 \u00bb UnfinishedMockingSession\n[ERROR]   OutlineAdderTest.testAddOutlines \u00bb UnfinishedMockingSession \n[ERROR]   OutsideLineRemoverTest.testRemoveLinesOutsideOfOutlines \u00bb UnfinishedMockingSession\n[ERROR]   ButtonFactoryTest.test:31->assertButtonCreated:65 \u00bb NoClassDefFound Could not ...\n[ERROR]   ButtonBinderTest.testCreate:21 \u00bb NoClassDefFound Could not initialize class or...\n[ERROR]   LocalPaintBoundStateFactoryTest$CreateWithErrorListenerTests.errorOccurs:36 \u00bb NoClassDefFound\n[ERROR]   LocalPaintBoundStateFactoryTest$CreateWithErrorListenerTests.noErrors:91 \u00bb NoClassDefFound\n[ERROR]   CreasePatternElementConverterTest.testToEdgesAssignment:105 NoClassDefFound Co...\n[ERROR]   CreasePatternElementConverterTest.testToEdgesVertices:91 NoClassDefFound Could...\n[ERROR]   CreasePatternElementConverterTest.testToFacesVertices:115 NoClassDefFound Coul...\n[ERROR]   CreasePatternElementConverterTest.testToVerticesCoords:73 \u00bb NoClassDefFound Co...\n[ERROR]   GeometryTest.testSortByAngle:45 \u00bb NoClassDefFound Could not initialize class o...\n[ERROR] Tests run: 67, Failures: 0, Errors: 43, Skipped: 0\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test (default-test) on project oripa: There are test failures.\n[ERROR] \n[ERROR] Please refer to /oripa/target/surefire-reports for the individual test results.\n[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException",
+  "testFailureDetails": "Test set: oripa.domain.cptool.LineAdderTest\nTests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! - in oripa.domain.cptool.LineAdderTest\ntestAddLine  Time elapsed: 0 s  <<< ERROR!\njava.lang.NoClassDefFoundError: Could not initialize class org.apache.logging.log4j.core.LoggerContext\n\tat oripa.domain.cptool.LineAdderTest.testAddLine(LineAdderTest.java:49)\ntestAddAll  Time elapsed: 0.001 s  <<< ERROR!\njava.lang.NoClassDefFoundError: Could not initialize class oripa.domain.cptool.LineAdder\n\tat oripa.domain.cptool.LineAdderTest.testAddAll(LineAdderTest.java:69)\nTest set: oripa.persistence.foldformat.CreasePatternElementConverterTest\nTests run: 4, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.008 s <<< FAILURE! - in oripa.persistence.foldformat.CreasePatternElementConverterTest\ntestToVerticesCoords  Time elapsed: 0.002 s  <<< ERROR!\njava.lang.NoClassDefFoundError: Could not initialize class org.apache.logging.log4j.core.LoggerContext\n\tat oripa.persistence.foldformat.CreasePatternElementConverterTest.testToVerticesCoords(CreasePatternElementConverterTest.java:73)\ntestToFacesVertices  Time elapsed: 0 s  <<< ERROR!\njava.lang.NoClassDefFoundError: Could not initialize class oripa.persistence.foldformat.CreasePatternElementConverter\n\tat oripa.persistence.foldformat.CreasePatternElementConverterTest.testToFacesVertices(CreasePatternElementConverterTest.java:115)\ntestToEdgesAssignment  Time elapsed: 0.001 s  <<< ERROR!\njava.lang.NoClassDefFoundError: Could not initialize class oripa.persistence.foldformat.CreasePatternElementConverter\n\tat oripa.persistence.foldformat.CreasePatternElementConverterTest.testToEdgesAssignment(CreasePatternElementConverterTest.java:105)\ntestToEdgesVertices  Time elapsed: 0.001 s  <<< ERROR!\njava.lang.NoClassDefFoundError: Could not initialize class oripa.persistence.foldformat.CreasePatternElementConverter\n\tat oripa.persistence.foldformat.CreasePatternElementConverterTest.testToEdgesVertices(CreasePatternElementConverterTest.java:91)\nTest set: oripa.domain.paint.outline.OutsideLineRemoverTest\nTests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in oripa.domain.paint.outline.OutsideLineRemoverTest\ntestRemoveLinesOutsideOfOutlines  Time elapsed: 0.001 s  <<< ERROR!\norg.mockito.exceptions.misusing.UnfinishedMockingSessionException:\nUnfinished mocking session detected.\nPrevious MockitoSession was not concluded with 'finishMocking()'.\nFor examples of correct usage see javadoc for MockitoSession class.\nTest set: oripa.domain.paint.outline.IsOutsideOfTempOutlineLoopTest\nTests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.006 s <<< FAILURE! - in oripa.domain.paint.outline.IsOutsideOfTempOutlineLoopTest\ntestExecute_outside_fix_v145  Time elapsed: 0 s  <<< ERROR!\norg.mockito.exceptions.misusing.UnfinishedMockingSessionException:\nUnfinished mocking session detected.\nPrevious MockitoSession was not concluded with 'finishMocking()'.\nFor examples of correct usage see javadoc for MockitoSession class.\ntestExecute_outside  Time elapsed: 0.002 s  <<< ERROR!\norg.mockito.exceptions.misusing.UnfinishedMockingSessionException:\nUnfinished mocking session detected.\nPrevious MockitoSession was not concluded with 'finishMocking()'.\nFor examples of correct usage see javadoc for MockitoSession class.\ntestExecute_inside  Time elapsed: 0.001 s  <<< ERROR!\norg.mockito.exceptions.misusing.UnfinishedMockingSessionException:\nUnfinished mocking session detected.\nPrevious MockitoSession was not concluded with 'finishMocking()'.\nFor examples of correct usage see javadoc for MockitoSession class.\nTest set: oripa.domain.fold.subface.SubFacesFactoryTest\nTests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.007 s <<< FAILURE! - in oripa.domain.fold.subface.SubFacesFactoryTest\ntestCreateSubFaces  Time elapsed: 0.006 s  <<< ERROR!\norg.mockito.exceptions.misusing.UnfinishedMockingSessionException:\nUnfinished mocking session detected.\nPrevious MockitoSession was not concluded with 'finishMocking()'.\nFor examples of correct usage see javadoc for MockitoSession class."
+ },
+ "sourceRoots": {
+  "production": [
+   "src/main/java"
+  ],
+  "test": [
+   "src/test/java"
+  ]
+ },
+ "editRegex": "^(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$))(?!(?:.*[\\\\/])?(?:src[\\\\/]test[\\\\/]java)[\\\\/])(?:(?:.*[\\\\/])?(?:src[\\\\/]main[\\\\/]java)[\\\\/](?:[^\\\\/]+[\\\\/])*[^\\\\/]+\\.java|(?:.*[\\\\/])?\\.uptake[\\\\/](?:rationale\\.md|escalation\\.md|proposed\\.patch))$",
+ "preparedAt": "2026-09-26T15:53:59+00:00"
+}

@@ -1,0 +1,7 @@
+{
+ "workspace": "work\\demo-cheat",
+ "image": "uptake-local/6ad104c4fb92:ready",
+ "before": "COMPILATION_FAILURE",
+ "compileErrors": 4,
+ "testsRunBeforeUpgrade": 12
+}

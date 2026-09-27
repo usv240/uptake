@@ -1,0 +1,77 @@
+{
+ "tool": "uptake",
+ "verdict": "ESCALATED",
+ "dependency": "com.thoughtworks.xstream:xstream",
+ "from": "1.4.17",
+ "to": "1.4.19",
+ "advisoriesRemoved": [
+  "GHSA-2q8x-2p7f-574v",
+  "GHSA-3ccq-5vw3-2p6x",
+  "GHSA-64xx-cq4q-mf44",
+  "GHSA-6w62-hx7r-mw68",
+  "GHSA-6wf9-jmg9-vxcc",
+  "GHSA-8jrj-525p-826v",
+  "GHSA-cxfm-5m4g-x7xp",
+  "GHSA-g5w6-mrj7-75h2",
+  "GHSA-h7v4-7xg3-hxcc",
+  "GHSA-hph2-m3g5-xxv4",
+  "GHSA-j9h8-phrw-h4fh",
+  "GHSA-p8pq-r894-fm8f",
+  "GHSA-qrx8-8545-4wg2",
+  "GHSA-rmr5-cpv2-vgjf",
+  "GHSA-xw4p-crpj-vjx2"
+ ],
+ "image": "uptake-local/19e20b0d69cb:ready",
+ "benchmarkCase": "19e20b0d69cb6dadbc54313cb6c6e5f70670ac93",
+ "before": {
+  "status": "TEST_FAILURE",
+  "compileErrors": 0,
+  "failingTests": [
+   "org.apache.log4j.chainsaw.LogPanelPreferenceModelTest#testLogPanelPreferenceModelSerialization"
+  ]
+ },
+ "after": {
+  "status": "TEST_FAILURE",
+  "tests": {
+   "run": 5,
+   "failures": 0,
+   "errors": 1,
+   "skipped": 0
+  },
+  "failingTests": [
+   "org.apache.log4j.chainsaw.LogPanelPreferenceModelTest#testLogPanelPreferenceModelSerialization"
+  ]
+ },
+ "baselineTestsBeforeUpgrade": 5,
+ "sourceRoots": {
+  "production": [
+   "src/main/java"
+  ],
+  "test": [
+   "src/test/java"
+  ]
+ },
+ "integrity": {
+  "productionFilesChanged": [],
+  "diffStat": "",
+  "violations": [],
+  "warnings": []
+ },
+ "proposal": {
+  "files": [
+   "src/test/java/org/apache/log4j/chainsaw/LogPanelPreferenceModelTest.java"
+  ],
+  "sha256": "09ccef131f1c1d3bca2c6dca731a2971cdeb1b11fd8831c93f23831ffaa62cf5",
+  "applies": true,
+  "status": "SUCCESS",
+  "tests": {
+   "run": 5,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "provenGreen": true
+ },
+ "patchSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+ "finalizedAt": "2026-09-26T19:55:02+00:00"
+}

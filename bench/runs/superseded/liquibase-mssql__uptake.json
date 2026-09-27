@@ -1,0 +1,48 @@
+{
+ "case": "feb582661e",
+ "name": "liquibase-mssql",
+ "arm": "uptake",
+ "verdict": "ESCALATED",
+ "dependency": "org.liquibase:liquibase-core",
+ "from": "3.4.2",
+ "to": "4.8.0",
+ "advisoriesRemoved": 1,
+ "failureCategory": "COMPILATION_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "after": {
+  "status": "COMPILATION_FAILURE",
+  "tests": {
+   "run": 0,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "testsBeforeUpgrade": 4,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "dc9194b0d1b1d9af674f2be2788d2446",
+  "duration_ms": 84922,
+  "session_costs": 0.708138,
+  "max_cost": 1,
+  "tool_calls": 20
+ },
+ "toolCalls": 20,
+ "toolsUsed": [
+  "apply_diff",
+  "glob",
+  "list_files",
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_build",
+  "mcp__uptake__uptake_status",
+  "read_file",
+  "update_todo_list",
+  "write_file"
+ ],
+ "wallSeconds": 0,
+ "exitCode": null,
+ "stderrTail": ""
+}

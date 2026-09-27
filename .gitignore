@@ -1,0 +1,7 @@
+work/
+__pycache__/
+*.pyc
+demo/build/
+.pytest_cache/
+.vscode/
+Rules.md

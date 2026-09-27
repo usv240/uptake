@@ -1,0 +1,147 @@
+{
+ "tool": "uptake",
+ "verdict": "ESCALATED",
+ "dependency": "org.apache.logging.log4j:log4j-core",
+ "from": "2.12.1",
+ "to": "2.15.0",
+ "advisoriesRemoved": [
+  "GHSA-jfh8-c2jp-5v3q",
+  "GHSA-vwqq-5vrc-xw9h"
+ ],
+ "image": "uptake-local/ac14d8362de4:ready",
+ "benchmarkCase": "ac14d8362de4bfcf636e1468d68faa10d8b42669",
+ "before": {
+  "status": "TEST_FAILURE",
+  "compileErrors": 0,
+  "failingTests": [
+   "ButtonBinderTest.testCreate",
+   "ButtonFactoryTest.test",
+   "CloseTempOutlineTest.testExecute",
+   "CreasePatternElementConverterTest.testToEdgesAssignment",
+   "CreasePatternElementConverterTest.testToEdgesVertices",
+   "CreasePatternElementConverterTest.testToFacesVertices",
+   "CreasePatternElementConverterTest.testToVerticesCoords",
+   "CreasePatternUndoManagerTest.testDiscardingOldRedo",
+   "CreasePatternUndoManagerTest.testUndo",
+   "ElementRemoverTest.testRemoveLine",
+   "ElementRemoverTest.testRemoveLines",
+   "ElementRemoverTest.testRemoveMeaninglessVertices",
+   "ElementRemoverTest.testRemoveSelectedLines",
+   "ElementRemoverTest.testRemoveVertex_shouldBeRemoved",
+   "ElementRemoverTest.testRemoveVertex_shouldNotBeRemoved_differentType",
+   "ElementRemoverTest.testRemoveVertex_shouldNotBeRemoved_notParallel",
+   "FacesToCreasePatternConverterTest.testConvertToCreasePattern",
+   "GeneralizedBLBLemmaTest.testHolds_45deg_135deg",
+   "GeneralizedBLBLemmaTest.testHolds_birdFoot",
+   "GeneralizedBLBLemmaTest.testHolds_equalAngles",
+   "GeneralizedBLBLemmaTest.testHolds_twoSequences",
+   "GeometryTest.testSortByAngle",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_inside",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_outside",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_outside_fix_v145",
+   "KawasakiTheoremTest.testHolds_birdFoot",
+   "KawasakiTheoremTest.testHolds_wrongShape",
+   "LineAdderTest.testAddAll",
+   "LineAdderTest.testAddLine",
+   "LineTypeChangerTest.testAlterLineType_changeables",
+   "LineTypeChangerTest.testAlterLineType_delete",
+   "LineTypeChangerTest.testAlterLineType_flip",
+   "LineTypeChangerTest.testAlterLineTypes_delete",
+   "LocalPaintBoundStateFactoryTest$CreateWithErrorListenerTests.errorOccurs",
+   "LocalPaintBoundStateFactoryTest$CreateWithErrorListenerTests.noErrors",
+   "MaekawaTheoremTest.testHolds_birdFoot",
+   "OutlineAdderTest.testAddOutlines",
+   "OutsideLineRemoverTest.testRemoveLinesOutsideOfOutlines",
+   "OverlappingLineExtractorTest.testExtract_all",
+   "OverlappingLineExtractorTest.testExtract_all_verticals",
+   "OverlappingLineExtractorTest.testExtract_ofSpecifiedLine",
+   "SubFacesFactoryTest.testCreateSubFaces"
+  ]
+ },
+ "after": {
+  "status": "TEST_FAILURE",
+  "tests": {
+   "run": 67,
+   "failures": 0,
+   "errors": 43,
+   "skipped": 0
+  },
+  "failingTests": [
+   "ButtonBinderTest.testCreate",
+   "ButtonFactoryTest.test",
+   "CloseTempOutlineTest.testExecute",
+   "CreasePatternElementConverterTest.testToEdgesAssignment",
+   "CreasePatternElementConverterTest.testToEdgesVertices",
+   "CreasePatternElementConverterTest.testToFacesVertices",
+   "CreasePatternElementConverterTest.testToVerticesCoords",
+   "CreasePatternUndoManagerTest.testDiscardingOldRedo",
+   "CreasePatternUndoManagerTest.testUndo",
+   "ElementRemoverTest.testRemoveLine",
+   "ElementRemoverTest.testRemoveLines",
+   "ElementRemoverTest.testRemoveMeaninglessVertices",
+   "ElementRemoverTest.testRemoveSelectedLines",
+   "ElementRemoverTest.testRemoveVertex_shouldBeRemoved",
+   "ElementRemoverTest.testRemoveVertex_shouldNotBeRemoved_differentType",
+   "ElementRemoverTest.testRemoveVertex_shouldNotBeRemoved_notParallel",
+   "FacesToCreasePatternConverterTest.testConvertToCreasePattern",
+   "GeneralizedBLBLemmaTest.testHolds_45deg_135deg",
+   "GeneralizedBLBLemmaTest.testHolds_birdFoot",
+   "GeneralizedBLBLemmaTest.testHolds_equalAngles",
+   "GeneralizedBLBLemmaTest.testHolds_twoSequences",
+   "GeometryTest.testSortByAngle",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_inside",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_outside",
+   "IsOutsideOfTempOutlineLoopTest.testExecute_outside_fix_v145",
+   "KawasakiTheoremTest.testHolds_birdFoot",
+   "KawasakiTheoremTest.testHolds_wrongShape",
+   "LineAdderTest.testAddAll",
+   "LineAdderTest.testAddLine",
+   "LineTypeChangerTest.testAlterLineType_changeables",
+   "LineTypeChangerTest.testAlterLineType_delete",
+   "LineTypeChangerTest.testAlterLineType_flip",
+   "LineTypeChangerTest.testAlterLineTypes_delete",
+   "LocalPaintBoundStateFactoryTest$CreateWithErrorListenerTests.errorOccurs",
+   "LocalPaintBoundStateFactoryTest$CreateWithErrorListenerTests.noErrors",
+   "MaekawaTheoremTest.testHolds_birdFoot",
+   "OutlineAdderTest.testAddOutlines",
+   "OutsideLineRemoverTest.testRemoveLinesOutsideOfOutlines",
+   "OverlappingLineExtractorTest.testExtract_all",
+   "OverlappingLineExtractorTest.testExtract_all_verticals",
+   "OverlappingLineExtractorTest.testExtract_ofSpecifiedLine",
+   "SubFacesFactoryTest.testCreateSubFaces"
+  ]
+ },
+ "baselineTestsBeforeUpgrade": 67,
+ "sourceRoots": {
+  "production": [
+   "src/main/java"
+  ],
+  "test": [
+   "src/test/java"
+  ]
+ },
+ "integrity": {
+  "productionFilesChanged": [],
+  "diffStat": "",
+  "violations": [],
+  "warnings": []
+ },
+ "proposal": {
+  "files": [
+   "pom.xml"
+  ],
+  "sha256": "d3f9a7814e379691a2664eb682016413b1579ea5f650ab3d3cea151530577b0e",
+  "applies": true,
+  "verifiedOnline": true,
+  "status": "SUCCESS",
+  "tests": {
+   "run": 67,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "provenGreen": true
+ },
+ "patchSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+ "finalizedAt": "2026-09-26T15:11:46+00:00"
+}

@@ -1,0 +1,112 @@
+{
+ "case": {
+  "url": "https://github.com/sabomichal/liquibase-mssql/pull/29",
+  "project": "liquibase-mssql",
+  "projectOrganisation": "sabomichal",
+  "breakingCommit": "feb582661e77de66eadaa7550720a8751b266ee4",
+  "prAuthor": "bot",
+  "preCommitAuthor": "human",
+  "breakingCommitAuthor": "bot",
+  "updatedDependency": {
+   "dependencyGroupID": "org.liquibase",
+   "dependencyArtifactID": "liquibase-core",
+   "previousVersion": "3.4.2",
+   "newVersion": "4.8.0",
+   "dependencyScope": "compile",
+   "versionUpdateType": "major",
+   "githubCompareLink": "https://github.com/liquibase/liquibase/compare/liquibase-parent-3.4.2...v4.8.0",
+   "mavenSourceLinkPre": "https://repo1.maven.org/maven2/org/liquibase/liquibase-core/3.4.2/liquibase-core-3.4.2-sources.jar",
+   "mavenSourceLinkBreaking": "https://repo1.maven.org/maven2/org/liquibase/liquibase-core/4.8.0/liquibase-core-4.8.0-sources.jar",
+   "updatedFileType": "JAR",
+   "dependencySection": "dependencies",
+   "licenseInfo": "Apache-2.0",
+   "githubRepoSlug": "liquibase/liquibase"
+  },
+  "preCommitReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:feb582661e77de66eadaa7550720a8751b266ee4-pre",
+  "breakingUpdateReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:feb582661e77de66eadaa7550720a8751b266ee4-breaking",
+  "javaVersionUsedForReproduction": "11",
+  "failureCategory": "COMPILATION_FAILURE",
+  "licenseInfo": "Apache-2.0",
+  "advisoriesRemoved": [
+   "GHSA-jvfv-hrrc-6q72"
+  ]
+ },
+ "image": "uptake-local/feb582661e77:ready",
+ "bumpImage": "ghcr.io/chains-project/breaking-updates:feb582661e77de66eadaa7550720a8751b266ee4-breaking",
+ "workdir": "/liquibase-mssql",
+ "baselineTests": 4,
+ "baselineStatus": "SUCCESS",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": [
+   {
+    "file": "src/java/liquibase/ext/mssql/sqlgenerator/CreateIndexGeneratorMSSQL.java",
+    "line": 12,
+    "col": 22,
+    "message": "cannot find symbol",
+    "detail": [
+     "symbol: class StringUtils",
+     "location: package liquibase.util"
+    ]
+   },
+   {
+    "file": "src/java/liquibase/ext/mssql/sqlgenerator/AddPrimaryKeyGeneratorMSSQL.java",
+    "line": 12,
+    "col": 22,
+    "message": "cannot find symbol",
+    "detail": [
+     "symbol: class StringUtils",
+     "location: package liquibase.util"
+    ]
+   },
+   {
+    "file": "src/java/liquibase/ext/mssql/sqlgenerator/CreateIndexGeneratorMSSQL.java",
+    "line": 77,
+    "col": 9,
+    "message": "cannot find symbol",
+    "detail": [
+     "symbol: variable StringUtils",
+     "location: class liquibase.ext.mssql.sqlgenerator.CreateIndexGeneratorMSSQL"
+    ]
+   },
+   {
+    "file": "src/java/liquibase/ext/mssql/sqlgenerator/AddPrimaryKeyGeneratorMSSQL.java",
+    "line": 67,
+    "col": 9,
+    "message": "cannot find symbol",
+    "detail": [
+     "symbol: variable StringUtils",
+     "location: class liquibase.ext.mssql.sqlgenerator.AddPrimaryKeyGeneratorMSSQL"
+    ]
+   },
+   {
+    "file": "src/java/liquibase/ext/mssql/database/MSSQLDatabase.java",
+    "line": 18,
+    "col": 24,
+    "message": "cannot find symbol",
+    "detail": [
+     "symbol: method getInstance()",
+     "location: class liquibase.executor.ExecutorService"
+    ]
+   }
+  ],
+  "tests": {
+   "run": 0,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": [],
+  "errorLogTail": "[ERROR] COMPILATION ERROR : \n[ERROR] /liquibase-mssql/src/java/liquibase/ext/mssql/sqlgenerator/CreateIndexGeneratorMSSQL.java:[12,22] cannot find symbol\n[ERROR] /liquibase-mssql/src/java/liquibase/ext/mssql/sqlgenerator/AddPrimaryKeyGeneratorMSSQL.java:[12,22] cannot find symbol\n[ERROR] /liquibase-mssql/src/java/liquibase/ext/mssql/sqlgenerator/CreateIndexGeneratorMSSQL.java:[77,9] cannot find symbol\n[ERROR] /liquibase-mssql/src/java/liquibase/ext/mssql/sqlgenerator/AddPrimaryKeyGeneratorMSSQL.java:[67,9] cannot find symbol\n[ERROR] /liquibase-mssql/src/java/liquibase/ext/mssql/database/MSSQLDatabase.java:[18,24] cannot find symbol\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile (default-compile) on project liquibase-mssql: Compilation failure: Compilation failure: \n[ERROR] /liquibase-mssql/src/java/liquibase/ext/mssql/sqlgenerator/CreateIndexGeneratorMSSQL.java:[12,22] cannot find symbol\n[ERROR]   symbol:   class StringUtils\n[ERROR]   location: package liquibase.util\n[ERROR] /liquibase-mssql/src/java/liquibase/ext/mssql/sqlgenerator/AddPrimaryKeyGeneratorMSSQL.java:[12,22] cannot find symbol\n[ERROR]   symbol:   class StringUtils\n[ERROR]   location: package liquibase.util\n[ERROR] /liquibase-mssql/src/java/liquibase/ext/mssql/sqlgenerator/CreateIndexGeneratorMSSQL.java:[77,9] cannot find symbol\n[ERROR]   symbol:   variable StringUtils\n[ERROR]   location: class liquibase.ext.mssql.sqlgenerator.CreateIndexGeneratorMSSQL\n[ERROR] /liquibase-mssql/src/java/liquibase/ext/mssql/sqlgenerator/AddPrimaryKeyGeneratorMSSQL.java:[67,9] cannot find symbol\n[ERROR]   symbol:   variable StringUtils\n[ERROR]   location: class liquibase.ext.mssql.sqlgenerator.AddPrimaryKeyGeneratorMSSQL\n[ERROR] /liquibase-mssql/src/java/liquibase/ext/mssql/database/MSSQLDatabase.java:[18,24] cannot find symbol\n[ERROR]   symbol:   method getInstance()\n[ERROR]   location: class liquibase.executor.ExecutorService\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException"
+ },
+ "sourceRoots": {
+  "production": [
+   "src/java"
+  ],
+  "test": [
+   "src/java-test"
+  ]
+ },
+ "editRegex": "^(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$))(?!(?:.*[\\\\/])?(?:src[\\\\/]java\\-test)[\\\\/])(?:(?:.*[\\\\/])?(?:src[\\\\/]java)[\\\\/](?:[^\\\\/]+[\\\\/])*[^\\\\/]+\\.java|(?:.*[\\\\/])?\\.uptake[\\\\/](?:rationale\\.md|escalation\\.md|proposed\\.patch))$",
+ "preparedAt": "2026-09-26T16:17:09+00:00"
+}

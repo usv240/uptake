@@ -1,0 +1,41 @@
+{
+ "tool": "uptake",
+ "verdict": "REPAIRED",
+ "dependency": "org.jasypt:jasypt",
+ "from": "1.8",
+ "to": "1.9.2",
+ "advisoriesRemoved": [
+  "GHSA-r5c2-rxh2-f5h2"
+ ],
+ "image": "uptake-local/9a8b6fc7847a:ready",
+ "benchmarkCase": "9a8b6fc7847a0782ae4c48d0e4f7056507c0397d",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": 7,
+  "failingTests": []
+ },
+ "after": {
+  "status": "SUCCESS",
+  "tests": {
+   "run": 208,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 36
+  },
+  "failingTests": []
+ },
+ "baselineTestsBeforeUpgrade": 208,
+ "sourceRoots": null,
+ "integrity": {
+  "productionFilesChanged": [
+   "src/core/security/src/main/java/it/geosolutions/geostore/core/security/password/GeoStoreDigestPasswordEncoder.java",
+   "src/core/security/src/main/java/it/geosolutions/geostore/core/security/password/GeoStorePBEPasswordEncoder.java"
+  ],
+  "diffStat": "2 files changed, 22 insertions(+), 9 deletions(-)",
+  "violations": [],
+  "warnings": []
+ },
+ "proposal": null,
+ "patchSha256": "6e03cf06b6eb8c162face5baf419340110ade1da7f593648ef8a8433b0cf365f",
+ "finalizedAt": "2026-09-26T15:07:31+00:00"
+}

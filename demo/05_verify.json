@@ -1,0 +1,9 @@
+{
+ "patchHashMatches": true,
+ "patchTouchesOnlyProductionCode": true,
+ "patchApplies": true,
+ "rebuildStatus": "SUCCESS",
+ "rebuildTestsRun": 12,
+ "matchesReceipt": true,
+ "ok": true
+}

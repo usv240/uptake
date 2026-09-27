@@ -1,0 +1,3 @@
+oripa              uptake ESCALATED              tests=67/67 cost=1.116436 viol=0 108s
+quickperf          uptake FAILED                 tests=309/309 cost=1.5748739999999999 viol=0 259s
+total spent 9.43

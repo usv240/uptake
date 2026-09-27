@@ -1,0 +1,61 @@
+{
+ "case": "9069046236",
+ "name": "quickperf",
+ "arm": "uptake",
+ "verdict": "FAILED",
+ "dependency": "org.apache.logging.log4j:log4j-core",
+ "from": "2.11.1",
+ "to": "2.16.0",
+ "advisoriesRemoved": 3,
+ "failureCategory": "TEST_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "after": {
+  "status": "TEST_FAILURE",
+  "tests": {
+   "run": 309,
+   "failures": 6,
+   "errors": 4,
+   "skipped": 0
+  },
+  "failingTests": [
+   "QuickPerfSpringRunnerBeforeAfterNewJvmTest.should_find_all_players",
+   "QuickPerfSpringRunnerBeforeAfterTest.org.quickperf.spring.springboottest.QuickPerfSpringRunnerBeforeAfterTest",
+   "QuickPerfSpringRunnerDisableQuickPerfNewJvmTest.org.quickperf.spring.springboottest.QuickPerfSpringRunnerDisableQuickPerfNewJvmTest",
+   "QuickPerfSpringRunnerDisableQuickPerfTest.org.quickperf.spring.springboottest.QuickPerfSpringRunnerDisableQuickPerfTest",
+   "SpringBootExpectJdbcQueryExecutionJunit4Test.should_fail_if_select_number_is_greater_than_expected",
+   "SpringBootExpectMaxJdbcQueryExecutionJunit4Test.should_fail_if_select_number_is_greater_than_expected",
+   "SpringBootExpectMaxSelectJunit4Test.should_fail_if_select_number_is_greater_than_expected",
+   "SpringBootExpectSelectJunit4Test.should_fail_if_select_number_is_greater_than_expected_from_spring_service",
+   "SpringBootExpectSelectJunit4Test.should_fail_if_select_number_is_greater_than_expected_from_web_service_and_with_test_launched_in_a_dedicated_jvm",
+   "SpringConnectionProfilingTest.should_profile_connection",
+   "org.quickperf.spring.springboottest.QuickPerfSpringRunnerBeforeAfterTest",
+   "org.quickperf.spring.springboottest.QuickPerfSpringRunnerDisableQuickPerfNewJvmTest",
+   "org.quickperf.spring.springboottest.QuickPerfSpringRunnerDisableQuickPerfTest"
+  ]
+ },
+ "testsBeforeUpgrade": 309,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "3f27b7b24a168eb88815c978efc2405e",
+  "duration_ms": 256914,
+  "session_costs": 1.5748739999999999,
+  "max_cost": 1.5,
+  "tool_calls": 27
+ },
+ "toolCalls": 27,
+ "toolsUsed": [
+  "glob",
+  "grep",
+  "list_files",
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_build",
+  "mcp__uptake__uptake_status",
+  "read_file",
+  "update_todo_list"
+ ],
+ "wallSeconds": 259,
+ "exitCode": 0,
+ "stderrTail": "(node:104540) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+}

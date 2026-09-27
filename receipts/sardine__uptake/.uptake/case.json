@@ -1,0 +1,53 @@
+{
+ "case": {
+  "url": "https://github.com/lookfirst/sardine/pull/334",
+  "project": "sardine",
+  "projectOrganisation": "lookfirst",
+  "breakingCommit": "d4aade950ffc07b63a0140e43ecf930a2c8aec43",
+  "prAuthor": "bot",
+  "preCommitAuthor": "human",
+  "breakingCommitAuthor": "bot",
+  "updatedDependency": {
+   "dependencyGroupID": "org.apache.httpcomponents",
+   "dependencyArtifactID": "httpclient",
+   "previousVersion": "4.5.1",
+   "newVersion": "4.5.13",
+   "dependencyScope": "compile",
+   "versionUpdateType": "patch",
+   "githubCompareLink": "https://github.com/apache/httpclient/compare/rel/v4.5.13...rel/v4.5.1",
+   "mavenSourceLinkPre": "https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1-sources.jar",
+   "mavenSourceLinkBreaking": "https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13-sources.jar",
+   "updatedFileType": "JAR",
+   "dependencySection": "dependencies",
+   "licenseInfo": "Apache-2.0",
+   "githubRepoSlug": "apache/httpclient"
+  },
+  "preCommitReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:d4aade950ffc07b63a0140e43ecf930a2c8aec43-pre",
+  "breakingUpdateReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:d4aade950ffc07b63a0140e43ecf930a2c8aec43-breaking",
+  "javaVersionUsedForReproduction": "11",
+  "failureCategory": "TEST_FAILURE",
+  "licenseInfo": "NOASSERTION",
+  "advisoriesRemoved": [
+   "GHSA-7r82-7xv7-xcpj"
+  ]
+ },
+ "image": "uptake-local/d4aade950ffc:ready",
+ "bumpImage": "ghcr.io/chains-project/breaking-updates:d4aade950ffc07b63a0140e43ecf930a2c8aec43-breaking",
+ "workdir": "/sardine",
+ "baselineTests": 26,
+ "baselineStatus": "SUCCESS",
+ "before": {
+  "status": "TEST_FAILURE",
+  "compileErrors": [],
+  "tests": {
+   "run": 26,
+   "failures": 1,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": [],
+  "errorLogTail": "[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.19:test (default-test) on project sardine: There are test failures.\n[ERROR] \n[ERROR] Please refer to /sardine/target/surefire-reports for the individual test results.\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException",
+  "testFailureDetails": ""
+ },
+ "preparedAt": "2026-09-26T07:05:27+00:00"
+}

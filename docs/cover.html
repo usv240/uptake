@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@500;700;800&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;width:1920px;height:1080px;background:#0B0D10;color:#E6E8EB;font-family:Geist,Inter,system-ui,sans-serif;overflow:hidden}
+  .wrap{position:absolute;inset:96px 112px;display:grid;grid-template-columns:1.15fr 1fr;gap:72px;align-items:center}
+  .brand{display:flex;gap:18px;align-items:center;font:700 44px Geist;letter-spacing:-.02em}
+  .logo{width:60px;height:60px;border-radius:14px;background:#56B4E9;color:#0B0D10;display:grid;place-items:center;font-size:38px;font-weight:800}
+  h1{font:800 104px/1.02 Geist;letter-spacing:-.045em;margin:48px 0 36px}
+  h1 span{color:#56B4E9}
+  p{font:500 34px/1.4 Geist;color:#9BA3AF;margin:0;max-width:880px}
+  p b{color:#E6E8EB}
+  .card{background:#14171C;border:2px solid #2A2F37;border-radius:24px;padding:40px 44px;font:500 30px/1 "Geist Mono",monospace}
+  .row{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-bottom:2px solid #2A2F37}
+  .row:last-child{border-bottom:0}
+  .ok{color:#009E73;font-weight:600}.no{color:#D55E00;font-weight:600}
+  .head{font:600 22px Geist;color:#9BA3AF;text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
+  .foot{position:absolute;left:112px;bottom:56px;font:500 24px Geist;color:#9BA3AF}
+  .foot b{color:#E6E8EB}
+</style></head><body>
+<div class="wrap">
+  <div>
+    <div class="brand"><div class="logo">✓</div>Uptake</div>
+    <h1>Security<br>upgrades, unblocked.<br><span>Every change proven.</span></h1>
+    <p>IBM Bob repairs code broken by real CVE upgrades, including the <b>Log4Shell patch</b>. Tests and versions stay locked; anything else arrives as a patch already proven green.</p>
+  </div>
+  <div class="card">
+    <div class="head">Bob's permissions in Uptake mode</div>
+    <div class="row"><span>src/main/java/**</span><span class="ok">✓ edit</span></div>
+    <div class="row"><span>src/test/**</span><span class="no">✗ locked</span></div>
+    <div class="row"><span>pom.xml · versions</span><span class="no">✗ locked</span></div>
+    <div class="row"><span>shell · mvn -DskipTests</span><span class="no">✗ none</span></div>
+    <div class="row"><span>verdict</span><span class="ok">proven offline</span></div>
+  </div>
+</div>
+<div class="foot">Built with <b>IBM Bob 2.0</b> · benchmarked on <b>BUMP</b> real breaking upgrades · every run re-verifiable</div>
+</body></html>

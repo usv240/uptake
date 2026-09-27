@@ -1,0 +1,52 @@
+{
+ "tool": "uptake",
+ "verdict": "REPAIRED",
+ "dependency": "org.bouncycastle:bcprov-jdk15on",
+ "from": "1.51",
+ "to": "1.67",
+ "advisoriesRemoved": [
+  "GHSA-2j2x-hx4g-2gf4",
+  "GHSA-4vhj-98r6-424h",
+  "GHSA-6xx3-rg99-gc3p",
+  "GHSA-72m5-fvvv-55m6",
+  "GHSA-9gp4-qrff-c648",
+  "GHSA-c8xf-m4ff-jcxj",
+  "GHSA-fjqm-246c-mwqg",
+  "GHSA-qcj7-g2j5-g7r3",
+  "GHSA-r97x-3g8f-gx3m",
+  "GHSA-r9ch-m4fh-fc7q",
+  "GHSA-rrvx-pwf8-p59p",
+  "GHSA-w285-wf9q-5w69",
+  "GHSA-xqj7-j8j5-f2xr"
+ ],
+ "image": "uptake-local/6ad104c4fb92:ready",
+ "benchmarkCase": "6ad104c4fb9263ad1bb29e6b33618b8225efd92d",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": 4,
+  "failingTests": []
+ },
+ "after": {
+  "status": "SUCCESS",
+  "tests": {
+   "run": 12,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "baselineTestsBeforeUpgrade": 12,
+ "sourceRoots": null,
+ "integrity": {
+  "productionFilesChanged": [
+   "src/main/java/io/github/hapjava/server/impl/crypto/ChachaDecoder.java"
+  ],
+  "diffStat": "1 file changed, 1 insertion(+), 3 deletions(-)",
+  "violations": [],
+  "warnings": []
+ },
+ "proposal": null,
+ "patchSha256": "380c10136fc7ca12eea8d50c26a2153118609ed44234bcccf5acf965aec4e974",
+ "finalizedAt": "2026-09-26T15:02:27+00:00"
+}

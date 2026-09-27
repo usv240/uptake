@@ -1,0 +1,42 @@
+{
+ "tool": "uptake",
+ "verdict": "REPAIRED",
+ "dependency": "mysql:mysql-connector-java",
+ "from": "5.1.49",
+ "to": "8.0.28",
+ "advisoriesRemoved": [
+  "GHSA-4vrv-ch96-6h42",
+  "GHSA-g76j-4cxx-23h9",
+  "GHSA-jcq3-cprp-m333"
+ ],
+ "image": "uptake-local/0305beafdecb:ready",
+ "benchmarkCase": "0305beafdecb0b28f7c94264ed20cdc4e41ff067",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": 2,
+  "failingTests": []
+ },
+ "after": {
+  "status": "SUCCESS",
+  "tests": {
+   "run": 291,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 13
+  },
+  "failingTests": []
+ },
+ "baselineTestsBeforeUpgrade": 291,
+ "sourceRoots": null,
+ "integrity": {
+  "productionFilesChanged": [
+   "src/main/java/com/feedzai/commons/sql/abstraction/engine/impl/mysql/MySqlQueryExceptionHandler.java"
+  ],
+  "diffStat": "1 file changed, 1 insertion(+), 1 deletion(-)",
+  "violations": [],
+  "warnings": []
+ },
+ "proposal": null,
+ "patchSha256": "4e251285fc881b5dd7376f313a40150694374db8f5ca381c19d4d302f212639f",
+ "finalizedAt": "2026-09-26T15:04:54+00:00"
+}

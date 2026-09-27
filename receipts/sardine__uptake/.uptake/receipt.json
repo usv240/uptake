@@ -1,0 +1,40 @@
+{
+ "tool": "uptake",
+ "verdict": "REPAIRED",
+ "dependency": "org.apache.httpcomponents:httpclient",
+ "from": "4.5.1",
+ "to": "4.5.13",
+ "advisoriesRemoved": [
+  "GHSA-7r82-7xv7-xcpj"
+ ],
+ "image": "uptake-local/d4aade950ffc:ready",
+ "benchmarkCase": "d4aade950ffc07b63a0140e43ecf930a2c8aec43",
+ "before": {
+  "status": "TEST_FAILURE",
+  "compileErrors": 0,
+  "failingTests": []
+ },
+ "after": {
+  "status": "SUCCESS",
+  "tests": {
+   "run": 26,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "baselineTestsBeforeUpgrade": 26,
+ "sourceRoots": null,
+ "integrity": {
+  "productionFilesChanged": [
+   "src/main/java/com/github/sardine/impl/SardineException.java"
+  ],
+  "diffStat": "1 file changed, 3 insertions(+), 1 deletion(-)",
+  "violations": [],
+  "warnings": []
+ },
+ "proposal": null,
+ "patchSha256": "91fcdb9ffc7d59c884751f8a5bdb572e0dff6a354f5bcb6404a10374d14f6a61",
+ "finalizedAt": "2026-09-26T15:05:19+00:00"
+}

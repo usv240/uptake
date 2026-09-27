@@ -1,0 +1,61 @@
+{
+ "case": {
+  "url": "https://github.com/allure-framework/allure-maven/pull/230",
+  "project": "allure-maven",
+  "projectOrganisation": "allure-framework",
+  "breakingCommit": "54857351e0b0a655970d7e2ccdb67f175cc5d688",
+  "prAuthor": "bot",
+  "preCommitAuthor": "human",
+  "breakingCommitAuthor": "bot",
+  "updatedDependency": {
+   "dependencyGroupID": "net.lingala.zip4j",
+   "dependencyArtifactID": "zip4j",
+   "previousVersion": "1.3.2",
+   "newVersion": "2.10.0",
+   "dependencyScope": "compile",
+   "versionUpdateType": "major",
+   "githubCompareLink": "Relevant tags were not found in the GitHub repository srikanth-lingala/zip4j for the updated dependency.",
+   "mavenSourceLinkPre": "https://repo1.maven.org/maven2/net/lingala/zip4j/zip4j/1.3.2/zip4j-1.3.2-sources.jar",
+   "mavenSourceLinkBreaking": "https://repo1.maven.org/maven2/net/lingala/zip4j/zip4j/2.10.0/zip4j-2.10.0-sources.jar",
+   "updatedFileType": "JAR",
+   "dependencySection": "dependencies",
+   "licenseInfo": "Apache-2.0",
+   "githubRepoSlug": "srikanth-lingala/zip4j"
+  },
+  "preCommitReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:54857351e0b0a655970d7e2ccdb67f175cc5d688-pre",
+  "breakingUpdateReproductionCommand": "docker run ghcr.io/chains-project/breaking-updates:54857351e0b0a655970d7e2ccdb67f175cc5d688-breaking",
+  "javaVersionUsedForReproduction": "11",
+  "failureCategory": "COMPILATION_FAILURE",
+  "licenseInfo": "Apache-2.0",
+  "advisoriesRemoved": [
+   "GHSA-2rpm-4x8c-pvqg",
+   "GHSA-q62h-jw38-24vh"
+  ]
+ },
+ "image": "uptake-local/54857351e0b0:ready",
+ "bumpImage": "ghcr.io/chains-project/breaking-updates:54857351e0b0a655970d7e2ccdb67f175cc5d688-breaking",
+ "workdir": "/allure-maven",
+ "baselineTests": 0,
+ "baselineStatus": "SUCCESS",
+ "before": {
+  "status": "COMPILATION_FAILURE",
+  "compileErrors": [
+   {
+    "file": "src/main/java/io/qameta/allure/maven/AllureCommandline.java",
+    "line": 18,
+    "col": 30,
+    "message": "package net.lingala.zip4j.core does not exist",
+    "detail": []
+   }
+  ],
+  "tests": {
+   "run": 0,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": [],
+  "errorLogTail": "[ERROR] COMPILATION ERROR : \n[ERROR] /allure-maven/src/main/java/io/qameta/allure/maven/AllureCommandline.java:[18,30] package net.lingala.zip4j.core does not exist\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project allure-maven: Compilation failure\n[ERROR] /allure-maven/src/main/java/io/qameta/allure/maven/AllureCommandline.java:[18,30] package net.lingala.zip4j.core does not exist\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException"
+ },
+ "preparedAt": "2026-09-26T06:40:08+00:00"
+}

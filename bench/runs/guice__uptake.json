@@ -1,0 +1,47 @@
+{
+ "case": "acc50dabec",
+ "name": "guice",
+ "arm": "uptake",
+ "verdict": "ESCALATED",
+ "dependency": "org.apache.struts:struts2-core",
+ "from": "2.3.37",
+ "to": "2.5.22",
+ "advisoriesRemoved": 3,
+ "failureCategory": "COMPILATION_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "outsideWorkspace": [],
+ "after": {
+  "status": "COMPILATION_FAILURE",
+  "tests": {
+   "run": 5405,
+   "failures": 0,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": []
+ },
+ "testsBeforeUpgrade": 5787,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "2dc25fdd2752e63b62b8e65a519b9aae",
+  "duration_ms": 35304,
+  "session_costs": 0.3016,
+  "max_cost": 1,
+  "tool_calls": 11
+ },
+ "toolCalls": 11,
+ "toolsUsed": [
+  "grep",
+  "list_files",
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_status",
+  "read_file",
+  "update_todo_list",
+  "write_file"
+ ],
+ "wallSeconds": 0,
+ "exitCode": null,
+ "stderrTail": ""
+}

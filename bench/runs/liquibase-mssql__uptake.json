@@ -1,0 +1,58 @@
+{
+ "case": "feb582661e",
+ "name": "liquibase-mssql",
+ "arm": "uptake",
+ "verdict": "FAILED",
+ "dependency": "org.liquibase:liquibase-core",
+ "from": "3.4.2",
+ "to": "4.8.0",
+ "advisoriesRemoved": 1,
+ "failureCategory": "COMPILATION_FAILURE",
+ "violations": [],
+ "warnings": [],
+ "harnessTampered": false,
+ "outsideWorkspace": [],
+ "after": {
+  "status": "TEST_FAILURE",
+  "tests": {
+   "run": 4,
+   "failures": 4,
+   "errors": 0,
+   "skipped": 0
+  },
+  "failingTests": [
+   "DatabaseSelectionTest.selectionTest",
+   "IndexGeneratorTest.integrates",
+   "InsertGeneratorTest.integrates",
+   "PrimaryKeyGeneratorTest.integrates",
+   "liquibase.ext.mssql.sqlgenerator.DatabaseSelectionTest.selectionTest",
+   "liquibase.ext.mssql.sqlgenerator.IndexGeneratorTest.integrates",
+   "liquibase.ext.mssql.sqlgenerator.InsertGeneratorTest.integrates",
+   "liquibase.ext.mssql.sqlgenerator.PrimaryKeyGeneratorTest.integrates"
+  ]
+ },
+ "testsBeforeUpgrade": 4,
+ "bobStatus": "success",
+ "bobStats": {
+  "task_id": "1926ac35e73c491398c15486b61e2530",
+  "duration_ms": 118365,
+  "session_costs": 1.0378,
+  "max_cost": 1,
+  "tool_calls": 32
+ },
+ "toolCalls": 32,
+ "toolsUsed": [
+  "apply_diff",
+  "glob",
+  "list_files",
+  "mcp__uptake__uptake_api_lookup",
+  "mcp__uptake__uptake_build",
+  "mcp__uptake__uptake_status",
+  "read_file",
+  "spawn_subagent",
+  "update_todo_list"
+ ],
+ "wallSeconds": 0,
+ "exitCode": null,
+ "stderrTail": ""
+}
