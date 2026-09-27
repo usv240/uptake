@@ -4,6 +4,7 @@ import json
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -41,7 +42,7 @@ def install_bob_config(ws: Path, edit_regex: str, with_mode: bool = True) -> Non
         (bob / "custom_modes.yaml").write_text(_mode_yaml(edit_regex), encoding="utf-8")
         shutil.copytree(ROOT / ".bob" / "rules-uptake", bob / "rules-uptake", dirs_exist_ok=True)
     mcp = {"mcpServers": {"uptake": {
-        "command": "python", "args": ["-m", "uptake.mcp_server"],
+        "command": sys.executable, "args": ["-m", "uptake.mcp_server"],
         "cwd": str(ROOT), "env": {"PYTHONPATH": str(ROOT), "UPTAKE_WS": str(ws.resolve())},
         "timeout": 1200000,
         "alwaysAllow": ["uptake_status", "uptake_build", "uptake_api_lookup", "uptake_release_notes", "uptake_audit"]}}}

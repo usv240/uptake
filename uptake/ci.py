@@ -40,6 +40,51 @@ def _kill(proc: "subprocess.Popen[bytes]") -> None:
             pass
 
 
+def _log_prepared(st: dict) -> None:
+    """Progress line for the CI log. Diagnostics must never fail a repair, so a missing field is skipped."""
+    try:
+        d = st["case"]["updatedDependency"]
+        print(f"uptake: {d['dependencyGroupID']}:{d['dependencyArtifactID']} {d['previousVersion']} -> "
+              f"{d['newVersion']}, {len(st['case']['advisoriesRemoved'])} advisories; before repair: "
+              f"{st['before']['status']} ({len(st['before']['compileErrors'])} compile errors), "
+              f"{st['baselineTests']} tests before the upgrade", flush=True)
+    except (KeyError, TypeError):
+        pass
+
+
+def _log_mcp(ws: Path) -> None:
+    try:
+        listing = subprocess.run([shutil.which("bob") or "bob", "mcp", "list"], cwd=ws, stdin=subprocess.DEVNULL,
+                                 capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
+        print("uptake: bob mcp list:", f"{listing.stdout}{listing.stderr}".strip(), sep="\n", flush=True)
+    except Exception:  # noqa: BLE001
+        pass
+
+
+def _log_verdict(receipt: dict) -> None:
+    try:
+        print(f"uptake: verdict {receipt['verdict']}; after repair {receipt['after']['status']}, "
+              f"{receipt['after']['tests']['run']} tests run; {len(receipt['integrity']['violations'])} integrity "
+              "violations", flush=True)
+    except (KeyError, TypeError):
+        pass
+
+
+def _register_globally(ws: Path) -> None:
+    """On a fresh CI runner, also register the Uptake MCP server and mode in Bob's user settings.
+
+    Bob Shell reads project-level .bob/ config only for folders it already trusts; a runner has none yet.
+    """
+    home = Path.home() / ".bob" / "settings"
+    home.mkdir(parents=True, exist_ok=True)
+    shutil.copy(ws / ".bob" / "mcp.json", home / "mcp.json")
+    if (ws / ".bob" / "custom_modes.yaml").exists():
+        shutil.copy(ws / ".bob" / "custom_modes.yaml", home / "custom_modes.yaml")
+    rules = ws / ".bob" / "rules-uptake"
+    if rules.exists():
+        shutil.copytree(rules, Path.home() / ".bob" / "rules-uptake", dirs_exist_ok=True)
+
+
 def _write_step_summary(text: str) -> None:
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
@@ -66,6 +111,7 @@ def run(
     # 1. Prepare the workspace (docker build + Bob config install)
     # ------------------------------------------------------------------
     st = repo_mod.prepare(ws, base, jdk)
+    _log_prepared(st)
 
     if st["before"]["status"] == "SUCCESS":
         msg = (f"The upgrade did not break the build (before status: SUCCESS)."
@@ -81,6 +127,14 @@ def run(
             "bob is not on PATH. Install IBM Bob Shell before running uptake ci."
         )
 
+    if os.environ.get("GITHUB_ACTIONS"):
+        _register_globally(ws)
+    # Import the MCP server once so its bytecode is compiled before Bob starts it: on a cold runner the first
+    # start is slow enough for Bob to begin without its tools.
+    subprocess.run([sys.executable, "-c", "import uptake.mcp_server"], stdin=subprocess.DEVNULL,
+                   env={**os.environ, "UPTAKE_WS": str(ws)}, capture_output=True, timeout=300)
+    _log_mcp(ws)
+
     ndjson_path = ws / ".uptake" / "bob.ndjson"
     ndjson_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -89,7 +143,7 @@ def run(
     popen_kwargs: dict = dict(
         stdin=subprocess.DEVNULL,  # Bob Shell treats a piped stdin as extra prompt input and waits for EOF
         stdout=ndjson_path.open("wb"),
-        stderr=tempfile.TemporaryFile(),
+        stderr=(ws / ".uptake" / "bob.stderr").open("wb"),
     )
     if sys.platform != "win32":
         popen_kwargs["start_new_session"] = True
@@ -109,6 +163,7 @@ def run(
     # ------------------------------------------------------------------
     receipt = workspace.finalize(ws)
     verdict = receipt["verdict"]
+    _log_verdict(receipt)
     dep = receipt["dependency"]
     to = receipt["to"]
 
