@@ -1,4 +1,4 @@
-"""uptake prepare <case> <dir> [--plain] | build <dir> | audit <dir> | finalize <dir> | verify <dir> | pr <dir>"""
+"""uptake prepare <case> <dir> [--plain] | build <dir> | audit <dir> | finalize <dir> | verify <dir> | pr <dir> | ci <dir>"""
 import argparse
 import json
 import sys
@@ -28,6 +28,15 @@ def main() -> None:
                       help="GitHub repo to post to (required when posting)")
     pr_p.add_argument("--number", type=int, default=None, metavar="N",
                       help="PR number (required when --repo is given)")
+    ci_p = sub.add_parser("ci", help="run the full repair inside a GitHub Actions job")
+    ci_p.add_argument("dir", type=Path)
+    ci_p.add_argument("--base", required=True, help="commit before the upgrade (PR base SHA)")
+    ci_p.add_argument("--jdk", default="17", help="JDK for the maven:3.9-eclipse-temurin-<jdk> image")
+    ci_p.add_argument("--max-cost", type=float, default=1.5, dest="max_cost", metavar="FLOAT")
+    ci_p.add_argument("--push", action="store_true", help="commit and push repaired files")
+    ci_p.add_argument("--repo", metavar="OWNER/NAME", default=None)
+    ci_p.add_argument("--number", type=int, default=None, metavar="N")
+    ci_p.add_argument("--branch", default=None, metavar="NAME")
     a = p.parse_args()
 
     if a.cmd == "prepare":
@@ -49,6 +58,11 @@ def main() -> None:
         out = integrity.audit(a.dir)
     elif a.cmd == "finalize":
         out = workspace.finalize(a.dir)
+    elif a.cmd == "ci":
+        from . import ci as ci_mod
+        code = ci_mod.run(a.dir, a.base, jdk=a.jdk, max_cost=a.max_cost,
+                          push=a.push, repo=a.repo, number=a.number, branch=a.branch)
+        sys.exit(code)
     elif a.cmd == "pr":
         if a.repo is None:
             # Dry run: print Markdown to stdout
