@@ -45,10 +45,13 @@ runs:
         node-version: "24"
     - name: Install Uptake and IBM Bob Shell
       shell: bash
+      timeout-minutes: 10
       run: |
         python -m pip install --quiet mcp
-        curl -fsSL https://bob.ibm.com/download/bobshell.sh | bash
+        # --pm npm skips the installer's interactive package-manager prompt (runners ship npm and yarn)
+        curl -fsSL https://bob.ibm.com/download/bobshell.sh | bash -s -- --pm npm < /dev/null
         echo "$(npm prefix -g)/bin" >> "$GITHUB_PATH"
+        "$(npm prefix -g)/bin/bob" --version
     - name: Repair the upgrade with IBM Bob
       id: uptake
       shell: bash

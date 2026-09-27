@@ -85,7 +85,7 @@ When a Dependabot PR breaks the build, the Action:
 4. **commits a proven repair to the PR**, or posts the proven one-line patch for approval;
 5. comments the receipt, and uploads Bob's full trace as an artifact.
 
-Live example: [usv240/uptake-demo](https://github.com/usv240/uptake-demo) (HAP-Java, MIT).
+Live example: real Dependabot opened [usv240/uptake-demo#1](https://github.com/usv240/uptake-demo/pull/1) (BouncyCastle 1.51 to 1.70, 13 advisories), the build broke, and the Action ran Bob on it. HAP-Java code, MIT.
 
 ## Verify our results yourself (Docker + Python only, no Bob needed)
 
