@@ -1,0 +1,87 @@
+name: Uptake
+description: >-
+  When a dependency upgrade breaks a Maven build, IBM Bob repairs the production code in Uptake's locked mode,
+  Uptake proves it green offline, commits the fix to the PR, and comments a re-verifiable receipt.
+author: usv240
+branding:
+  icon: check-circle
+  color: blue
+
+inputs:
+  bob-api-key:
+    description: IBM Bob API key with Inference scope (store it as a repository and Dependabot secret)
+    required: true
+  github-token:
+    description: Token used to push the fix and comment on the PR
+    default: ${{ github.token }}
+  jdk:
+    description: JDK major version for the maven:3.9-eclipse-temurin-<jdk> build image
+    default: "17"
+  max-cost:
+    description: Maximum Bobcoins Bob may spend on one repair
+    default: "1.5"
+  push:
+    description: Commit and push a proven repair to the PR branch
+    default: "true"
+  rerun-workflow:
+    description: >-
+      Workflow file to re-run on the PR branch after a fix is pushed (pushes made with the default token do not
+      trigger workflows on their own), e.g. your normal CI
+    default: ""
+
+outputs:
+  verdict:
+    description: REPAIRED, ESCALATED, FAILED, CHEATED or OVERSTEPPED
+    value: ${{ steps.uptake.outputs.verdict }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "24"
+    - name: Install Uptake and IBM Bob Shell
+      shell: bash
+      run: |
+        python -m pip install --quiet mcp
+        curl -fsSL https://bob.ibm.com/download/bobshell.sh | bash
+        echo "$(npm prefix -g)/bin" >> "$GITHUB_PATH"
+    - name: Repair the upgrade with IBM Bob
+      id: uptake
+      shell: bash
+      env:
+        BOB_API_KEY: ${{ inputs.bob-api-key }}
+        GH_TOKEN: ${{ inputs.github-token }}
+        PYTHONPATH: ${{ github.action_path }}
+      run: |
+        git config user.name "Uptake"
+        git config user.email "uptake-bot@users.noreply.github.com"
+        push_flag=""
+        if [ "${{ inputs.push }}" = "true" ]; then push_flag="--push"; fi
+        set +e
+        python -m uptake ci "$GITHUB_WORKSPACE" \
+          --base "${{ github.event.pull_request.base.sha }}" \
+          --jdk "${{ inputs.jdk }}" --max-cost "${{ inputs.max-cost }}" $push_flag \
+          --repo "${{ github.repository }}" --number "${{ github.event.pull_request.number }}" \
+          --branch "${{ github.event.pull_request.head.ref }}"
+        code=$?
+        set -e
+        verdict=$(python -c "import json;print(json.load(open('.uptake/receipt.json'))['verdict'])" 2>/dev/null || echo NONE)
+        echo "verdict=$verdict" >> "$GITHUB_OUTPUT"
+        if [ -n "${{ inputs.rerun-workflow }}" ] && [ "${verdict#REPAIRED}" != "$verdict" ] && [ "${{ inputs.push }}" = "true" ]; then
+          gh workflow run "${{ inputs.rerun-workflow }}" --ref "${{ github.event.pull_request.head.ref }}" || true
+        fi
+        exit $code
+    - name: Keep the receipt and Bob's full trace
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: uptake-receipt
+        path: |
+          .uptake/
+          UPGRADE_RECEIPT.md
+        include-hidden-files: true
+        if-no-files-found: ignore

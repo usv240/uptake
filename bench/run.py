@@ -53,7 +53,7 @@ def _run_bob(cmd, **kw):
     import tempfile
     kw.pop("stderr", None)
     with tempfile.TemporaryFile(mode="w+", encoding="utf-8", errors="replace") as err:
-        p = subprocess.Popen(cmd, stderr=err, **kw)
+        p = subprocess.Popen(cmd, stderr=err, stdin=subprocess.DEVNULL, **kw)  # Bob reads a piped stdin as input
         try:
             p.wait(timeout=BOB_LIMIT)
             note = ""
