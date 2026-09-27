@@ -151,16 +151,20 @@ def shot(name: str):
         cam.click('a#live-pr')
         cam.settle(".js-discussion, .timeline-comment", 30000)
         cam.page.wait_for_timeout(800)
+        cam.move_to("span.State, .gh-header-meta .State", 0.5, 0.5)  # the red CI cross on Dependabot's commit comes next
         on(1)
-        cam.scroll_to(".js-timeline-item:has-text('Uptake'), .timeline-comment:has-text('Uptake:')", offset=BAR + 90, frames=40)
-        cam.move_to(".timeline-comment:has-text('Uptake:') h2", 0.3, 0.5)
+        cam.scroll_to(".js-timeline-item:has-text('Bump org.bouncycastle')", offset=BAR + 220, frames=40)
+        cam.move_to(".js-timeline-item:has-text('Bump org.bouncycastle') a:has-text('Bump org')", 0.9, 0.5)
         on(2)
-        cam.move_to(".timeline-comment:has-text('Uptake:') :text('After repair')", 0.3, 0.5)
+        cam.scroll_to(".js-timeline-item:has-text('Adapt to')", offset=BAR + 160, frames=40)
+        cam.move_to(".js-timeline-item:has-text('Adapt to') a:has-text('Adapt to')", 0.3, 0.5)
+        cam.scroll_to(".timeline-comment:has-text('REPAIRED') h2", offset=BAR + 120, frames=40)
+        cam.move_to(".timeline-comment:has-text('REPAIRED') :text('After repair')", 0.3, 0.5)
 
     def back_to_site(cam):
         if not cam.page.url.startswith(SITE):
-            cam.scroll_to(".timeline-comment:has-text('Uptake:') a[href^='https://usv240.github.io/uptake']", offset=BAR + 300)
-            cam.click(".timeline-comment:has-text('Uptake:') a[href^='https://usv240.github.io/uptake']")
+            cam.scroll_to(".timeline-comment:has-text('REPAIRED') a[href^='https://usv240.github.io/uptake']", offset=BAR + 300)
+            cam.click(".timeline-comment:has-text('REPAIRED') a[href^='https://usv240.github.io/uptake']")
             cam.settle("#stats .stat")
 
     def how(cam, on):
@@ -229,7 +233,8 @@ def shot(name: str):
             cam.page.evaluate(EASE_SCROLL, [0, 30])
             cam.click("a#live-pr")
             cam.settle(".timeline-comment", 30000)
-            cam.scroll_to(".merge-status-list, .mergeability-details, #partial-pull-merging", offset=BAR + 260, frames=40)
+            cam.scroll_to(".js-timeline-item:has-text('Adapt to')", offset=BAR + 200, frames=40)
+            cam.move_to(".js-timeline-item:has-text('Adapt to') a:has-text('Adapt to')", 0.3, 0.5)
         else:
             cam.page.evaluate(EASE_SCROLL, [0, 30])
             cam.move_to("#stats .stat:first-child .v")
